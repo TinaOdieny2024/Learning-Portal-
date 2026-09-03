@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Module 2 | Biostatistics | Great Lakes University of Kisumu</title>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f7fb;
+    color: #1f2937;
+}
+
+/* HEADER */
+
+.header {
+    background: #17365d;
+    color: white;
+    padding: 25px 40px;
+}
+
+.university {
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.course {
+    font-size: 12px;
+    opacity: 0.8;
+    margin-top: 5px;
+}
+
+.back {
+    display: inline-block;
+    margin-top: 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+/* MAIN */
+
+.container {
+    max-width: 1000px;
+    margin: 35px auto;
+    padding: 0 20px;
+}
+
+/* MODULE HERO */
+
+.module-hero {
+    background: white;
+    padding: 35px;
+    border-radius: 15px;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 25px;
+}
+
+.module-label {
+    color: #6b7280;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+.module-hero h1 {
+    color: #17365d;
+    font-size: 30px;
+    margin: 10px 0;
+}
+
+.module-hero p {
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+/* CONTENT */
+
+.section {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 25px;
+}
+
+.section h2 {
+    color: #17365d;
+    margin-bottom: 18px;
+}
+
+.section h3 {
+    color: #17365d;
+    margin: 20px 0 10px;
+}
+
+.section p {
+    line-height: 1.7;
+    color: #4b5563;
+    margin-bottom: 12px;
+}
+
+.section ul {
+    margin-left: 22px;
+    line-height: 1.8;
+    color: #4b5563;
+}
+
+/* OBJECTIVES */
+
+.objectives {
+    background: #eef4fa;
+    padding: 22px;
+    border-radius: 10px;
+}
+
+/* EXAMPLE */
+
+.example {
+    background: #f8fafc;
+    border-left: 4px solid #17365d;
+    padding: 20px;
+    margin-top: 15px;
+}
+
+.example strong {
+    color: #17365d;
+}
+
+/* TABLE */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th,
+td {
+    padding: 12px;
+    border: 1px solid #dbe2ea;
+    text-align: left;
+}
+
+th {
+    background: #17365d;
+    color: white;
+}
+
+td {
+    color: #4b5563;
+}
+
+/* ACTIVITY */
+
+.activity {
+    background: #fff8e7;
+    border-radius: 10px;
+    padding: 22px;
+}
+
+.question {
+    margin-bottom: 20px;
+}
+
+.question p {
+    font-weight: bold;
+    color: #17365d;
+}
+
+/* COMPLETION */
+
+.completion {
+    background: #17365d;
+    color: white;
+    padding: 35px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.completion h2 {
+    margin-bottom: 10px;
+}
+
+.completion p {
+    opacity: 0.9;
+    margin-bottom: 20px;
+}
+
+.complete-btn {
+    border: none;
+    background: white;
+    color: #17365d;
+    padding: 13px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.complete-btn:hover {
+    opacity: 0.9;
+}
+
+#completionMessage {
+    margin-top: 18px;
+    font-weight: bold;
+    display: none;
+}
+
+/* FOOTER */
+
+.footer {
+    text-align: center;
+    color: #8a94a6;
+    padding: 30px;
+    font-size: 12px;
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    .header {
+        padding: 22px;
+    }
+
+    .module-hero h1 {
+        font-size: 24px;
+    }
+
+    .section {
+        padding: 22px;
+    }
+
+    table {
+        font-size: 13px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<!-- HEADER -->
+
+<div class="header">
+
+    <div class="university">
+        GREAT LAKES UNIVERSITY OF KISUMU
+    </div>
+
+    <div class="course">
+        Biostatistics for Clinical Medicine
+    </div>
+
+    <a href="index.html" class="back">
+        ← Back to Dashboard
+    </a>
+
+</div>
+
+
+<div class="container">
+
+
+<!-- MODULE HERO -->
+
+<div class="module-hero">
+
+    <div class="module-label">
+        MODULE 02
+    </div>
+
+    <h1>
+        Types of Data & Variables
+    </h1>
+
+    <p>
+        Understanding variables, levels of measurement and
+        different types of clinical data used in health research.
+    </p>
+
+</div>
+
+
+<!-- LEARNING OBJECTIVES -->
+
+<div class="section">
+
+    <h2>
+        Learning Objectives
+    </h2>
+
+    <div class="objectives">
+
+        <ul>
+
+            <li>
+                Define data and variables.
+            </li>
+
+            <li>
+                Distinguish between qualitative and quantitative data.
+            </li>
+
+            <li>
+                Identify discrete and continuous variables.
+            </li>
+
+            <li>
+                Explain nominal, ordinal, interval and ratio levels
+                of measurement.
+            </li>
+
+            <li>
+                Identify appropriate examples of variables used
+                in clinical medicine.
+            </li>
+
+        </ul>
+
+    </div>
+
+</div>
+
+
+<!-- INTRODUCTION -->
+
+<div class="section">
+
+    <h2>
+        1. Introduction to Data
+    </h2>
+
+    <p>
+        Data are observations or measurements collected about
+        individuals, patients, populations or other units of study.
+        In clinical medicine, data are essential for describing
+        patients, identifying disease patterns and evaluating
+        treatments.
+    </p>
+
+    <p>
+        For example, a researcher may collect information about
+        a patient's age, sex, blood pressure, HIV status, weight
+        and treatment outcome.
+    </p>
+
+</div>
+
+
+<!-- VARIABLES -->
+
+<div class="section">
+
+    <h2>
+        2. What is a Variable?
+    </h2>
+
+    <p>
+        A variable is a characteristic that can take different
+        values among individuals or observations.
+    </p>
+
+    <div class="example">
+
+        <strong>Clinical example:</strong>
+
+        <p>
+            If we collect the age of 100 patients, age is a variable
+            because different patients may have different ages.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- QUALITATIVE -->
+
+<div class="section">
+
+    <h2>
+        3. Qualitative and Quantitative Data
+    </h2>
+
+    <h3>
+        Qualitative Data
+    </h3>
+
+    <p>
+        Qualitative data describe categories or characteristics
+        rather than numerical measurements.
+    </p>
+
+    <div class="example">
+
+        <strong>Examples:</strong>
+
+        <p>
+            Sex, marital status, disease status and blood group.
+        </p>
+
+    </div>
+
+
+    <h3>
+        Quantitative Data
+    </h3>
+
+    <p>
+        Quantitative data are numerical and represent quantities
+        that can be measured or counted.
+    </p>
+
+    <div class="example">
+
+        <strong>Examples:</strong>
+
+        <p>
+            Age, weight, height, blood pressure and number of
+            clinic visits.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- DISCRETE CONTINUOUS -->
+
+<div class="section">
+
+    <h2>
+        4. Discrete and Continuous Variables
+    </h2>
+
+    <h3>
+        Discrete Variables
+    </h3>
+
+    <p>
+        Discrete variables are countable values, usually whole
+        numbers.
+    </p>
+
+    <p>
+        Example: Number of children, number of hospital admissions
+        and number of clinic visits.
+    </p>
+
+
+    <h3>
+        Continuous Variables
+    </h3>
+
+    <p>
+        Continuous variables can take any value within a range
+        and can be measured with increasing precision.
+    </p>
+
+    <p>
+        Example: Weight, height, temperature and blood pressure.
+    </p>
+
+</div>
+
+
+<!-- LEVELS OF MEASUREMENT -->
+
+<div class="section">
+
+    <h2>
+        5. Levels of Measurement
+    </h2>
+
+    <p>
+        Understanding the level of measurement of a variable is
+        important because it influences the statistical methods
+        that can appropriately be used to analyse the data.
+    </p>
+
+    <table>
+
+        <tr>
+
+            <th>
+                Level
+            </th>
+
+            <th>
+                Description
+            </th>
+
+            <th>
+                Clinical Example
+            </th>
+
+        </tr>
+
+        <tr>
+
+            <td>
+                Nominal
+            </td>
+
+            <td>
+                Categories without an inherent order.
+            </td>
+
+            <td>
+                Blood group
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td>
+                Ordinal
+            </td>
+
+            <td>
+                Categories with a meaningful order.
+            </td>
+
+            <td>
+                Disease severity
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td>
+                Interval
+            </td>
+
+            <td>
+                Numerical scale with equal intervals but no true zero.
+            </td>
+
+            <td>
+                Temperature in Celsius
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td>
+                Ratio
+            </td>
+
+            <td>
+                Numerical scale with equal intervals and a true zero.
+            </td>
+
+            <td>
+                Weight
+            </td>
+
+        </tr>
+
+    </table>
+
+</div>
+
+
+<!-- CLINICAL APPLICATION -->
+
+<div class="section">
+
+    <h2>
+        6. Clinical Application
+    </h2>
+
+    <p>
+        Consider a study investigating treatment outcomes among
+        patients with hypertension.
+    </p>
+
+    <table>
+
+        <tr>
+
+            <th>
+                Variable
+            </th>
+
+            <th>
+                Type
+            </th>
+
+        </tr>
+
+        <tr>
+            <td>Age</td>
+            <td>Quantitative / Continuous</td>
+        </tr>
+
+        <tr>
+            <td>Sex</td>
+            <td>Qualitative / Nominal</td>
+        </tr>
+
+        <tr>
+            <td>Blood pressure</td>
+            <td>Quantitative / Continuous</td>
+        </tr>
+
+        <tr>
+            <td>Hypertension severity</td>
+            <td>Qualitative / Ordinal</td>
+        </tr>
+
+        <tr>
+            <td>Number of clinic visits</td>
+            <td>Quantitative / Discrete</td>
+        </tr>
+
+    </table>
+
+</div>
+
+
+<!-- PRACTICE -->
+
+<div class="section">
+
+    <h2>
+        Practice Activity
+    </h2>
+
+    <div class="activity">
+
+        <div class="question">
+
+            <p>
+                1. Is blood group a nominal or ordinal variable?
+            </p>
+
+            <p>
+                Answer: __________
+            </p>
+
+        </div>
+
+
+        <div class="question">
+
+            <p>
+                2. Is number of hospital admissions discrete or continuous?
+            </p>
+
+            <p>
+                Answer: __________
+            </p>
+
+        </div>
+
+
+        <div class="question">
+
+            <p>
+                3. Is pain severity measured as mild, moderate and severe
+                nominal or ordinal?
+            </p>
+
+            <p>
+                Answer: __________
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- RESOURCES -->
+
+<div class="section">
+
+    <h2>
+        Additional Resources
+    </h2>
+
+    <ul>
+
+        <li>Lecture notes on Types of Data & Variables</li>
+
+        <li>Recommended biostatistics textbook</li>
+
+        <li>Clinical data classification exercise</li>
+
+        <li>R practical exercise</li>
+
+    </ul>
+
+</div>
+
+
+<!-- COMPLETION -->
+
+<div class="completion">
+
+    <h2>
+        Module Completion
+    </h2>
+
+    <p>
+        Once you have completed the learning activities,
+        mark this module as complete.
+    </p>
+
+    <button
+        class="complete-btn"
+        onclick="completeModule()">
+
+        ✓ Mark Module as Complete
+
+    </button>
+
+    <div id="completionMessage">
+
+        ✓ Module 2 completed successfully!
+
+    </div>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+    Great Lakes University of Kisumu<br>
+
+    Biostatistics for Clinical Medicine • Learning Portal
+
+</div>
+
+
+</div>
+
+
+<script>
+
+/* =========================================
+   MODULE COMPLETION
+   ========================================= */
+
+function completeModule() {
+
+    localStorage.setItem(
+        "module2Completed",
+        "true"
+    );
+
+    document.getElementById(
+        "completionMessage"
+    ).style.display = "block";
+
+}
+
+</script>
+
+</body>
+</html>

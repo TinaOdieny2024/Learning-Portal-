@@ -4,48 +4,114 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Module 1 | Biostatistics</title>
+<title>Module 1 | Biostatistics for Clinical Medicine</title>
 
 <style>
-
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
 }
 
 body {
-    background: #f4f6f9;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f7fb;
     color: #1f2937;
+    line-height: 1.7;
 }
 
-.header {
-    background: #17365d;
+header {
+    background: #123b63;
     color: white;
-    padding: 30px 7%;
+    padding: 28px 20px;
 }
 
-.header a {
-    color: white;
-    text-decoration: none;
+.header-container {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.university {
     font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.9;
 }
 
-.header h1 {
-    margin-top: 20px;
-    font-size: 30px;
-}
-
-.header p {
-    margin-top: 8px;
+.school {
+    font-size: 14px;
+    margin-top: 4px;
     opacity: 0.85;
 }
 
+header h1 {
+    margin: 18px 0 5px;
+    font-size: 30px;
+}
+
+header p {
+    margin: 0;
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.back {
+    display: inline-block;
+    margin-top: 20px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.back:hover {
+    text-decoration: underline;
+}
+
 .container {
-    width: 88%;
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 30px auto;
+    padding: 0 20px;
+}
+
+.module-banner {
+    background: white;
+    border-radius: 14px;
+    padding: 28px;
+    margin-bottom: 25px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.06);
+}
+
+.module-number {
+    color: #2563eb;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.module-banner h2 {
+    margin: 8px 0;
+    font-size: 27px;
+    color: #123b63;
+}
+
+.module-banner p {
+    margin-bottom: 0;
+    color: #64748b;
+}
+
+.progress {
+    margin-top: 20px;
+    background: #e5e7eb;
+    height: 9px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    width: 8%;
+    height: 100%;
+    background: #2563eb;
 }
 
 .card {
@@ -53,312 +119,659 @@ body {
     padding: 28px;
     margin-bottom: 22px;
     border-radius: 14px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    box-shadow: 0 3px 15px rgba(0,0,0,0.05);
 }
 
 .card h2 {
-    margin-bottom: 18px;
-    color: #17365d;
+    color: #123b63;
+    margin-top: 0;
 }
 
-.card p {
-    line-height: 1.7;
-    color: #4b5563;
-}
-
-.objectives li {
-    margin: 12px 0;
-    line-height: 1.5;
-}
-
-.resource {
-    padding: 15px;
-    background: #f8fafc;
-    border-radius: 8px;
-    margin-top: 12px;
-}
-
-.resource a {
+.card h3 {
     color: #2563eb;
-    text-decoration: none;
-    font-weight: bold;
+    margin-top: 25px;
 }
 
-.clinical {
+.objectives {
+    background: #eef6ff;
     border-left: 5px solid #2563eb;
 }
 
-.questions {
-    margin-top: 15px;
+.objectives li {
+    margin-bottom: 8px;
+}
+
+.definition {
+    background: #f8fafc;
+    border-left: 5px solid #64748b;
+    padding: 18px;
+    margin: 20px 0;
+}
+
+.clinical {
+    background: #f0fdf4;
+    border-left: 5px solid #16a34a;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.example {
+    background: #fff7ed;
+    border-left: 5px solid #ea580c;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th, td {
+    border: 1px solid #dbe3ec;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background: #123b63;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background: #f8fafc;
 }
 
 .question {
     background: #f8fafc;
+    border-radius: 10px;
     padding: 18px;
-    margin-top: 12px;
-    border-radius: 8px;
+    margin: 15px 0;
 }
 
-.button {
-    display: inline-block;
-    padding: 12px 20px;
-    background: #2563eb;
-    color: white;
+.resources a {
+    color: #2563eb;
     text-decoration: none;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    font-size: 15px;
 }
 
-.complete {
+.resources a:hover {
+    text-decoration: underline;
+}
+
+.completion {
     text-align: center;
+    background: white;
+    border-radius: 14px;
+    padding: 35px 25px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.06);
+    margin-bottom: 30px;
 }
 
-.complete button {
+.complete-btn {
     background: #16a34a;
+    color: white;
+    border: none;
+    padding: 14px 25px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.complete-btn:hover {
+    background: #15803d;
+}
+
+#completionMessage {
+    display: none;
+    margin-top: 18px;
+    color: #15803d;
+    font-weight: bold;
 }
 
 footer {
+    background: #123b63;
+    color: white;
     text-align: center;
-    padding: 30px;
-    color: #6b7280;
+    padding: 25px 15px;
+    font-size: 14px;
 }
 
+@media (max-width: 700px) {
+    header h1 {
+        font-size: 24px;
+    }
+
+    .module-banner h2 {
+        font-size: 23px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+}
 </style>
 </head>
 
 <body>
 
-<div class="header">
+<header>
+    <div class="header-container">
 
-    <a href="index.html">
-        ← Back to Dashboard
-    </a>
+        <div class="university">
+            Great Lakes University of Kisumu
+        </div>
 
-    <h1>Module 1: Introduction to Biostatistics</h1>
+        <div class="school">
+            School of Health Sciences • Department of Clinical Medicine
+        </div>
 
-    <p>
-        Biostatistics for Clinical Medicine
-    </p>
+        <h1>Biostatistics for Clinical Medicine</h1>
 
-</div>
+        <p>Learning Portal • Module 1</p>
+
+        <a class="back" href="index.html">
+            ← Back to Dashboard
+        </a>
+
+    </div>
+</header>
 
 
 <div class="container">
 
+    <section class="module-banner">
+
+        <div class="module-number">
+            Module 01
+        </div>
+
+        <h2>Introduction to Biostatistics</h2>
+
+        <p>
+            Understanding the role of statistics in medicine, healthcare,
+            clinical practice and health research.
+        </p>
+
+        <div class="progress">
+            <div class="progress-bar"></div>
+        </div>
+
+    </section>
+
 
     <!-- LEARNING OBJECTIVES -->
 
-    <div class="card">
+    <section class="card objectives">
 
         <h2>🎯 Learning Objectives</h2>
 
         <p>By the end of this module, you should be able to:</p>
 
-        <ul class="objectives">
+        <ul>
+            <li>Define biostatistics and explain its importance in medicine.</li>
 
-            <li>
-                Define biostatistics and explain its importance
-                in medicine.
-            </li>
+            <li>Distinguish between descriptive and inferential statistics.</li>
 
-            <li>
-                Describe how statistics are used in clinical
-                research.
-            </li>
+            <li>Explain how statistics supports clinical decision-making.</li>
 
-            <li>
-                Distinguish between descriptive and inferential
-                statistics.
-            </li>
+            <li>Identify common applications of biostatistics in healthcare.</li>
 
-            <li>
-                Identify common types of data used in health
-                research.
-            </li>
+            <li>Explain the relationship between populations, samples and statistical inference.</li>
 
+            <li>Recognize the importance of data quality in clinical research.</li>
         </ul>
 
-    </div>
+    </section>
 
 
     <!-- INTRODUCTION -->
 
-    <div class="card">
+    <section class="card">
 
-        <h2>📖 Introduction</h2>
-
-        <p>
-
-            Biostatistics is the application of statistical
-            methods to biological, medical and health-related
-            data.
-
-            <br><br>
-
-            In clinical medicine, biostatistics helps healthcare
-            professionals understand patient data, evaluate
-            treatments, interpret research findings and make
-            evidence-based decisions.
-
-        </p>
-
-    </div>
-
-
-    <!-- VIDEO -->
-
-    <div class="card">
-
-        <h2>🎥 Video Lesson</h2>
+        <h2>1. Introduction to Biostatistics</h2>
 
         <p>
-            Watch the introductory lecture before proceeding
-            to the practice questions.
+            Healthcare professionals make decisions every day using information
+            collected from patients, communities and health systems.
         </p>
 
-        <div class="resource">
+        <p>
+            For example, a clinician may want to know whether a patient's blood
+            pressure has improved after treatment. A researcher may want to
+            determine whether a new treatment is more effective than the existing
+            treatment. A public health professional may want to estimate the
+            prevalence of a disease in a population.
+        </p>
 
-            <a href="#" target="_blank">
-                ▶️ Watch Module 1 Lecture
-            </a>
+        <p>
+            All of these questions involve data. Biostatistics provides the
+            methods used to collect, organize, analyze, interpret and communicate
+            health-related data.
+        </p>
+
+        <div class="definition">
+
+            <strong>Definition:</strong>
+
+            <p>
+                <strong>Biostatistics</strong> is the application of statistical
+                methods to biological, medical and health-related data.
+            </p>
 
         </div>
 
-    </div>
+    </section>
 
 
-    <!-- CLINICAL EXAMPLE -->
+    <!-- WHY IMPORTANT -->
 
-    <div class="card clinical">
+    <section class="card">
 
-        <h2>💡 Clinical Example</h2>
+        <h2>2. Why Is Biostatistics Important in Clinical Medicine?</h2>
 
         <p>
-
-            Suppose a hospital wants to determine whether a new
-            treatment reduces the recovery time of patients.
-
-            Researchers could collect information about patients'
-            recovery times and use statistical methods to compare
-            patients receiving the new treatment with those
-            receiving standard care.
-
-            <br><br>
-
-            Biostatistics provides the tools needed to determine
-            whether the observed difference is likely to represent
-            a real effect.
-
+            Biostatistics is not simply about calculating numbers. It helps
+            clinicians and researchers convert data into meaningful evidence.
         </p>
 
-    </div>
+        <h3>Biostatistics helps us to:</h3>
+
+        <ul>
+
+            <li>
+                Understand patterns of disease.
+            </li>
+
+            <li>
+                Measure disease frequency and burden.
+            </li>
+
+            <li>
+                Evaluate treatments and interventions.
+            </li>
+
+            <li>
+                Compare groups of patients.
+            </li>
+
+            <li>
+                Assess risk factors for disease.
+            </li>
+
+            <li>
+                Interpret clinical research findings.
+            </li>
+
+            <li>
+                Make evidence-based clinical decisions.
+            </li>
+
+        </ul>
+
+        <div class="clinical">
+
+            <strong>🏥 Clinical Example</strong>
+
+            <p>
+                Suppose a hospital introduces a new protocol for managing
+                patients with hypertension.
+            </p>
+
+            <p>
+                After six months, the hospital wants to determine whether the
+                protocol improved blood pressure control.
+            </p>
+
+            <p>
+                Biostatistics can help the research team compare blood pressure
+                measurements before and after implementation and determine whether
+                the observed change is likely to represent a real improvement.
+            </p>
+
+        </div>
+
+    </section>
 
 
-    <!-- PRACTICE QUESTIONS -->
+    <!-- DESCRIPTIVE AND INFERENTIAL -->
 
-    <div class="card">
+    <section class="card">
 
-        <h2>📝 Practice Questions</h2>
+        <h2>3. Descriptive and Inferential Statistics</h2>
+
+        <p>
+            Statistics can broadly be divided into two major areas:
+            <strong>descriptive statistics</strong> and
+            <strong>inferential statistics</strong>.
+        </p>
+
+        <table>
+
+            <tr>
+                <th>Descriptive Statistics</th>
+                <th>Inferential Statistics</th>
+            </tr>
+
+            <tr>
+                <td>
+                    Summarizes and describes collected data.
+                </td>
+
+                <td>
+                    Uses sample data to make conclusions about a population.
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Examples include mean, median, percentage and standard deviation.
+                </td>
+
+                <td>
+                    Examples include confidence intervals, hypothesis tests and regression.
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Answers: "What does our data look like?"
+                </td>
+
+                <td>
+                    Answers: "What can we conclude beyond our sample?"
+                </td>
+            </tr>
+
+        </table>
+
+    </section>
+
+
+    <!-- POPULATION SAMPLE -->
+
+    <section class="card">
+
+        <h2>4. Population and Sample</h2>
+
+        <p>
+            One of the most important concepts in biostatistics is the distinction
+            between a <strong>population</strong> and a <strong>sample</strong>.
+        </p>
+
+        <div class="definition">
+
+            <strong>Population</strong>
+
+            <p>
+                The complete group of individuals or observations that we are
+                interested in studying.
+            </p>
+
+        </div>
+
+        <div class="definition">
+
+            <strong>Sample</strong>
+
+            <p>
+                A subset of the population selected for study.
+            </p>
+
+        </div>
+
+        <div class="example">
+
+            <strong>Example</strong>
+
+            <p>
+                Suppose we want to estimate the prevalence of hypertension among
+                adults in Kisumu County.
+            </p>
+
+            <p>
+                The population could be all adults living in Kisumu County,
+                while the sample could consist of 1,000 adults selected for the study.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- DATA TO EVIDENCE -->
+
+    <section class="card">
+
+        <h2>5. From Clinical Data to Evidence</h2>
+
+        <p>
+            Biostatistical analysis is part of a larger process. A typical
+            clinical research process may follow these steps:
+        </p>
+
+        <ol>
+
+            <li>Identify a clinical or public health question.</li>
+
+            <li>Design the study.</li>
+
+            <li>Collect appropriate data.</li>
+
+            <li>Clean and organize the data.</li>
+
+            <li>Describe the data.</li>
+
+            <li>Conduct statistical analysis.</li>
+
+            <li>Interpret the findings.</li>
+
+            <li>Communicate the evidence.</li>
+
+            <li>Use the evidence to inform decisions.</li>
+
+        </ol>
+
+        <div class="clinical">
+
+            <strong>Key idea:</strong>
+
+            <p>
+                Good statistical analysis cannot compensate for poor study
+                design or poor-quality data.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- CLINICAL APPLICATION -->
+
+    <section class="card">
+
+        <h2>6. Clinical Application</h2>
+
+        <p>
+            Consider the following clinical research question:
+        </p>
+
+        <div class="example">
+
+            <strong>Research Question</strong>
+
+            <p>
+                Does a new medication reduce systolic blood pressure more
+                effectively than the standard medication among adults with hypertension?
+            </p>
+
+        </div>
+
+        <p>
+            To answer this question, researchers may need to:
+        </p>
+
+        <ul>
+
+            <li>Define the study population.</li>
+
+            <li>Select an appropriate sample.</li>
+
+            <li>Measure systolic blood pressure.</li>
+
+            <li>Record treatment assignment.</li>
+
+            <li>Summarize the data.</li>
+
+            <li>Compare the treatment groups.</li>
+
+            <li>Estimate the difference in blood pressure.</li>
+
+            <li>Determine the uncertainty around the estimate.</li>
+
+            <li>Interpret the clinical significance of the findings.</li>
+
+        </ul>
+
+        <p>
+            These activities demonstrate why biostatistics is fundamental to
+            evidence-based medicine.
+        </p>
+
+    </section>
+
+
+    <!-- PRACTICE -->
+
+    <section class="card">
+
+        <h2>📝 Practice Activity</h2>
+
+        <p>
+            Try answering these questions before moving to the next module.
+        </p>
 
         <div class="question">
 
             <strong>Question 1</strong>
 
             <p>
-                What is the primary purpose of biostatistics
-                in clinical medicine?
+                What is biostatistics?
             </p>
 
         </div>
-
 
         <div class="question">
 
             <strong>Question 2</strong>
 
             <p>
-                What is the difference between descriptive
-                and inferential statistics?
+                Give two examples of how biostatistics can be used in clinical medicine.
             </p>
 
         </div>
-
 
         <div class="question">
 
             <strong>Question 3</strong>
 
             <p>
-                Give two examples of variables that could be
-                collected from patients in a clinical study.
+                What is the difference between a population and a sample?
             </p>
 
         </div>
 
-    </div>
+        <div class="question">
+
+            <strong>Question 4</strong>
+
+            <p>
+                Distinguish between descriptive and inferential statistics.
+            </p>
+
+        </div>
+
+        <div class="question">
+
+            <strong>Question 5</strong>
+
+            <p>
+                Why is good-quality data important for statistical analysis?
+            </p>
+
+        </div>
+
+    </section>
 
 
     <!-- RESOURCES -->
 
-    <div class="card">
+    <section class="card resources">
 
-        <h2>📚 Additional Resources</h2>
-
-        <div class="resource">
-
-            📄
-            <a href="#" target="_blank">
-                Module 1 Lecture Notes
-            </a>
-
-        </div>
-
-        <div class="resource">
-
-            📄
-            <a href="#" target="_blank">
-                Recommended Reading
-            </a>
-
-        </div>
-
-    </div>
-
-
-    <!-- COMPLETE -->
-
-    <div class="card complete">
-
-        <h2>✅ Module Completion</h2>
+        <h2>📖 Additional Resources</h2>
 
         <p>
-            After studying the material and completing the
-            practice questions, mark this module as complete.
+            Recommended resources will be added here as the course develops,
+            including lecture slides, videos, readings and statistical exercises.
         </p>
 
-        <br>
+        <ul>
 
-        <button
-            class="button"
-            onclick="completeModule()">
+            <li>Course lecture notes</li>
 
+            <li>Clinical examples and case studies</li>
+
+            <li>Statistical exercises</li>
+
+            <li>Recommended textbook chapters</li>
+
+        </ul>
+
+    </section>
+
+
+    <!-- COMPLETION -->
+
+    <section class="completion">
+
+        <h2>✅ Complete Module 1</h2>
+
+        <p>
+            Once you have studied the material and completed the practice
+            activity, mark this module as complete.
+        </p>
+
+        <button class="complete-btn" onclick="completeModule()">
             Mark Module as Complete
-
         </button>
 
-        <p id="message" style="margin-top:15px;"></p>
+        <div id="completionMessage">
+            🎉 Module 1 completed successfully!
+        </div>
 
-    </div>
-
+    </section>
 
 </div>
 
 
 <footer>
 
-    Biostatistics Learning Portal
+    <p>
+        Great Lakes University of Kisumu
+    </p>
+
+    <p>
+        Biostatistics for Clinical Medicine • Learning Portal
+    </p>
+
+    <p>
+        Learning Portal developed by Christine Odieny
+    </p>
 
 </footer>
 
@@ -367,10 +780,21 @@ footer {
 
 function completeModule() {
 
-    document.getElementById("message").innerHTML =
-        "✅ Module 1 completed!";
+    localStorage.setItem("module1Completed", "true");
+
+    document.getElementById("completionMessage").style.display = "block";
 
 }
+
+window.onload = function() {
+
+    if (localStorage.getItem("module1Completed") === "true") {
+
+        document.getElementById("completionMessage").style.display = "block";
+
+    }
+
+};
 
 </script>
 

@@ -1,1421 +1,289 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>
-Great Lakes University of Kisumu | Biostatistics
-</title>
+<title>Biostatistics | Great Lakes University</title>
 
 <style>
-
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f4f7fb;
-    color: #1f2937;
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    color: #172033;
 }
 
-/* =========================
-   SIDEBAR
-========================= */
-
-.sidebar {
-
-    position: fixed;
-
-    left: 0;
-    top: 0;
-
-    width: 260px;
-
-    height: 100vh;
-
-    background: #17365d;
-
+header {
+    background: #12355b;
     color: white;
-
-    padding: 25px 18px;
-
-    overflow-y: auto;
+    padding: 25px 20px;
 }
 
-.university {
-
-    text-align: center;
-
-    padding-bottom: 25px;
-
-    border-bottom:
-    1px solid rgba(255,255,255,0.2);
+.header-content {
+    max-width: 1100px;
+    margin: auto;
 }
 
-.university h2 {
-
-    font-size: 17px;
-
-    line-height: 1.4;
-
-    letter-spacing: 0.5px;
+header h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
 }
 
-.university p {
-
-    font-size: 12px;
-
-    margin-top: 7px;
-
-    opacity: 0.8;
+header p {
+    opacity: 0.9;
 }
 
-.portal-title {
-
-    text-align: center;
-
-    margin: 22px 0;
-}
-
-.portal-title h3 {
-
-    font-size: 15px;
-}
-
-.portal-title p {
-
-    font-size: 11px;
-
-    opacity: 0.7;
-
-    margin-top: 5px;
-}
-
-.nav-section {
-
-    margin-top: 25px;
-}
-
-.nav-section-title {
-
-    font-size: 10px;
-
-    text-transform: uppercase;
-
-    letter-spacing: 1px;
-
-    opacity: 0.55;
-
-    margin: 0 10px 10px;
-}
-
-.nav a {
-
-    display: block;
-
-    text-decoration: none;
-
-    color: white;
-
-    padding: 12px 14px;
-
-    border-radius: 8px;
-
-    margin-bottom: 5px;
-
-    font-size: 14px;
-}
-
-.nav a:hover,
-.nav a.active {
-
-    background:
-    rgba(255,255,255,0.12);
-}
-
-
-/* =========================
-   MAIN
-========================= */
-
-.main {
-
-    margin-left: 260px;
-
-    min-height: 100vh;
-}
-
-
-/* =========================
-   TOP BAR
-========================= */
-
-.topbar {
-
-    height: 70px;
-
+nav {
     background: white;
+    border-bottom: 1px solid #ddd;
+    padding: 12px 20px;
+}
 
-    border-bottom:
-    1px solid #e5e7eb;
-
+.nav-content {
+    max-width: 1100px;
+    margin: auto;
     display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    padding: 0 35px;
+    gap: 20px;
 }
 
-.topbar h3 {
-
-    font-size: 18px;
-
-    color: #17365d;
+nav a {
+    text-decoration: none;
+    color: #12355b;
+    font-weight: bold;
 }
 
-.student {
-
-    font-size: 14px;
-
-    color: #6b7280;
+.container {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 0 20px;
 }
 
-
-/* =========================
-   CONTENT
-========================= */
-
-.content {
-
-    padding: 35px;
+.welcome {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
 }
 
-
-/* =========================
-   HERO
-========================= */
-
-.hero {
-
-    background:
-    linear-gradient(
-        135deg,
-        #17365d,
-        #24578d
-    );
-
-    color: white;
-
-    border-radius: 16px;
-
-    padding: 40px;
-
-    margin-bottom: 30px;
-}
-
-.hero .small {
-
-    font-size: 12px;
-
-    letter-spacing: 1.5px;
-
-    opacity: 0.8;
-
+.welcome h2 {
     margin-bottom: 10px;
 }
 
-.hero h1 {
-
-    font-size: 32px;
-
-    margin-bottom: 8px;
-}
-
-.hero h2 {
-
-    font-size: 18px;
-
-    font-weight: normal;
-
-    opacity: 0.9;
-
-    margin-bottom: 15px;
-}
-
-.hero p {
-
-    max-width: 700px;
-
-    line-height: 1.6;
-
-    opacity: 0.9;
-}
-
-.continue-btn {
-
-    display: inline-block;
-
-    margin-top: 22px;
-
-    padding: 12px 20px;
-
-    background: white;
-
-    color: #17365d;
-
-    border-radius: 8px;
-
-    text-decoration: none;
-
-    font-weight: bold;
-
-    font-size: 14px;
-}
-
-
-/* =========================
-   SECTION TITLES
-========================= */
-
-.section-title {
-
-    font-size: 20px;
-
-    color: #17365d;
-
-    margin: 30px 0 18px;
-}
-
-
-/* =========================
-   STATS
-========================= */
-
-.stats {
-
-    display: grid;
-
-    grid-template-columns:
-    repeat(3, 1fr);
-
-    gap: 20px;
-}
-
-.stat-card {
-
-    background: white;
-
-    padding: 25px;
-
-    border-radius: 12px;
-
-    border: 1px solid #e5e7eb;
-}
-
-.stat-card h4 {
-
-    color: #6b7280;
-
-    font-size: 13px;
-
-    font-weight: normal;
-}
-
-.stat-card .number {
-
-    font-size: 28px;
-
-    color: #17365d;
-
-    font-weight: bold;
-
-    margin-top: 8px;
-}
-
-
-/* =========================
-   MODULES
-========================= */
-
 .modules {
-
     display: grid;
-
-    grid-template-columns:
-    repeat(3, 1fr);
-
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 18px;
 }
 
 .module {
-
     background: white;
-
     border-radius: 12px;
-
-    padding: 22px;
-
-    border: 1px solid #e5e7eb;
-
-    transition:
-    transform 0.2s,
-    box-shadow 0.2s;
-}
-
-.module:hover {
-
-    transform:
-    translateY(-3px);
-
-    box-shadow:
-    0 8px 20px
-    rgba(0,0,0,0.08);
-}
-
-.module.available {
-
-    border-top:
-    4px solid #17365d;
-}
-
-.module.locked {
-
-    opacity: 0.65;
-}
-
-.module-number {
-
-    font-size: 12px;
-
-    color: #6b7280;
-
-    margin-bottom: 8px;
+    padding: 20px;
+    border: 1px solid #e1e5eb;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
 }
 
 .module h3 {
-
-    font-size: 17px;
-
-    color: #17365d;
-
+    color: #12355b;
     margin-bottom: 10px;
 }
 
 .module p {
-
-    font-size: 13px;
-
+    color: #596579;
     line-height: 1.5;
-
-    color: #6b7280;
+    margin-bottom: 15px;
 }
 
-.status {
-
-    display: inline-block;
-
-    margin-top: 15px;
-
-    font-size: 11px;
-
-    font-weight: bold;
-
-    letter-spacing: 0.5px;
-}
-
-.available .status {
-
-    color: #1f7a4d;
-}
-
-.locked .status {
-
-    color: #777;
-}
-
-.module a {
-
-    display: inline-block;
-
-    margin-top: 15px;
-
-    color: #17365d;
-
-    text-decoration: none;
-
-    font-weight: bold;
-
+.week {
     font-size: 13px;
-}
-
-
-/* =========================
-   ANNOUNCEMENTS
-========================= */
-
-.announcement {
-
-    background: white;
-
-    border-radius: 12px;
-
-    padding: 25px;
-
-    border: 1px solid #e5e7eb;
-
-    margin-bottom: 30px;
-}
-
-.announcement h3 {
-
-    color: #17365d;
-
+    font-weight: bold;
+    color: #6b7280;
     margin-bottom: 8px;
 }
 
-.announcement p {
-
-    color: #6b7280;
-
-    line-height: 1.6;
+.btn {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 7px;
+    background: #12355b;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
 }
 
+.locked {
+    background: #eef1f5;
+    color: #697386;
+}
 
-/* =========================
-   FOOTER
-========================= */
+.status {
+    font-size: 13px;
+    margin-bottom: 12px;
+    font-weight: bold;
+}
 
-.footer {
+.available {
+    color: #16803c;
+}
 
+footer {
+    margin-top: 50px;
+    background: #12355b;
+    color: white;
     text-align: center;
-
-    padding: 30px;
-
-    color: #8a94a6;
-
-    font-size: 12px;
+    padding: 25px;
 }
 
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 900px) {
-
-    .sidebar {
-
-        position: relative;
-
-        width: 100%;
-
-        height: auto;
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 23px;
     }
 
-    .main {
-
-        margin-left: 0;
+    .container {
+        margin-top: 20px;
     }
-
-    .stats {
-
-        grid-template-columns: 1fr;
-    }
-
-    .modules {
-
-        grid-template-columns: 1fr;
-    }
-
-    .content {
-
-        padding: 20px;
-    }
-
-    .hero {
-
-        padding: 28px;
-    }
-
-    .hero h1 {
-
-        font-size: 25px;
-    }
-
 }
-
 </style>
-
 </head>
-
 
 <body>
 
+<header>
+    <div class="header-content">
+        <h1>Biostatistics</h1>
+        <p>Great Lakes University of Kisumu | Clinical Medicine</p>
+    </div>
+</header>
 
-<!-- =========================
-     SIDEBAR
-========================= -->
+<nav>
+    <div class="nav-content">
+        <a href="index.html">Course Content</a>
+        <a href="dashboard.html">My Dashboard</a>
+    </div>
+</nav>
 
-<div class="sidebar">
+<div class="container">
 
-    <div class="university">
-
-        <h2>
-            GREAT LAKES UNIVERSITY OF KISUMU
-        </h2>
-
+    <section class="welcome">
+        <h2>Welcome to Biostatistics</h2>
         <p>
-            School of Health Sciences
+            This 12-week course introduces students to statistical concepts,
+            methods and applications used in clinical and health research.
         </p>
+    </section>
 
-    </div>
+    <section class="modules">
 
-
-    <div class="portal-title">
-
-        <h3>
-            Biostatistics
-        </h3>
-
-        <p>
-            Clinical Medicine Learning Portal
-        </p>
-
-    </div>
-
-
-    <div class="nav-section">
-
-        <div class="nav-section-title">
-            Learning
+        <div class="module">
+            <div class="week">WEEK 01</div>
+            <h3>Introduction to Biostatistics & Data</h3>
+            <p>Types of data, variables, descriptive statistics, central tendency and dispersion.</p>
+            <div class="status available">● Available</div>
+            <a class="btn" href="#">Open Module</a>
         </div>
 
-        <div class="nav">
-
-            <a href="index.html"
-               class="active">
-                Dashboard
-            </a>
-
-            <a href="Courses.html">
-                📚 Course Modules
-            </a>
-
-            <a href="#announcements">
-                📢 Announcements
-            </a>
-
+        <div class="module">
+            <div class="week">WEEK 02</div>
+            <h3>Probability & Theoretical Distributions</h3>
+            <p>Probability concepts and Binomial, Poisson, Normal, t, F and Chi-square distributions.</p>
+            <div class="status">🔒 Scheduled</div>
+            <a class="btn locked" href="#">Locked</a>
         </div>
 
-    </div>
-
-
-    <div class="nav-section">
-
-        <div class="nav-section-title">
-            Course Tools
+        <div class="module">
+            <div class="week">WEEK 03</div>
+            <h3>Sampling & Sampling Techniques</h3>
+            <p>Probability and non-probability sampling, sampling distributions and the Central Limit Theorem.</p>
+            <div class="status">🔒 Scheduled</div>
+            <a class="btn locked" href="#">Locked</a>
         </div>
 
-        <div class="nav">
-
-            <a href="#assignments">
-                📝 Assignments
-            </a>
-
-            <a href="#progress">
-                📊 My Progress
-            </a>
-
-            <a href="#resources">
-                📚 Resources
-            </a>
-
+        <div class="module">
+            <div class="week">WEEK 04</div>
+            <h3>Confidence Intervals & Sample Size</h3>
+            <p>Confidence intervals, precision, reliability and sample size determination.</p>
+            <div class="status">🔒 Scheduled</div>
+            <a class="btn locked" href="#">Locked</a>
         </div>
 
-    </div>
-
-
-    <div class="nav-section">
-
-        <div class="nav-section-title">
-            Support
+        <div class="module">
+            <div class="week">WEEK 05</div>
+            <h3>Hypothesis Testing</h3>
+            <p>Null and alternative hypotheses, p-values, Type I and Type II errors and statistical tests.</p>
+            <div class="status">🔒 Scheduled</div>
+            <a class="btn locked" href="#">Locked</a>
         </div>
 
-        <div class="nav">
-
-            <a href="#help">
-                ❓ Help
-            </a>
-
+        <div class="module">
+            <div class="week">WEEK 06</div>
+            <h3>ANOVA</h3>
+            <p>One-way, two-way and multi-way ANOVA, assumptions and post-hoc comparisons.</p>
+            <div class="status">🔒 Scheduled</div>
+            <a class="btn locked" href="#">Locked</a>
         </div>
 
-    </div>
+        <div class="module">
+            <div class="week">WEEK 07</div>
+            <h3>Non-Parametric Tests</h3>
+            <p>Wilcoxon, Mann-Whitney U, Kruskal-Wallis and McNemar tests.</p>
+            <div class="status">🔒 Scheduled</div>
+            <a class="btn locked" href="#">Locked</a>
+        </div>
 
+        <div class="module">
+            <div class="week">WEEK 08</div>
+            <h3>Correlation & Regression</h3>
+            <p>Correlation coefficients, linear regression, model fitting and interpretation.</p>
+            <div class="status">🔒 Scheduled</div>
+            <a class="btn locked" href="#">Locked</a>
+        </div>
+
+        <div class="module">
+            <div class="week">WEEK 09</div>
+            <h3>Advanced Statistical Inference</h3>
+            <p>Statistical power, sample size, non-inferiority, equivalence and meta-analysis.</p>
+            <div class="status">🔒 Scheduled</div>
+            <a class="btn locked" href="#">Locked</a>
+        </div>
+
+        <div class="module">
+            <div class="week">WEEK 10</div>
+            <h3>Review & Applications</h3>
+            <p>Review of key concepts, real-world applications and ethical statistical practice.</p>
+            <div class="status">🔒 Scheduled</div>
+            <a class="btn locked" href="#">Locked</a>
+        </div>
+
+        <div class="module">
+            <div class="week">WEEK 11</div>
+            <h3>Clinical Research Applications</h3>
+            <p>Applying statistical reasoning to clinical and health research questions.</p>
+            <div class="status">🔒 Scheduled</div>
+            <a class="btn locked" href="#">Locked</a>
+        </div>
+
+        <div class="module">
+            <div class="week">WEEK 12</div>
+            <h3>Clinical Research, Statistical Analysis & Interpretation</h3>
+            <p>Study design, statistical analysis, interpretation and reporting of clinical research findings.</p>
+            <div class="status">🔒 Scheduled</div>
+            <a class="btn locked" href="#">Locked</a>
+        </div>
+
+    </section>
 </div>
 
-
-
-<!-- =========================
-     MAIN
-========================= -->
-
-<div class="main">
-
-
-    <!-- TOP BAR -->
-
-    <div class="topbar">
-
-        <h3>
-            Biostatistics Learning Portal
-        </h3>
-
-        <div class="student">
-            Clinical Medicine
-        </div>
-
-    </div>
-
-
-
-    <div class="content">
-
-
-        <!-- HERO -->
-
-        <div class="hero">
-
-            <div class="small">
-                GREAT LAKES UNIVERSITY OF KISUMU
-            </div>
-
-            <h1>
-                Welcome to Biostatistics
-            </h1>
-
-            <h2>
-                Biostatistics for Clinical Medicine
-            </h2>
-
-            <p>
-
-                Welcome to your online learning portal.
-                Explore course modules, learning resources,
-                assignments and assessments as you progress
-                through the 12-week Biostatistics course.
-
-            </p>
-
-
-            <a href="Module1.html"
-               class="continue-btn">
-
-                Continue Learning →
-
-            </a>
-
-        </div>
-
-
-
-        <!-- COURSE OVERVIEW -->
-
-        <h2 class="section-title"
-            id="progress">
-
-            Course Overview
-
-        </h2>
-
-
-        <div class="stats">
-
-
-            <div class="stat-card">
-
-                <h4>
-                    Course Progress
-                </h4>
-
-                <div class="number">
-                    8%
-                </div>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <h4>
-                    Current Module
-                </h4>
-
-                <div class="number">
-                    Module 1
-                </div>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <h4>
-                    Modules Completed
-                </h4>
-
-                <div class="number">
-                    1 / 12
-                </div>
-
-            </div>
-
-
-        </div>
-
-
-
-        <!-- CONTINUE LEARNING -->
-
-        <h2 class="section-title">
-
-            Continue Learning
-
-        </h2>
-
-
-        <div class="announcement">
-
-            <h3>
-                Module 1:
-                Introduction to Biostatistics
-            </h3>
-
-            <p>
-
-                Begin your Biostatistics journey by learning
-                the meaning, importance and applications of
-                biostatistics in clinical medicine.
-
-            </p>
-
-
-            <a href="Module1.html"
-               class="module-link">
-
-                Continue Module →
-
-            </a>
-
-        </div>
-
-
-
-        <!-- COURSE MODULES -->
-
-        <h2 class="section-title"
-            id="modules">
-
-            Course Modules
-
-        </h2>
-
-
-        <div class="modules"
-             id="moduleContainer">
-
-            <!-- Modules automatically appear here -->
-
-        </div>
-
-
-
-        <!-- ANNOUNCEMENTS -->
-
-        <h2 class="section-title"
-            id="announcements">
-
-            Announcements
-
-        </h2>
-
-
-        <div class="announcement">
-
-            <h3>
-                Welcome to the Course 🎓
-            </h3>
-
-            <p>
-
-                Welcome to the Biostatistics for Clinical Medicine
-                learning portal. Your modules will become available
-                according to the course schedule.
-
-            </p>
-
-        </div>
-
-
-
-        <!-- FOOTER -->
-
-        <div class="footer">
-
-            <p>
-                Great Lakes University of Kisumu
-            </p>
-
-            <p>
-                Biostatistics for Clinical Medicine
-                • Learning Portal
-            </p>
-
-        </div>
-
-
-    </div>
-
-</div>
-
-
-
-<!-- =========================
-     JAVASCRIPT
-========================= -->
-
-<script>
-
-
-/* COURSE DATES */
-
-const courseStartDate =
-    new Date("2026-09-07T00:00:00");
-
-
-const module3Date =
-    new Date("2026-09-20T00:00:00");
-
-
-const portalCloseDate =
-    new Date("2027-01-31T23:59:59");
-
-
-
-/* MODULE INFORMATION */
-
-const modules = [
-
-    {
-        number: 1,
-
-        title:
-        "Introduction to Biostatistics",
-
-        description:
-        "Introduction to biostatistics, its importance and applications in clinical medicine.",
-
-        link:
-        "Module1.html"
-    },
-
-
-    {
-        number: 2,
-
-        title:
-        "Types of Data & Variables",
-
-        description:
-        "Understanding variables, levels of measurement and different types of clinical data.",
-
-        link:
-        "Module2.html"
-    },
-
-
-    {
-        number: 3,
-
-        title:
-        "Data Presentation",
-
-        description:
-        "Tables, charts and graphical presentation of clinical data."
-    },
-
-
-    {
-        number: 4,
-
-        title:
-        "Descriptive Statistics",
-
-        description:
-        "Measures of central tendency and measures of variability."
-    },
-
-
-    {
-        number: 5,
-
-        title:
-        "Probability",
-
-        description:
-        "Basic probability concepts and their applications in clinical medicine."
-    },
-
-
-    {
-        number: 6,
-
-        title:
-        "Probability Distributions",
-
-        description:
-        "Introduction to important probability distributions used in health research."
-    },
-
-
-    {
-        number: 7,
-
-        title:
-        "Sampling & Sampling Distributions",
-
-        description:
-        "Sampling methods and sampling distributions in clinical research."
-    },
-
-
-    {
-        number: 8,
-
-        title:
-        "Estimation & Confidence Intervals",
-
-        description:
-        "Point estimation, confidence intervals and interpretation."
-    },
-
-
-    {
-        number: 9,
-
-        title:
-        "Hypothesis Testing",
-
-        description:
-        "Principles of statistical hypothesis testing and clinical interpretation."
-    },
-
-
-    {
-        number: 10,
-
-        title:
-        "Comparing Groups",
-
-        description:
-        "Statistical tests for comparing groups in clinical studies."
-    },
-
-
-    {
-        number: 11,
-
-        title:
-        "Correlation & Regression",
-
-        description:
-        "Exploring relationships between variables using correlation and regression."
-    },
-
-
-    {
-        number: 12,
-
-        title:
-        "Biostatistics in Clinical Research",
-
-        description:
-        "Applying biostatistical concepts to clinical research and evidence-based medicine."
-    }
-
-];
-
-
-
-/* CHECK PORTAL */
-
-function isPortalClosed() {
-
-    const today =
-        new Date();
-
-    return today >
-        portalCloseDate;
-
-}
-
-
-
-/* NUMBER OF OPEN MODULES */
-
-function getAvailableModules() {
-
-    const today =
-        new Date();
-
-
-    if (today <
-        courseStartDate) {
-
-        return 0;
-    }
-
-
-    if (today <
-        module3Date) {
-
-        return 2;
-    }
-
-
-    const daysSinceModule3 =
-        Math.floor(
-
-            (today -
-            module3Date)
-
-            /
-
-            (1000 *
-             60 *
-             60 *
-             24)
-
-        );
-
-
-    const available =
-        3 +
-
-        Math.floor(
-            daysSinceModule3 / 7
-        );
-
-
-    return Math.min(
-        available,
-        modules.length
-    );
-
-}
-
-
-
-/* MODULE OPENING DATE */
-
-function getOpeningDate(
-    moduleNumber
-) {
-
-
-    if (
-        moduleNumber === 1 ||
-        moduleNumber === 2
-    ) {
-
-        return new Date(
-            "2026-09-07T00:00:00"
-        );
-
-    }
-
-
-    const date =
-        new Date(
-            module3Date
-        );
-
-
-    date.setDate(
-
-        date.getDate() +
-
-        ((moduleNumber - 3) * 7)
-
-    );
-
-
-    return date;
-
-}
-
-
-
-/* FORMAT DATE */
-
-function formatDate(date) {
-
-    return date.toLocaleDateString(
-
-        "en-GB",
-
-        {
-
-            day: "numeric",
-
-            month: "long",
-
-            year: "numeric"
-
-        }
-
-    );
-
-}
-
-
-
-/* DISPLAY MODULES */
-
-function displayModules() {
-
-
-    const container =
-        document.getElementById(
-            "moduleContainer"
-        );
-
-
-    if (isPortalClosed()) {
-
-
-        container.innerHTML = `
-
-            <div style="
-                grid-column: 1 / -1;
-                background:white;
-                padding:40px;
-                border-radius:14px;
-                text-align:center;
-            ">
-
-                <div style="
-                    font-size:45px;
-                    margin-bottom:15px;
-                ">
-                    🔒
-                </div>
-
-                <h2 style="
-                    color:#17365d;
-                    margin-bottom:10px;
-                ">
-                    Course Portal Closed
-                </h2>
-
-                <p style="
-                    color:#6b7280;
-                ">
-                    The learning portal closed on
-                    31 January 2027.
-                </p>
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-
-    const availableModules =
-        getAvailableModules();
-
-
-    container.innerHTML = "";
-
-
-
-    modules.forEach(
-        function(module) {
-
-
-        const card =
-            document.createElement(
-                "div"
-            );
-
-
-
-        /* OPEN MODULE */
-
-        if (
-            module.number <=
-            availableModules
-        ) {
-
-
-            card.className =
-                "module available";
-
-
-            card.innerHTML = `
-
-                <div class="module-number">
-
-                    MODULE
-                    ${String(module.number)
-                    .padStart(2,"0")}
-
-                </div>
-
-
-                <h3>
-                    ${module.title}
-                </h3>
-
-
-                <p>
-                    ${module.description}
-                </p>
-
-
-                <div class="status">
-
-                    🟢 OPEN
-
-                </div>
-
-
-                ${
-                    module.link
-
-                    ?
-
-                    `
-                    <br>
-
-                    <a href="${module.link}">
-
-                        Open Module →
-
-                    </a>
-                    `
-
-                    :
-
-                    `
-                    <div style="
-                        margin-top:15px;
-                        color:#6b7280;
-                        font-size:13px;
-                        font-weight:bold;
-                    ">
-
-                        Module content coming soon
-
-                    </div>
-                    `
-                }
-
-            `;
-
-        }
-
-
-
-        /* LOCKED MODULE */
-
-        else {
-
-
-            const openingDate =
-                getOpeningDate(
-                    module.number
-                );
-
-
-            card.className =
-                "module locked";
-
-
-            card.innerHTML = `
-
-                <div class="module-number">
-
-                    MODULE
-                    ${String(module.number)
-                    .padStart(2,"0")}
-
-                </div>
-
-
-                <h3>
-                    ${module.title}
-                </h3>
-
-
-                <p>
-                    ${module.description}
-                </p>
-
-
-                <div class="status">
-
-                    🔒 LOCKED
-
-                </div>
-
-
-                <div style="
-                    margin-top:12px;
-                    color:#7b8494;
-                    font-size:12px;
-                ">
-
-                    Opens
-                    ${formatDate(openingDate)}
-
-                </div>
-
-            `;
-
-        }
-
-
-        container.appendChild(card);
-
-
-    });
-
-}
-
-
-
-/* START */
-
-displayModules();
-
-
-</script>
-
+<footer>
+    <p>Biostatistics | Great Lakes University of Kisumu</p>
+    <p>12-Week Clinical Medicine Course</p>
+</footer>
 
 </body>
-
 </html>

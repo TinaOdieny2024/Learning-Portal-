@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Course Modules | Biostatistics for Clinical Medicine</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #1f2937;
+}
+
+.header {
+    background: #123c69;
+    color: white;
+    padding: 28px 20px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 25px;
+}
+
+.header p {
+    margin: 8px 0 0;
+    opacity: 0.9;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.back {
+    display: inline-block;
+    margin-bottom: 25px;
+    color: #123c69;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.course-title {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+.course-title h2 {
+    margin-top: 0;
+    color: #123c69;
+}
+
+.modules {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.module {
+    background: white;
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+    border-left: 5px solid #123c69;
+}
+
+.module.locked {
+    opacity: 0.65;
+    border-left-color: #9ca3af;
+}
+
+.module-number {
+    font-size: 14px;
+    font-weight: bold;
+    color: #6b7280;
+    margin-bottom: 8px;
+}
+
+.module h3 {
+    margin: 5px 0 10px;
+    color: #123c69;
+}
+
+.module p {
+    line-height: 1.5;
+    color: #555;
+}
+
+.status {
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+.open {
+    color: #15803d;
+}
+
+.locked-status {
+    color: #6b7280;
+}
+
+.module a {
+    display: inline-block;
+    background: #123c69;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 7px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.module a:hover {
+    opacity: 0.9;
+}
+
+.locked-box {
+    background: #f3f4f6;
+    padding: 10px;
+    border-radius: 7px;
+    color: #6b7280;
+}
+
+.closed {
+    background: white;
+    padding: 35px;
+    border-radius: 12px;
+    text-align: center;
+    color: #6b7280;
+}
+
+footer {
+    text-align: center;
+    padding: 35px 20px;
+    color: #6b7280;
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <h1>GREAT LAKES UNIVERSITY OF KISUMU</h1>
+    <p>School of Health Sciences | Department of Clinical Medicine</p>
+</header>
+
+<div class="container">
+
+    <a href="index.html" class="back">← Back to Dashboard</a>
+
+    <div class="course-title">
+        <h2>Biostatistics for Clinical Medicine</h2>
+        <p>
+            Course Modules
+        </p>
+        <p>
+            All 12 modules are listed below. Modules become available
+            according to the course schedule.
+        </p>
+    </div>
+
+    <div id="moduleContainer" class="modules"></div>
+
+</div>
+
+<footer>
+    Biostatistics for Clinical Medicine Learning Portal
+</footer>
+
+<script>
+
+const courseStartDate =
+    new Date("2026-09-07T00:00:00");
+
+const module3Date =
+    new Date("2026-09-20T00:00:00");
+
+const portalCloseDate =
+    new Date("2027-01-31T23:59:59");
+
+
+const modules = [
+
+    {
+        number: 1,
+        title: "Introduction to Biostatistics",
+        description:
+        "Introduction to biostatistics, its importance and applications in clinical medicine.",
+        link: "Module1.html"
+    },
+
+    {
+        number: 2,
+        title: "Types of Data & Variables",
+        description:
+        "Understanding variables, levels of measurement and different types of clinical data.",
+        link: "Module2.html"
+    },
+
+    {
+        number: 3,
+        title: "Descriptive Statistics",
+        description:
+        "Summarising and presenting clinical data using tables, graphs and numerical measures."
+    },
+
+    {
+        number: 4,
+        title: "Probability",
+        description:
+        "Understanding probability concepts and their applications in clinical medicine."
+    },
+
+    {
+        number: 5,
+        title: "Probability Distributions",
+        description:
+        "Introduction to important probability distributions used in health research."
+    },
+
+    {
+        number: 6,
+        title: "Sampling & Sampling Distributions",
+        description:
+        "Understanding sampling methods and sampling distributions in clinical research."
+    },
+
+    {
+        number: 7,
+        title: "Estimation & Confidence Intervals",
+        description:
+        "Estimating population parameters and interpreting confidence intervals."
+    },
+
+    {
+        number: 8,
+        title: "Hypothesis Testing",
+        description:
+        "Understanding statistical hypotheses, significance testing and p-values."
+    },
+
+    {
+        number: 9,
+        title: "Comparing Groups",
+        description:
+        "Statistical methods for comparing groups in clinical and health research."
+    },
+
+    {
+        number: 10,
+        title: "Correlation & Regression",
+        description:
+        "Understanding relationships between variables using correlation and regression."
+    },
+
+    {
+        number: 11,
+        title: "Biostatistics in Clinical Research",
+        description:
+        "Applying biostatistical methods to clinical research questions and study designs."
+    },
+
+    {
+        number: 12,
+        title: "Review & Clinical Application",
+        description:
+        "Comprehensive review and application of biostatistical concepts to clinical medicine."
+    }
+
+];
+
+
+function getAvailableModules() {
+
+    const today = new Date();
+
+    if (today < courseStartDate) {
+        return 0;
+    }
+
+    if (today < module3Date) {
+        return 2;
+    }
+
+    const daysSinceModule3 =
+        Math.floor(
+            (today - module3Date) /
+            (1000 * 60 * 60 * 24)
+        );
+
+    return Math.min(
+        12,
+        3 + Math.floor(daysSinceModule3 / 7)
+    );
+}
+
+
+function getOpeningDate(moduleNumber) {
+
+    if (moduleNumber === 1 ||
+        moduleNumber === 2) {
+
+        return courseStartDate;
+    }
+
+    return new Date(
+        module3Date.getTime() +
+        (moduleNumber - 3) *
+        7 *
+        24 *
+        60 *
+        60 *
+        1000
+    );
+}
+
+
+function formatDate(date) {
+
+    return date.toLocaleDateString(
+        "en-GB",
+        {
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+        }
+    );
+}
+
+
+function displayModules() {
+
+    const container =
+        document.getElementById(
+            "moduleContainer"
+        );
+
+    const today = new Date();
+
+    if (today > portalCloseDate) {
+
+        container.innerHTML = `
+            <div class="closed">
+                <h2>🔒 Course Portal Closed</h2>
+                <p>
+                    This learning portal closed on
+                    31 January 2027.
+                </p>
+            </div>
+        `;
+
+        return;
+    }
+
+    const availableModules =
+        getAvailableModules();
+
+    modules.forEach(module => {
+
+        const card =
+            document.createElement("div");
+
+        const isOpen =
+            module.number <= availableModules;
+
+        card.className =
+            isOpen
+            ? "module"
+            : "module locked";
+
+
+        if (isOpen) {
+
+            card.innerHTML = `
+                <div class="module-number">
+                    MODULE ${String(module.number).padStart(2, "0")}
+                </div>
+
+                <h3>${module.title}</h3>
+
+                <p>${module.description}</p>
+
+                <div class="status open">
+                    🟢 OPEN
+                </div>
+
+                ${
+                    module.link
+                    ? `<a href="${module.link}">
+                        Open Module →
+                       </a>`
+                    : `<div class="locked-box">
+                        Module content coming soon.
+                       </div>`
+                }
+            `;
+
+        } else {
+
+            const openingDate =
+                getOpeningDate(
+                    module.number
+                );
+
+            card.innerHTML = `
+                <div class="module-number">
+                    MODULE ${String(module.number).padStart(2, "0")}
+                </div>
+
+                <h3>${module.title}</h3>
+
+                <p>${module.description}</p>
+
+                <div class="status locked-status">
+                    🔒 LOCKED
+                </div>
+
+                <div class="locked-box">
+                    Opens ${formatDate(openingDate)}
+                </div>
+            `;
+        }
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+displayModules();
+
+</script>
+
+</body>
+</html>

@@ -222,7 +222,14 @@ body {
     border: 1px solid #e5e7eb;
     transition: transform 0.2s, box-shadow 0.2s;
 }
+.module.previous {
+    border-top: 4px solid #16a34a;
+    opacity: 0.85;
+}
 
+.module.locked {
+    opacity: 0.65;
+}
 .module:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.08);
@@ -471,238 +478,14 @@ body {
 
 
         <!-- MODULES -->
-        <h2 class="section-title" id="modules">
-            Course Modules
-        </h2>
 
-        <div class="modules">
+<h2 class="section-title" id="modules">
+    Course Modules
+</h2>
 
-            <!-- MODULE 1 -->
-            <div class="module available">
-
-                <div class="module-number">MODULE 01</div>
-
-                <h3>Introduction to Biostatistics</h3>
-
-                <p>
-                    Introduction to biostatistics, its importance and
-                    applications in clinical medicine.
-                </p>
-
-                <div class="status">
-                    AVAILABLE NOW
-                </div>
-
-                <br>
-
-                <a href="Module1.html">
-                    Open Module →
-                </a>
-
-            </div>
-
-
-            <!-- MODULE 2 -->
-            <div class="module locked">
-
-                <div class="module-number">MODULE 02</div>
-
-                <h3>Types of Data & Variables</h3>
-
-                <p>
-                    Understanding variables, levels of measurement and
-                    different types of clinical data.
-                </p>
-
-                <div class="status">
-                    🔒 UPCOMING
-                </div>
-
-            </div>
-
-
-            <!-- MODULE 3 -->
-            <div class="module locked">
-
-                <div class="module-number">MODULE 03</div>
-
-                <h3>Data Presentation</h3>
-
-                <p>
-                    Tables, charts and graphical presentation of clinical data.
-                </p>
-
-                <div class="status">
-                    🔒 UPCOMING
-                </div>
-
-            </div>
-
-
-            <!-- MODULE 4 -->
-            <div class="module locked">
-
-                <div class="module-number">MODULE 04</div>
-
-                <h3>Descriptive Statistics</h3>
-
-                <p>
-                    Measures of central tendency and measures of variability.
-                </p>
-
-                <div class="status">
-                    🔒 UPCOMING
-                </div>
-
-            </div>
-
-
-            <!-- MODULE 5 -->
-            <div class="module locked">
-
-                <div class="module-number">MODULE 05</div>
-
-                <h3>Probability</h3>
-
-                <p>
-                    Basic probability concepts and their applications in
-                    clinical medicine.
-                </p>
-
-                <div class="status">
-                    🔒 UPCOMING
-                </div>
-
-            </div>
-
-
-            <!-- MODULE 6 -->
-            <div class="module locked">
-
-                <div class="module-number">MODULE 06</div>
-
-                <h3>Probability Distributions</h3>
-
-                <p>
-                    Introduction to important probability distributions used
-                    in health research.
-                </p>
-
-                <div class="status">
-                    🔒 UPCOMING
-                </div>
-
-            </div>
-
-
-            <!-- MODULE 7 -->
-            <div class="module locked">
-
-                <div class="module-number">MODULE 07</div>
-
-                <h3>Sampling & Sampling Distributions</h3>
-
-                <p>
-                    Sampling methods and sampling distributions in clinical
-                    research.
-                </p>
-
-                <div class="status">
-                    🔒 UPCOMING
-                </div>
-
-            </div>
-
-
-            <!-- MODULE 8 -->
-            <div class="module locked">
-
-                <div class="module-number">MODULE 08</div>
-
-                <h3>Estimation & Confidence Intervals</h3>
-
-                <p>
-                    Point estimation, confidence intervals and interpretation.
-                </p>
-
-                <div class="status">
-                    🔒 UPCOMING
-                </div>
-
-            </div>
-
-
-            <!-- MODULE 9 -->
-            <div class="module locked">
-
-                <div class="module-number">MODULE 09</div>
-
-                <h3>Hypothesis Testing</h3>
-
-                <p>
-                    Principles of statistical hypothesis testing and clinical
-                    interpretation.
-                </p>
-
-                <div class="status">
-                    🔒 UPCOMING
-                </div>
-
-            </div>
-
-
-            <!-- MODULE 10 -->
-            <div class="module locked">
-
-                <div class="module-number">MODULE 10</div>
-
-                <h3>Comparing Groups</h3>
-
-                <p>
-                    Statistical tests for comparing groups in clinical studies.
-                </p>
-
-                <div class="status">
-                    🔒 UPCOMING
-                </div>
-
-            </div>
-
-
-            <!-- MODULE 11 -->
-            <div class="module locked">
-
-                <div class="module-number">MODULE 11</div>
-
-                <h3>Correlation & Regression</h3>
-
-                <p>
-                    Exploring relationships between variables using correlation
-                    and regression.
-                </p>
-
-                <div class="status">
-                    🔒 UPCOMING
-                </div>
-
-            </div>
-
-
-            <!-- MODULE 12 -->
-            <div class="module locked">
-
-                <div class="module-number">MODULE 12</div>
-
-                <h3>Biostatistics in Clinical Research</h3>
-
-                <p>
-                    Applying biostatistical concepts to clinical research and
-                    evidence-based medicine.
-                </p>
-
-                <div class="status">
-                    🔒 UPCOMING
-                </div>
+<div class="modules" id="moduleContainer">
+    <!-- Modules will be automatically generated here -->
+</div>
 
             </div>
 
@@ -743,6 +526,359 @@ body {
     </div>
 
 </div>
+<script>
+<script>
 
+/* =========================================
+   BIOSTATISTICS MODULE SCHEDULE
+   ========================================= */
+
+const courseStartDate = new Date("2026-09-07T00:00:00");
+
+const modules = [
+
+    {
+        number: 1,
+        title: "Introduction to Biostatistics",
+        description: "Introduction to biostatistics, its importance and applications in clinical medicine.",
+        link: "Module1.html"
+    },
+
+    {
+        number: 2,
+        title: "Types of Data & Variables",
+        description: "Understanding variables, levels of measurement and different types of clinical data."
+    },
+
+    {
+        number: 3,
+        title: "Data Presentation",
+        description: "Tables, charts and graphical presentation of clinical data."
+    },
+
+    {
+        number: 4,
+        title: "Descriptive Statistics",
+        description: "Measures of central tendency and measures of variability."
+    },
+
+    {
+        number: 5,
+        title: "Probability",
+        description: "Basic probability concepts and their applications in clinical medicine."
+    },
+
+    {
+        number: 6,
+        title: "Probability Distributions",
+        description: "Introduction to important probability distributions used in health research."
+    },
+
+    {
+        number: 7,
+        title: "Sampling & Sampling Distributions",
+        description: "Sampling methods and sampling distributions in clinical research."
+    },
+
+    {
+        number: 8,
+        title: "Estimation & Confidence Intervals",
+        description: "Point estimation, confidence intervals and interpretation."
+    },
+
+    {
+        number: 9,
+        title: "Hypothesis Testing",
+        description: "Principles of statistical hypothesis testing and clinical interpretation."
+    },
+
+    {
+        number: 10,
+        title: "Comparing Groups",
+        description: "Statistical tests for comparing groups in clinical studies."
+    },
+
+    {
+        number: 11,
+        title: "Correlation & Regression",
+        description: "Exploring relationships between variables using correlation and regression."
+    },
+
+    {
+        number: 12,
+        title: "Biostatistics in Clinical Research",
+        description: "Applying biostatistical concepts to clinical research and evidence-based medicine."
+    }
+
+];
+
+
+/* =========================================
+   DETERMINE CURRENT MODULE
+   ========================================= */
+
+function getCurrentModule() {
+
+    const today = new Date();
+
+    if (today < courseStartDate) {
+        return 0;
+    }
+
+    const daysSinceStart = Math.floor(
+        (today - courseStartDate) / (1000 * 60 * 60 * 24)
+    );
+
+    /*
+       Module 1:
+       7–12 September
+
+       Module 2:
+       13–19 September
+
+       Module 3:
+       20–26 September
+
+       Thereafter, every Sunday.
+    */
+
+    if (daysSinceStart < 6) {
+        return 1;
+    }
+
+    return Math.min(
+        2 + Math.floor((daysSinceStart - 6) / 7),
+        modules.length
+    );
+}
+
+
+/* =========================================
+   GET MODULE OPENING DATE
+   ========================================= */
+
+function getOpeningDate(moduleNumber) {
+
+    const date = new Date(courseStartDate);
+
+    if (moduleNumber === 1) {
+        return date;
+    }
+
+    date.setDate(
+        date.getDate() + 6 + ((moduleNumber - 2) * 7)
+    );
+
+    return date;
+}
+
+
+/* =========================================
+   FORMAT DATE
+   ========================================= */
+
+function formatDate(date) {
+
+    return date.toLocaleDateString(
+        "en-GB",
+        {
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+        }
+    );
+
+}
+
+
+/* =========================================
+   DISPLAY MODULES
+   ========================================= */
+
+function displayModules() {
+
+    const container =
+        document.getElementById("moduleContainer");
+
+    const currentModule =
+        getCurrentModule();
+
+    container.innerHTML = "";
+
+
+    modules.forEach(function(module) {
+
+        const card =
+            document.createElement("div");
+
+
+        /* BEFORE COURSE STARTS */
+
+        if (currentModule === 0) {
+
+            card.className = "module locked";
+
+            card.innerHTML = `
+
+                <div class="module-number">
+                    MODULE ${String(module.number).padStart(2, "0")}
+                </div>
+
+                <h3>${module.title}</h3>
+
+                <p>${module.description}</p>
+
+                <div class="status">
+                    🔒 UPCOMING
+                </div>
+
+                <div style="
+                    margin-top:12px;
+                    color:#7b8494;
+                    font-size:12px;">
+                    Opens ${formatDate(getOpeningDate(module.number))}
+                </div>
+
+            `;
+
+        }
+
+
+        /* CURRENT MODULE */
+
+        else if (module.number === currentModule) {
+
+            card.className = "module available";
+
+            card.innerHTML = `
+
+                <div class="module-number">
+                    MODULE ${String(module.number).padStart(2, "0")}
+                </div>
+
+                <h3>${module.title}</h3>
+
+                <p>${module.description}</p>
+
+                <div class="status">
+                    🟢 CURRENT MODULE
+                </div>
+
+                <br>
+
+                ${
+                    module.link
+                    ?
+                    `<a href="${module.link}">
+                        Open Module →
+                    </a>`
+                    :
+                    `<span style="
+                        display:inline-block;
+                        margin-top:15px;
+                        color:#17365d;
+                        font-size:13px;
+                        font-weight:bold;">
+                        Module page coming soon
+                    </span>`
+                }
+
+            `;
+
+        }
+
+
+        /* PREVIOUS MODULE */
+
+        else if (module.number < currentModule) {
+
+            card.className = "module previous";
+
+            card.innerHTML = `
+
+                <div class="module-number">
+                    MODULE ${String(module.number).padStart(2, "0")}
+                </div>
+
+                <h3>${module.title}</h3>
+
+                <p>${module.description}</p>
+
+                <div class="status">
+                    ✓ PREVIOUS MODULE
+                </div>
+
+                <br>
+
+                ${
+                    module.link
+                    ?
+                    `<a href="${module.link}">
+                        Review Module →
+                    </a>`
+                    :
+                    `<span style="
+                        display:inline-block;
+                        margin-top:15px;
+                        color:#6b7280;
+                        font-size:13px;">
+                        Module page coming soon
+                    </span>`
+                }
+
+            `;
+
+        }
+
+
+        /* UPCOMING MODULE */
+
+        else {
+
+            card.className = "module locked";
+
+            card.innerHTML = `
+
+                <div class="module-number">
+                    MODULE ${String(module.number).padStart(2, "0")}
+                </div>
+
+                <h3>${module.title}</h3>
+
+                <p>${module.description}</p>
+
+                <div class="status">
+                    🔒 UPCOMING
+                </div>
+
+                <div style="
+                    margin-top:12px;
+                    color:#7b8494;
+                    font-size:12px;">
+                    Opens ${formatDate(getOpeningDate(module.number))}
+                </div>
+
+            `;
+
+        }
+
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+/* =========================================
+   RUN
+   ========================================= */
+const courseStartDate = new Date("2026-09-07T00:00:00");
+displayModules();
+
+</script>
+
+</script>
+    
 </body>
 </html>

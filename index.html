@@ -529,127 +529,198 @@ body {
 <script>
 <script>
 
+<script>
+
 /* =========================================
-   BIOSTATISTICS MODULE SCHEDULE
+   BIOSTATISTICS COURSE SETTINGS
    ========================================= */
 
-const courseStartDate = new Date("2026-09-07T00:00:00");
+/*
+   Module 1 and Module 2 open together
+   on 7 September 2026.
+
+   Module 3 opens on 20 September 2026.
+
+   After that, one new module opens
+   every Sunday.
+
+   Once a module opens, it NEVER locks again.
+
+   The entire portal closes on
+   31 January 2027 at 23:59.
+*/
+
+const courseStartDate =
+    new Date("2026-09-07T00:00:00");
+
+const module3Date =
+    new Date("2026-09-20T00:00:00");
+
+const portalCloseDate =
+    new Date("2027-01-31T23:59:59");
+
+
+/* =========================================
+   MODULE INFORMATION
+   ========================================= */
 
 const modules = [
 
     {
         number: 1,
         title: "Introduction to Biostatistics",
-        description: "Introduction to biostatistics, its importance and applications in clinical medicine.",
+        description:
+            "Introduction to biostatistics, its importance and applications in clinical medicine.",
         link: "Module1.html"
     },
 
     {
         number: 2,
         title: "Types of Data & Variables",
-        description: "Understanding variables, levels of measurement and different types of clinical data."
+        description:
+            "Understanding variables, levels of measurement and different types of clinical data."
     },
 
     {
         number: 3,
         title: "Data Presentation",
-        description: "Tables, charts and graphical presentation of clinical data."
+        description:
+            "Tables, charts and graphical presentation of clinical data."
     },
 
     {
         number: 4,
         title: "Descriptive Statistics",
-        description: "Measures of central tendency and measures of variability."
+        description:
+            "Measures of central tendency and measures of variability."
     },
 
     {
         number: 5,
         title: "Probability",
-        description: "Basic probability concepts and their applications in clinical medicine."
+        description:
+            "Basic probability concepts and their applications in clinical medicine."
     },
 
     {
         number: 6,
         title: "Probability Distributions",
-        description: "Introduction to important probability distributions used in health research."
+        description:
+            "Introduction to important probability distributions used in health research."
     },
 
     {
         number: 7,
         title: "Sampling & Sampling Distributions",
-        description: "Sampling methods and sampling distributions in clinical research."
+        description:
+            "Sampling methods and sampling distributions in clinical research."
     },
 
     {
         number: 8,
         title: "Estimation & Confidence Intervals",
-        description: "Point estimation, confidence intervals and interpretation."
+        description:
+            "Point estimation, confidence intervals and interpretation."
     },
 
     {
         number: 9,
         title: "Hypothesis Testing",
-        description: "Principles of statistical hypothesis testing and clinical interpretation."
+        description:
+            "Principles of statistical hypothesis testing and clinical interpretation."
     },
 
     {
         number: 10,
         title: "Comparing Groups",
-        description: "Statistical tests for comparing groups in clinical studies."
+        description:
+            "Statistical tests for comparing groups in clinical studies."
     },
 
     {
         number: 11,
         title: "Correlation & Regression",
-        description: "Exploring relationships between variables using correlation and regression."
+        description:
+            "Exploring relationships between variables using correlation and regression."
     },
 
     {
         number: 12,
         title: "Biostatistics in Clinical Research",
-        description: "Applying biostatistical concepts to clinical research and evidence-based medicine."
+        description:
+            "Applying biostatistical concepts to clinical research and evidence-based medicine."
     }
 
 ];
 
 
 /* =========================================
-   DETERMINE CURRENT MODULE
+   CHECK WHETHER PORTAL IS CLOSED
    ========================================= */
 
-function getCurrentModule() {
+function isPortalClosed() {
 
     const today = new Date();
+
+    return today > portalCloseDate;
+
+}
+
+
+/* =========================================
+   DETERMINE HOW MANY MODULES ARE OPEN
+   ========================================= */
+
+function getAvailableModules() {
+
+    const today = new Date();
+
+    /*
+       Before 7 September:
+       No modules are available.
+    */
 
     if (today < courseStartDate) {
         return 0;
     }
 
-    const daysSinceStart = Math.floor(
-        (today - courseStartDate) / (1000 * 60 * 60 * 24)
-    );
 
     /*
-       Module 1:
-       7–12 September
-
-       Module 2:
-       13–19 September
-
-       Module 3:
-       20–26 September
-
-       Thereafter, every Sunday.
+       From 7 September:
+       Modules 1 and 2 are available.
     */
 
-    if (daysSinceStart < 6) {
-        return 1;
+    if (today < module3Date) {
+        return 2;
     }
 
+
+    /*
+       From 20 September:
+       Module 3 becomes available.
+    */
+
+    const daysSinceModule3 =
+        Math.floor(
+            (today - module3Date) /
+            (1000 * 60 * 60 * 24)
+        );
+
+
+    /*
+       Every 7 days another module opens.
+    */
+
+    const available =
+        3 +
+        Math.floor(daysSinceModule3 / 7);
+
+
     return Math.min(
-        2 + Math.floor((daysSinceStart - 6) / 7),
+        available,
         modules.length
     );
+
 }
 
 
@@ -659,17 +730,41 @@ function getCurrentModule() {
 
 function getOpeningDate(moduleNumber) {
 
-    const date = new Date(courseStartDate);
+    /*
+       Module 1 and Module 2:
+       7 September 2026
+    */
 
-    if (moduleNumber === 1) {
-        return date;
+    if (
+        moduleNumber === 1 ||
+        moduleNumber === 2
+    ) {
+
+        return new Date(
+            "2026-09-07T00:00:00"
+        );
+
     }
 
+
+    /*
+       Module 3:
+       20 September 2026
+
+       Modules 4 onward:
+       Every Sunday after that.
+    */
+
+    const date =
+        new Date(module3Date);
+
     date.setDate(
-        date.getDate() + 6 + ((moduleNumber - 2) * 7)
+        date.getDate() +
+        ((moduleNumber - 3) * 7)
     );
 
     return date;
+
 }
 
 
@@ -698,10 +793,64 @@ function formatDate(date) {
 function displayModules() {
 
     const container =
-        document.getElementById("moduleContainer");
+        document.getElementById(
+            "moduleContainer"
+        );
 
-    const currentModule =
-        getCurrentModule();
+
+    /*
+       If the portal is closed,
+       show the closed message.
+    */
+
+    if (isPortalClosed()) {
+
+        container.innerHTML = `
+
+            <div style="
+                grid-column: 1 / -1;
+                background: white;
+                padding: 40px;
+                border-radius: 14px;
+                text-align: center;
+                border: 1px solid #e5e7eb;
+            ">
+
+                <div style="
+                    font-size: 45px;
+                    margin-bottom: 15px;
+                ">
+                    🔒
+                </div>
+
+                <h2 style="
+                    color: #17365d;
+                    margin-bottom: 10px;
+                ">
+                    Course Portal Closed
+                </h2>
+
+                <p style="
+                    color: #6b7280;
+                    line-height: 1.6;
+                ">
+                    The Biostatistics for Clinical Medicine
+                    learning portal closed on
+                    31 January 2027.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    const availableModules =
+        getAvailableModules();
+
 
     container.innerHTML = "";
 
@@ -712,11 +861,18 @@ function displayModules() {
             document.createElement("div");
 
 
-        /* BEFORE COURSE STARTS */
+        /*
+           MODULE IS OPEN
+        */
 
-        if (currentModule === 0) {
+        if (
+            module.number <=
+            availableModules
+        ) {
 
-            card.className = "module locked";
+            card.className =
+                "module available";
+
 
             card.innerHTML = `
 
@@ -724,44 +880,16 @@ function displayModules() {
                     MODULE ${String(module.number).padStart(2, "0")}
                 </div>
 
-                <h3>${module.title}</h3>
+                <h3>
+                    ${module.title}
+                </h3>
 
-                <p>${module.description}</p>
-
-                <div class="status">
-                    🔒 UPCOMING
-                </div>
-
-                <div style="
-                    margin-top:12px;
-                    color:#7b8494;
-                    font-size:12px;">
-                    Opens ${formatDate(getOpeningDate(module.number))}
-                </div>
-
-            `;
-
-        }
-
-
-        /* CURRENT MODULE */
-
-        else if (module.number === currentModule) {
-
-            card.className = "module available";
-
-            card.innerHTML = `
-
-                <div class="module-number">
-                    MODULE ${String(module.number).padStart(2, "0")}
-                </div>
-
-                <h3>${module.title}</h3>
-
-                <p>${module.description}</p>
+                <p>
+                    ${module.description}
+                </p>
 
                 <div class="status">
-                    🟢 CURRENT MODULE
+                    🟢 OPEN
                 </div>
 
                 <br>
@@ -769,61 +897,23 @@ function displayModules() {
                 ${
                     module.link
                     ?
-                    `<a href="${module.link}">
+                    `
+                    <a href="${module.link}">
                         Open Module →
-                    </a>`
+                    </a>
+                    `
                     :
-                    `<span style="
-                        display:inline-block;
-                        margin-top:15px;
-                        color:#17365d;
-                        font-size:13px;
-                        font-weight:bold;">
-                        Module page coming soon
-                    </span>`
-                }
-
-            `;
-
-        }
-
-
-        /* PREVIOUS MODULE */
-
-        else if (module.number < currentModule) {
-
-            card.className = "module previous";
-
-            card.innerHTML = `
-
-                <div class="module-number">
-                    MODULE ${String(module.number).padStart(2, "0")}
-                </div>
-
-                <h3>${module.title}</h3>
-
-                <p>${module.description}</p>
-
-                <div class="status">
-                    ✓ PREVIOUS MODULE
-                </div>
-
-                <br>
-
-                ${
-                    module.link
-                    ?
-                    `<a href="${module.link}">
-                        Review Module →
-                    </a>`
-                    :
-                    `<span style="
+                    `
+                    <span style="
                         display:inline-block;
                         margin-top:15px;
                         color:#6b7280;
-                        font-size:13px;">
-                        Module page coming soon
-                    </span>`
+                        font-size:13px;
+                        font-weight:bold;
+                    ">
+                        Module content coming soon
+                    </span>
+                    `
                 }
 
             `;
@@ -831,11 +921,21 @@ function displayModules() {
         }
 
 
-        /* UPCOMING MODULE */
+        /*
+           MODULE IS LOCKED
+        */
 
         else {
 
-            card.className = "module locked";
+            const openingDate =
+                getOpeningDate(
+                    module.number
+                );
+
+
+            card.className =
+                "module locked";
+
 
             card.innerHTML = `
 
@@ -843,19 +943,24 @@ function displayModules() {
                     MODULE ${String(module.number).padStart(2, "0")}
                 </div>
 
-                <h3>${module.title}</h3>
+                <h3>
+                    ${module.title}
+                </h3>
 
-                <p>${module.description}</p>
+                <p>
+                    ${module.description}
+                </p>
 
                 <div class="status">
-                    🔒 UPCOMING
+                    🔒 LOCKED
                 </div>
 
                 <div style="
                     margin-top:12px;
                     color:#7b8494;
-                    font-size:12px;">
-                    Opens ${formatDate(getOpeningDate(module.number))}
+                    font-size:12px;
+                ">
+                    Opens ${formatDate(openingDate)}
                 </div>
 
             `;
@@ -871,12 +976,10 @@ function displayModules() {
 
 
 /* =========================================
-   RUN
+   START PORTAL
    ========================================= */
-const courseStartDate = new Date("2026-09-07T00:00:00");
-displayModules();
 
-</script>
+displayModules();
 
 </script>
     

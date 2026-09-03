@@ -1,289 +1,421 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Biostatistics | Great Lakes University</title>
+    <title>Biostatistics | Clinical Medicine</title>
 
-<style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #f5f7fb;
-    color: #172033;
-}
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #222;
+        }
 
-header {
-    background: #12355b;
-    color: white;
-    padding: 25px 20px;
-}
+        header {
+            background: #003b5c;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
 
-.header-content {
-    max-width: 1100px;
-    margin: auto;
-}
+        header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
 
-header h1 {
-    font-size: 28px;
-    margin-bottom: 8px;
-}
+        header p {
+            font-size: 15px;
+        }
 
-header p {
-    opacity: 0.9;
-}
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
 
-nav {
-    background: white;
-    border-bottom: 1px solid #ddd;
-    padding: 12px 20px;
-}
+        .welcome {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
 
-.nav-content {
-    max-width: 1100px;
-    margin: auto;
-    display: flex;
-    gap: 20px;
-}
+        .welcome h2 {
+            color: #003b5c;
+            margin-bottom: 10px;
+        }
 
-nav a {
-    text-decoration: none;
-    color: #12355b;
-    font-weight: bold;
-}
+        .modules {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
 
-.container {
-    max-width: 1100px;
-    margin: 30px auto;
-    padding: 0 20px;
-}
+        .module {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: 0.2s;
+        }
 
-.welcome {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    margin-bottom: 25px;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
-}
+        .module:hover {
+            transform: translateY(-3px);
+        }
 
-.welcome h2 {
-    margin-bottom: 10px;
-}
+        .module-number {
+            color: #003b5c;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
 
-.modules {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 18px;
-}
+        .module h3 {
+            margin-bottom: 10px;
+        }
 
-.module {
-    background: white;
-    border-radius: 12px;
-    padding: 20px;
-    border: 1px solid #e1e5eb;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-}
+        .module p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
 
-.module h3 {
-    color: #12355b;
-    margin-bottom: 10px;
-}
+        .module a {
+            display: inline-block;
+            background: #003b5c;
+            color: white;
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
 
-.module p {
-    color: #596579;
-    line-height: 1.5;
-    margin-bottom: 15px;
-}
+        .module a:hover {
+            background: #00577f;
+        }
 
-.week {
-    font-size: 13px;
-    font-weight: bold;
-    color: #6b7280;
-    margin-bottom: 8px;
-}
-
-.btn {
-    display: inline-block;
-    padding: 10px 16px;
-    border-radius: 7px;
-    background: #12355b;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.locked {
-    background: #eef1f5;
-    color: #697386;
-}
-
-.status {
-    font-size: 13px;
-    margin-bottom: 12px;
-    font-weight: bold;
-}
-
-.available {
-    color: #16803c;
-}
-
-footer {
-    margin-top: 50px;
-    background: #12355b;
-    color: white;
-    text-align: center;
-    padding: 25px;
-}
-
-@media (max-width: 600px) {
-    header h1 {
-        font-size: 23px;
-    }
-
-    .container {
-        margin-top: 20px;
-    }
-}
-</style>
+        footer {
+            margin-top: 40px;
+            background: #003b5c;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 13px;
+        }
+    </style>
 </head>
 
 <body>
 
-<header>
-    <div class="header-content">
-        <h1>Biostatistics</h1>
-        <p>Great Lakes University of Kisumu | Clinical Medicine</p>
+    <!-- HEADER -->
+    <header>
+        <h1>Biostatistics for Clinical Medicine</h1>
+        <p>Online Learning Portal</p>
+    </header>
+
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+
+        <!-- WELCOME SECTION -->
+        <div class="welcome">
+            <h2>Course Content</h2>
+
+            <p>
+                Welcome to the Biostatistics course for Clinical Medicine.
+                Select a module below to access the learning materials.
+            </p>
+        </div>
+
+
+        <!-- MODULES -->
+        <div class="modules">
+
+
+            <!-- MODULE 01 -->
+            <div class="module">
+
+                <div class="module-number">
+                    MODULE 01
+                </div>
+
+                <h3>Types of Data</h3>
+
+                <p>
+                    Types of data encountered in statistical analysis
+                    and clinical research.
+                </p>
+
+                <a href="modules/module-01/Module_01_Types_of_Data.pdf"
+                   target="_blank">
+                    Open Module
+                </a>
+
+            </div>
+
+
+            <!-- MODULE 02 -->
+            <div class="module">
+
+                <div class="module-number">
+                    MODULE 02
+                </div>
+
+                <h3>Data Presentation</h3>
+
+                <p>
+                    Methods of organizing, presenting and summarizing
+                    clinical data.
+                </p>
+
+                <a href="modules/module-02/Module_02.pdf"
+                   target="_blank">
+                    Open Module
+                </a>
+
+            </div>
+
+
+            <!-- MODULE 03 -->
+            <div class="module">
+
+                <div class="module-number">
+                    MODULE 03
+                </div>
+
+                <h3>Measures of Central Tendency and Dispersion</h3>
+
+                <p>
+                    Mean, median, mode, range, variance, standard deviation
+                    and other measures.
+                </p>
+
+                <a href="modules/module-03/Module_03_Measures_of_Central_Tendency_Dispersion.pdf"
+                   target="_blank">
+                    Open Module
+                </a>
+
+            </div>
+
+
+            <!-- MODULE 04 -->
+            <div class="module">
+
+                <div class="module-number">
+                    MODULE 04
+                </div>
+
+                <h3>Probability and Probability Distributions</h3>
+
+                <p>
+                    Basic probability concepts and important probability
+                    distributions used in clinical research.
+                </p>
+
+                <a href="modules/module-04/Module_04_Probability_Probability_Distributions.pdf"
+                   target="_blank">
+                    Open Module
+                </a>
+
+            </div>
+
+
+            <!-- MODULE 05 -->
+            <div class="module">
+
+                <div class="module-number">
+                    MODULE 05
+                </div>
+
+                <h3>Sampling and Sampling Distributions</h3>
+
+                <p>
+                    Sampling methods, sampling distributions and their
+                    application in clinical studies.
+                </p>
+
+                <a href="modules/module-05/Module_05.pdf"
+                   target="_blank">
+                    Open Module
+                </a>
+
+            </div>
+
+
+            <!-- MODULE 06 -->
+            <div class="module">
+
+                <div class="module-number">
+                    MODULE 06
+                </div>
+
+                <h3>Estimation and Confidence Intervals</h3>
+
+                <p>
+                    Point estimation, confidence intervals and interpretation
+                    of estimates.
+                </p>
+
+                <a href="modules/module-06/Module_06.pdf"
+                   target="_blank">
+                    Open Module
+                </a>
+
+            </div>
+
+
+            <!-- MODULE 07 -->
+            <div class="module">
+
+                <div class="module-number">
+                    MODULE 07
+                </div>
+
+                <h3>Hypothesis Testing</h3>
+
+                <p>
+                    Principles of hypothesis testing, p-values and statistical
+                    decision making.
+                </p>
+
+                <a href="modules/module-07/Module_07.pdf"
+                   target="_blank">
+                    Open Module
+                </a>
+
+            </div>
+
+
+            <!-- MODULE 08 -->
+            <div class="module">
+
+                <div class="module-number">
+                    MODULE 08
+                </div>
+
+                <h3>Common Statistical Tests</h3>
+
+                <p>
+                    Statistical tests commonly used in clinical and health
+                    research.
+                </p>
+
+                <a href="modules/module-08/Module_08.pdf"
+                   target="_blank">
+                    Open Module
+                </a>
+
+            </div>
+
+
+            <!-- MODULE 09 -->
+            <div class="module">
+
+                <div class="module-number">
+                    MODULE 09
+                </div>
+
+                <h3>Analysis of Variance</h3>
+
+                <p>
+                    Analysis of variance and comparison of means across
+                    multiple groups.
+                </p>
+
+                <a href="modules/module-09/Module_09.pdf"
+                   target="_blank">
+                    Open Module
+                </a>
+
+            </div>
+
+
+            <!-- MODULE 10 -->
+            <div class="module">
+
+                <div class="module-number">
+                    MODULE 10
+                </div>
+
+                <h3>Correlation and Regression</h3>
+
+                <p>
+                    Exploring relationships between variables using
+                    correlation and regression methods.
+                </p>
+
+                <a href="modules/module-10/Module_10_Correlation_Regression.pdf"
+                   target="_blank">
+                    Open Module
+                </a>
+
+            </div>
+
+
+            <!-- MODULE 11 -->
+            <div class="module">
+
+                <div class="module-number">
+                    MODULE 11
+                </div>
+
+                <h3>Clinical Research Applications</h3>
+
+                <p>
+                    Application of statistical methods to clinical research
+                    questions and datasets.
+                </p>
+
+                <a href="modules/module-11/Module_11.pdf"
+                   target="_blank">
+                    Open Module
+                </a>
+
+            </div>
+
+
+            <!-- MODULE 12 -->
+            <div class="module">
+
+                <div class="module-number">
+                    MODULE 12
+                </div>
+
+                <h3>Statistical Analysis and Interpretation</h3>
+
+                <p>
+                    Statistical analysis, interpretation of results and
+                    reporting findings in clinical research.
+                </p>
+
+                <a href="modules/module-12/Module_12_Clinical_Research_Statistical_Analysis_Interpretation.pdf"
+                   target="_blank">
+                    Open Module
+                </a>
+
+            </div>
+
+
+        </div>
+
     </div>
-</header>
 
-<nav>
-    <div class="nav-content">
-        <a href="index.html">Course Content</a>
-        <a href="dashboard.html">My Dashboard</a>
-    </div>
-</nav>
 
-<div class="container">
-
-    <section class="welcome">
-        <h2>Welcome to Biostatistics</h2>
-        <p>
-            This 12-week course introduces students to statistical concepts,
-            methods and applications used in clinical and health research.
-        </p>
-    </section>
-
-    <section class="modules">
-
-        <div class="module">
-            <div class="week">WEEK 01</div>
-            <h3>Introduction to Biostatistics & Data</h3>
-            <p>Types of data, variables, descriptive statistics, central tendency and dispersion.</p>
-            <div class="status available">● Available</div>
-            <a class="btn" href="#">Open Module</a>
-        </div>
-
-        <div class="module">
-            <div class="week">WEEK 02</div>
-            <h3>Probability & Theoretical Distributions</h3>
-            <p>Probability concepts and Binomial, Poisson, Normal, t, F and Chi-square distributions.</p>
-            <div class="status">🔒 Scheduled</div>
-            <a class="btn locked" href="#">Locked</a>
-        </div>
-
-        <div class="module">
-            <div class="week">WEEK 03</div>
-            <h3>Sampling & Sampling Techniques</h3>
-            <p>Probability and non-probability sampling, sampling distributions and the Central Limit Theorem.</p>
-            <div class="status">🔒 Scheduled</div>
-            <a class="btn locked" href="#">Locked</a>
-        </div>
-
-        <div class="module">
-            <div class="week">WEEK 04</div>
-            <h3>Confidence Intervals & Sample Size</h3>
-            <p>Confidence intervals, precision, reliability and sample size determination.</p>
-            <div class="status">🔒 Scheduled</div>
-            <a class="btn locked" href="#">Locked</a>
-        </div>
-
-        <div class="module">
-            <div class="week">WEEK 05</div>
-            <h3>Hypothesis Testing</h3>
-            <p>Null and alternative hypotheses, p-values, Type I and Type II errors and statistical tests.</p>
-            <div class="status">🔒 Scheduled</div>
-            <a class="btn locked" href="#">Locked</a>
-        </div>
-
-        <div class="module">
-            <div class="week">WEEK 06</div>
-            <h3>ANOVA</h3>
-            <p>One-way, two-way and multi-way ANOVA, assumptions and post-hoc comparisons.</p>
-            <div class="status">🔒 Scheduled</div>
-            <a class="btn locked" href="#">Locked</a>
-        </div>
-
-        <div class="module">
-            <div class="week">WEEK 07</div>
-            <h3>Non-Parametric Tests</h3>
-            <p>Wilcoxon, Mann-Whitney U, Kruskal-Wallis and McNemar tests.</p>
-            <div class="status">🔒 Scheduled</div>
-            <a class="btn locked" href="#">Locked</a>
-        </div>
-
-        <div class="module">
-            <div class="week">WEEK 08</div>
-            <h3>Correlation & Regression</h3>
-            <p>Correlation coefficients, linear regression, model fitting and interpretation.</p>
-            <div class="status">🔒 Scheduled</div>
-            <a class="btn locked" href="#">Locked</a>
-        </div>
-
-        <div class="module">
-            <div class="week">WEEK 09</div>
-            <h3>Advanced Statistical Inference</h3>
-            <p>Statistical power, sample size, non-inferiority, equivalence and meta-analysis.</p>
-            <div class="status">🔒 Scheduled</div>
-            <a class="btn locked" href="#">Locked</a>
-        </div>
-
-        <div class="module">
-            <div class="week">WEEK 10</div>
-            <h3>Review & Applications</h3>
-            <p>Review of key concepts, real-world applications and ethical statistical practice.</p>
-            <div class="status">🔒 Scheduled</div>
-            <a class="btn locked" href="#">Locked</a>
-        </div>
-
-        <div class="module">
-            <div class="week">WEEK 11</div>
-            <h3>Clinical Research Applications</h3>
-            <p>Applying statistical reasoning to clinical and health research questions.</p>
-            <div class="status">🔒 Scheduled</div>
-            <a class="btn locked" href="#">Locked</a>
-        </div>
-
-        <div class="module">
-            <div class="week">WEEK 12</div>
-            <h3>Clinical Research, Statistical Analysis & Interpretation</h3>
-            <p>Study design, statistical analysis, interpretation and reporting of clinical research findings.</p>
-            <div class="status">🔒 Scheduled</div>
-            <a class="btn locked" href="#">Locked</a>
-        </div>
-
-    </section>
-</div>
-
-<footer>
-    <p>Biostatistics | Great Lakes University of Kisumu</p>
-    <p>12-Week Clinical Medicine Course</p>
-</footer>
+    <!-- FOOTER -->
+    <footer>
+        <p>Biostatistics for Clinical Medicine</p>
+        <p>Learning Portal</p>
+    </footer>
 
 </body>
-</html>
+</html

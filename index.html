@@ -3450,18 +3450,15 @@ function updateCurrentModule() {
 
 function continueLearning() {
 
-    const next =
-        getNextModule();
-
+    const next = getNextModule();
 
     if (!next) {
-
         showPage("progressPage");
-
         return;
-
     }
 
+    openLearningModule(next.index);
+}
 
     const index =
         modules.indexOf(next);

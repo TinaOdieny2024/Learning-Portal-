@@ -1663,7 +1663,7 @@ const modules = [
         "Build the foundation for understanding how clinical data are collected, classified and used to answer medical questions.",
 
         file:
-        "Module_01_ Types of Data Encountered in Statistical Analysis_-_Clinical_Data.pdf",
+        "Module_01_Introduction_to_Biostatistics_-_Clinical_Data.pdf",
 
         release:
         "2026-09-04T00:00:00"
@@ -1684,7 +1684,7 @@ const modules = [
         "Good data presentation helps clinicians identify patterns, trends and important findings quickly.",
 
         file:
-        "PLACEHOLDER_MODULE_02.pdf",
+        "Module_02_Data_Presentation_-_Visualization.pdf",
 
         release:
         "2026-09-11T00:00:00"
@@ -1747,7 +1747,7 @@ const modules = [
         "Learn how researchers use samples to make conclusions about larger populations.",
 
         file:
-        "PLACEHOLDER_MODULE_05.pdf",
+        "Module_05_Sampling_-_Sampling_Distributions.pdf",
 
         release:
         "2026-10-02T00:00:00"
@@ -1768,7 +1768,7 @@ const modules = [
         "Confidence intervals help communicate the uncertainty surrounding estimates from clinical studies.",
 
         file:
-        "PLACEHOLDER_MODULE_06.pdf",
+        "Module_06_Estimation_-_Confidence_Intervals.pdf",
 
         release:
         "2026-10-09T00:00:00"
@@ -1789,7 +1789,7 @@ const modules = [
         "The goal is to understand what statistical evidence means in the context of a clinical question.",
 
         file:
-        "PLACEHOLDER_MODULE_07.pdf",
+        "Module_07_Hypothesis_Testing.pdf",
 
         release:
         "2026-10-16T00:00:00"
@@ -1810,7 +1810,7 @@ const modules = [
         "Choose statistical tests according to the study design, data characteristics and research question.",
 
         file:
-        "PLACEHOLDER_MODULE_08.pdf",
+        "Module_08_Comparing_Groups_-_t-tests_-_Non-parametric_Tests.pdf",
 
         release:
         "2026-10-23T00:00:00"
@@ -1831,7 +1831,7 @@ const modules = [
         "These methods are commonly used to investigate associations between clinical and demographic characteristics.",
 
         file:
-        "PLACEHOLDER_MODULE_09.pdf",
+        "Module_09_Categorical_Data_-_Chi-Square_Tests.pdf",
 
         release:
         "2026-10-30T00:00:00"
@@ -1873,7 +1873,7 @@ const modules = [
         "Connect statistical concepts with real clinical decisions involving diagnosis and screening.",
 
         file:
-        "PLACEHOLDER_MODULE_11.pdf",
+        "Module_11_Clinical_Epidemiology_-_Diagnostic_Test_Statistics.pdf",
 
         release:
         "2026-11-13T00:00:00"
@@ -1894,7 +1894,7 @@ const modules = [
         "The final module integrates the statistical concepts learned throughout the course.",
 
         file:
-        "Module_12_Clinical_Research-Statistical_Analysis-_Interpretation.pdf",
+        "Module_12_Clinical_Research-_Statistical_Analysis_-_Interpretation.pdf",
 
         release:
         "2026-11-20T00:00:00"
@@ -2512,52 +2512,154 @@ function openLearningModule(index) {
 
     } else {
 
-        /* Temporary content for Modules 2–12 */
+        /* Brief introductions and module-specific learning guidance for Modules 2–12 */
 
-        document.getElementById("learningObjectives").innerHTML = `
+        const moduleContent = {
+            2: {
+                intro: `This module introduces graphical displays of clinical data. The choice of graph depends on the type of variable being analysed, and appropriate visual presentation helps communicate information clearly.`,
+                objectives: [
+                    `Identify common graphical displays used for clinical data.`,
+                    `Choose an appropriate graph according to the type of variable being analysed.`,
+                    `Describe how tables and graphs can communicate patterns and distributions.`,
+                    `Interpret graphical displays used in clinical and health research.`,
+                ],
+                notes: `<h3>Brief Introduction</h3><p>Data can be difficult to understand when presented only as raw numbers. Graphical displays provide a clear way to organize and communicate information. In this module, focus on matching the type of variable with an appropriate graph.</p><h3>Key Learning Point</h3><p>The choice of graph should depend on the type of variable being analysed. A suitable display makes patterns, comparisons and distributions easier to recognize.</p>`,
+                additional: `<p><strong>Clinical connection:</strong> Graphs can help clinicians and researchers communicate findings from patient records, surveys, laboratory results and other clinical datasets.</p><p><strong>Remember:</strong> Always consider the variable type before selecting a graphical display.</p>`
+            },
+            3: {
+                intro: `This module focuses on applying appropriate measures of central tendency and dispersion to summarize and interpret biomedical data.`,
+                objectives: [
+                    `Explain the purpose of measures of central tendency.`,
+                    `Calculate and interpret the mean, median and mode.`,
+                    `Explain measures of dispersion including range, variance and standard deviation.`,
+                    `Use measures of central tendency and dispersion to describe biomedical data.`,
+                ],
+                notes: `<h3>Brief Introduction</h3><p>Measures of central tendency describe a typical or central value in a dataset, while measures of dispersion describe how widely observations vary. The module covers mean, median and mode together with range, variance and standard deviation.</p><h3>Key Learning Point</h3><p>A good summary of biomedical data should describe both the centre of the data and its variability.</p>`,
+                additional: `<p><strong>Clinical connection:</strong> These measures are commonly used to summarize patient measurements such as age, weight, blood pressure and laboratory results.</p><p><strong>Remember:</strong> Central tendency tells you where the data are centred; dispersion tells you how much they vary.</p>`
+            },
+            4: {
+                intro: `This module introduces probability and probability distributions. It develops the basic ideas needed to describe uncertain outcomes and support later statistical inference.`,
+                objectives: [
+                    `Define an experiment, sample space and event.`,
+                    `Explain probability as a measure of the chance of an outcome.`,
+                    `Apply basic probability rules to clinical examples.`,
+                    `Recognize the role of probability distributions in statistical analysis.`,
+                ],
+                notes: `<h3>Brief Introduction</h3><p>Probability is used to describe the chance of an outcome occurring. Clinical examples may include blood groups, diagnostic findings, treatment outcomes and other uncertain events.</p><h3>Key Learning Point</h3><p>Probability values range from 0 to 1. The module also introduces ideas such as mutually exclusive and independent events, which are important when applying probability rules.</p>`,
+                additional: `<p><strong>Clinical connection:</strong> Probability provides a foundation for interpreting uncertainty in diagnosis, treatment outcomes and health research.</p><p><strong>Remember:</strong> An impossible event has probability 0, while a certain event has probability 1.</p>`
+            },
+            5: {
+                intro: `This module introduces populations, samples, sampling techniques and sampling distributions, showing how researchers use samples to learn about larger populations.`,
+                objectives: [
+                    `Distinguish between a population and a sample.`,
+                    `Explain sampling frames and sampling units.`,
+                    `Describe common sampling approaches used in research.`,
+                    `Explain why representative sampling is important for valid inference.`,
+                    `Understand the basic idea of a sampling distribution.`,
+                ],
+                notes: `<h3>Brief Introduction</h3><p>Clinical researchers often study a sample rather than every member of a population. Appropriate sampling helps researchers obtain useful information while making conclusions about the wider population.</p><h3>Key Learning Point</h3><p>A sample should be selected carefully so that it provides meaningful information about the population of interest. Sampling distributions help explain how sample statistics behave across repeated samples.</p>`,
+                additional: `<p><strong>Clinical connection:</strong> Sampling decisions affect the quality and generalizability of findings from surveys, observational studies and clinical research.</p><p><strong>Remember:</strong> Clearly define the population before deciding how and from where to sample.</p>`
+            },
+            6: {
+                intro: `This module introduces estimation and confidence intervals, which are used to estimate population characteristics from sample data and communicate uncertainty around those estimates.`,
+                objectives: [
+                    `Explain the purpose of statistical estimation.`,
+                    `Distinguish between point estimates and interval estimates.`,
+                    `Explain the meaning of a confidence interval.`,
+                    `Understand the role of standard error in estimation.`,
+                    `Interpret confidence intervals in clinical research.`,
+                ],
+                notes: `<h3>Brief Introduction</h3><p>Researchers use sample data to estimate unknown population quantities. A point estimate provides a single value, while a confidence interval provides a range of plausible values and communicates the uncertainty associated with the estimate.</p><h3>Key Learning Point</h3><p>The standard error reflects the variability of a sample statistic across samples. For a sample mean, the standard error is related to the sample standard deviation and sample size.</p>`,
+                additional: `<p><strong>Clinical connection:</strong> Confidence intervals are useful when reporting treatment effects, means, proportions and other clinical estimates.</p><p><strong>Remember:</strong> Larger samples generally produce more precise estimates and narrower confidence intervals, all else being equal.</p>`
+            },
+            7: {
+                intro: `This module introduces hypothesis testing as a method for making statistical inferences about a population using sample data.`,
+                objectives: [
+                    `Explain the purpose of hypothesis testing.`,
+                    `Distinguish between the null and alternative hypotheses.`,
+                    `Explain the meaning of a p-value.`,
+                    `Describe Type I and Type II errors.`,
+                    `Interpret statistical significance in relation to a clinical research question.`,
+                ],
+                notes: `<h3>Brief Introduction</h3><p>Hypothesis testing involves formulating competing hypotheses and assessing the evidence provided by sample data. The process helps researchers make decisions about population claims while recognizing uncertainty.</p><h3>Key Learning Point</h3><p>The null hypothesis (H0) and alternative hypothesis (H1 or HA) are central to the testing process. The p-value is used to assess how compatible the observed data are with the null hypothesis.</p>`,
+                additional: `<p><strong>Clinical connection:</strong> Hypothesis testing can be used to assess questions about differences, associations and treatment effects in clinical studies.</p><p><strong>Remember:</strong> Statistical significance should be interpreted in the context of the research question and the size and direction of the observed effect.</p>`
+            },
+            8: {
+                intro: `This module develops practical skills for comparing groups using t-tests and appropriate non-parametric methods, including checking assumptions and interpreting statistical results.`,
+                objectives: [
+                    `Explain when a one-sample t-test is appropriate.`,
+                    `Explain when an independent-samples t-test is appropriate.`,
+                    `Recognize the role of assumptions such as normality and equal variances.`,
+                    `Interpret mean differences, confidence intervals and p-values.`,
+                    `Recognize when non-parametric methods may be appropriate.`,
+                ],
+                notes: `<h3>Brief Introduction</h3><p>The module uses practical clinical examples to compare means. These include testing whether a sample mean differs from a specified population value and comparing mean total cholesterol between males and females.</p><h3>Key Learning Point</h3><p>Statistical testing should begin with the research question and an assessment of relevant assumptions. The interpretation should consider the mean difference, its confidence interval and the p-value.</p>`,
+                additional: `<p><strong>Clinical connection:</strong> Comparing groups is common in clinical research, for example when assessing whether measurements differ between patient groups or before and after an intervention.</p><p><strong>Remember:</strong> Do not choose a test only because it is familiar; consider the study design, variable type and assumptions.</p>`
+            },
+            9: {
+                intro: `This module introduces categorical data analysis and chi-square methods for examining relationships between categorical variables. It also connects these methods with broader topics in biostatistics.`,
+                objectives: [
+                    `Identify categorical variables and summarize them appropriately.`,
+                    `Explain the purpose of chi-square tests.`,
+                    `Understand how proportions can be compared or interpreted.`,
+                    `Recognize the importance of confidence intervals, errors and statistical power in inference.`,
+                    `Relate categorical analysis to clinical research questions.`,
+                ],
+                notes: `<h3>Brief Introduction</h3><p>Categorical variables place observations into groups or categories. In clinical research, examples may include disease status, treatment category and other qualitative characteristics. Chi-square methods are used to investigate relationships between categorical variables.</p><h3>Key Learning Point</h3><p>Interpretation of categorical data should focus on counts, proportions and the research question. Statistical inference also requires attention to confidence intervals, Type I and Type II errors and power.</p>`,
+                additional: `<p><strong>Clinical connection:</strong> Categorical analysis can help investigate associations between patient characteristics, exposures, treatments and outcomes.</p><p><strong>Remember:</strong> Start by identifying the categorical variables and clearly stating the clinical question you want the analysis to answer.</p>`
+            },
+            10: {
+                intro: `This module introduces correlation and regression as methods for studying and quantifying relationships between variables in clinical and health research.`,
+                objectives: [
+                    `Explain the purpose of correlation analysis.`,
+                    `Explain the basic purpose of regression analysis.`,
+                    `Recognize how statistical models can describe relationships between variables.`,
+                    `Understand the role of confidence intervals and interpretation of regression results.`,
+                    `Distinguish statistical association from the broader clinical meaning of a relationship.`,
+                ],
+                notes: `<h3>Brief Introduction</h3><p>Clinical research often asks whether two variables are related and how strongly they are associated. Correlation provides a way to describe relationships, while regression provides a framework for modelling and quantifying them.</p><h3>Key Learning Point</h3><p>Regression analysis can be extended to multiple regression and logistic regression. Interpretation should be based on the fitted model, confidence intervals and the clinical research question.</p>`,
+                additional: `<p><strong>Clinical connection:</strong> Correlation and regression can be used to explore relationships among clinical measurements and to build models for research questions.</p><p><strong>Remember:</strong> A statistical association does not by itself establish causation.</p>`
+            },
+            11: {
+                intro: `This module connects probability concepts with clinical epidemiology and diagnostic reasoning. It uses clinical examples to explore probabilities of outcomes and the interpretation of independent and conditional events.`,
+                objectives: [
+                    `Apply probability concepts to clinical examples.`,
+                    `Interpret probabilities for mutually exclusive outcomes.`,
+                    `Apply the addition rule to appropriate events.`,
+                    `Explain independence and the multiplication rule.`,
+                    `Understand the basic idea of conditional probability.`,
+                ],
+                notes: `<h3>Brief Introduction</h3><p>The module uses clinical and population examples to show how probability supports reasoning about uncertain outcomes. Examples include blood-group probabilities and repeated independent observations.</p><h3>Key Learning Point</h3><p>Mutually exclusive events cannot occur together, while independent events are those in which one outcome does not influence another. These distinctions determine which probability rules are appropriate.</p>`,
+                additional: `<p><strong>Clinical connection:</strong> Probability reasoning is important when interpreting diagnostic information and assessing the likelihood of clinical outcomes.</p><p><strong>Remember:</strong> Before applying a probability rule, identify whether the events are mutually exclusive, independent or conditional.</p>`
+            },
+            12: {
+                intro: `This final module brings together statistical analysis, interpretation and clinical research concepts from across the course, emphasizing how biostatistics supports evidence-based research.`,
+                objectives: [
+                    `Integrate key biostatistical concepts across the course.`,
+                    `Recognize statistical methods used in different clinical research designs.`,
+                    `Understand the role of hypothesis testing, confidence intervals and power in research.`,
+                    `Relate chi-square, t-tests, correlation and regression to research questions.`,
+                    `Interpret statistical findings in the context of clinical research.`,
+                ],
+                notes: `<h3>Brief Introduction</h3><p>The final module integrates the major themes of the course, including descriptive statistics, probability and inference, theoretical distributions, sampling, sample-size estimation, hypothesis testing, confidence intervals, comparison of means and proportions, chi-square methods, and regression.</p><h3>Key Learning Point</h3><p>Good statistical analysis begins with a clear research question and an appropriate study design, followed by suitable sampling, analysis and interpretation of results.</p>`,
+                additional: `<p><strong>Clinical connection:</strong> Biostatistics supports clinical research by helping investigators design studies, analyse data and communicate evidence clearly.</p><p><strong>Remember:</strong> Always interpret statistical results alongside the research question, study design and clinical context.</p>`
+            },
+        };
 
-            <li>Understand the key concepts covered in this module.</li>
+        const content = moduleContent[module.number];
 
-            <li>Apply the statistical concepts to clinical and
-            health-related examples.</li>
+        if (content) {
+            document.getElementById("learningObjectives").innerHTML =
+                content.objectives.map(function(item) {
+                    return "<li>" + item + "</li>";
+                }).join("");
 
-            <li>Interpret statistical information relevant to
-            clinical practice.</li>
+            document.getElementById("learningNotes").innerHTML =
+                "<p><strong>Brief Introduction:</strong> " + content.intro + "</p>" + content.notes;
 
-        `;
-
-
-        document.getElementById("learningNotes").innerHTML = `
-
-            <h3>Introduction</h3>
-
-            <p>
-                ${module.description}
-            </p>
-
-            <h3>Key Learning Point</h3>
-
-            <p>
-                ${module.note}
-            </p>
-
-            <p>
-                The detailed learning notes for this module will be
-                added from the official course material.
-            </p>
-
-        `;
-
-
-        document.getElementById("learningAdditionalNotes").innerHTML = `
-
-            <p>
-                <strong>Clinical connection:</strong>
-                Consider how the concepts in this module can be applied
-                when collecting, analysing and interpreting clinical data.
-            </p>
-
-        `;
+            document.getElementById("learningAdditionalNotes").innerHTML =
+                content.additional;
+        }
 
     }
 
@@ -2663,48 +2765,17 @@ function updateLearningQuizStatus(index) {
     const status = document.getElementById("learningQuizStatus");
     const button = document.getElementById("learningQuizButton");
 
-    let attempts = {};
-
-    try {
-        attempts = JSON.parse(
-            localStorage.getItem("moduleQuizAttempts") || "{}"
-        );
-    } catch (error) {
-        attempts = {};
+    if (!status || !button || !modules[index]) {
+        return;
     }
 
-    const used = Number(attempts[String(index)]) || 0;
+    const moduleNumber = modules[index].number;
+    const questions = moduleQuizBank[moduleNumber];
 
-    if (index !== 0) {
+    if (!questions) {
         status.textContent =
-            "The quiz for this module will be added with the module learning material.";
+            "The quiz for this module is not available yet.";
         button.disabled = true;
-        return;
-    }
-
-    if (used >= 2) {
-        status.textContent = "Quiz attempts used: 2 of 2.";
-        button.disabled = true;
-        return;
-    }
-
-    status.textContent =
-        used === 0
-            ? "Quiz not attempted yet. You have 2 attempts available."
-            : "Quiz attempts used: " + used + " of 2.";
-
-    button.disabled = false;
-}
-
-
-function startModuleQuiz() {
-
-    if (currentLearningModuleIndex === null) {
-        return;
-    }
-
-    if (currentLearningModuleIndex !== 0) {
-        alert("The quiz for this module will be available soon.");
         return;
     }
 
@@ -2722,7 +2793,800 @@ function startModuleQuiz() {
         attempts = {};
     }
 
-    const attemptKey = String(currentLearningModuleIndex);
+    const used = Number(attempts[String(moduleNumber)]) || 0;
+
+    if (used >= 2) {
+        status.textContent = "Quiz attempts used: 2 of 2.";
+        button.disabled = true;
+        return;
+    }
+
+    status.textContent =
+        used === 0
+            ? "Quiz not attempted yet. You have 2 attempts available."
+            : "Quiz attempts used: " + used + " of 2.";
+
+    button.disabled = false;
+}
+
+
+const moduleQuizBank = {
+    1: [
+        {
+            question: "Which of the following is nominal data?",
+            options: ["Blood group", "Disease severity", "Body temperature in Celsius", "Weight"],
+            answer: 0,
+            explanation: "Nominal categories have no inherent order."
+        },
+        {
+            question: "Which type of data has a meaningful order but not necessarily equal distances?",
+            options: ["Ordinal", "Nominal", "Interval", "Ratio"],
+            answer: 0,
+            explanation: "Ordinal categories can be ranked."
+        },
+        {
+            question: "Which is an example of interval data?",
+            options: ["Temperature in Celsius", "Weight", "Height", "Blood group"],
+            answer: 0,
+            explanation: "Celsius temperature has meaningful intervals but no true zero."
+        },
+        {
+            question: "Which measurement scale has a true zero?",
+            options: ["Ratio", "Nominal", "Ordinal", "Interval"],
+            answer: 0,
+            explanation: "Ratio data include a meaningful true zero."
+        },
+        {
+            question: "Which is quantitative data?",
+            options: ["Body weight", "Blood group", "Disease status", "Treatment category"],
+            answer: 0,
+            explanation: "Body weight is a numerical measurement."
+        },
+        {
+            question: "A clinic register containing eligible patients can serve as a:",
+            options: ["Sampling frame", "Sampling error", "Population parameter", "Statistical test"],
+            answer: 0,
+            explanation: "A sampling frame lists population elements available for selection."
+        },
+        {
+            question: "A patient selected for a study is an example of a:",
+            options: ["Sampling unit", "Sampling frame", "Population", "Sampling error"],
+            answer: 0,
+            explanation: "A sampling unit is an element that can be selected."
+        },
+        {
+            question: "The entire group a researcher wants to study is the:",
+            options: ["Population", "Sample", "Sampling unit", "Sampling frame"],
+            answer: 0,
+            explanation: "The population is the full group of interest."
+        },
+        {
+            question: "A subset selected from a population is a:",
+            options: ["Sample", "Population", "Sampling frame", "Parameter"],
+            answer: 0,
+            explanation: "A sample is a subset of the population."
+        },
+        {
+            question: "Sampling error is the difference between:",
+            options: ["A sample characteristic and its population counterpart", "Two researchers' names", "Two computer programs", "Two unrelated variables"],
+            answer: 0,
+            explanation: "Sampling error reflects the discrepancy between a sample characteristic and the corresponding population characteristic."
+        },
+    ],
+    2: [
+        {
+            question: "Which graph is commonly used for categorical frequencies?",
+            options: ["Bar chart", "Histogram", "Scatter plot", "Box plot"],
+            answer: 0,
+            explanation: "Bar charts display frequencies or proportions of categories."
+        },
+        {
+            question: "Which graph is commonly used to display the distribution of numerical data?",
+            options: ["Histogram", "Pie chart", "Bar chart", "Flow chart"],
+            answer: 0,
+            explanation: "Histograms display numerical values across intervals or bins."
+        },
+        {
+            question: "A pie chart primarily displays:",
+            options: ["Relative proportions of categories", "Continuous measurements over time", "Individual patient trajectories", "Correlation coefficients"],
+            answer: 0,
+            explanation: "Pie slices represent relative proportions."
+        },
+        {
+            question: "A histogram divides numerical values into:",
+            options: ["Intervals or bins", "Nominal labels only", "Study groups only", "Regression equations"],
+            answer: 0,
+            explanation: "Histograms group numerical values into bins."
+        },
+        {
+            question: "Which display is appropriate for showing a relationship between two numerical variables?",
+            options: ["Scatter plot", "Pie chart", "Bar chart", "Frequency table"],
+            answer: 0,
+            explanation: "Scatter plots show paired numerical observations."
+        },
+        {
+            question: "A bar chart is most appropriate when the variable is:",
+            options: ["Categorical", "Continuous only", "A regression coefficient", "A confidence interval"],
+            answer: 0,
+            explanation: "Bar charts are commonly used for categorical variables."
+        },
+        {
+            question: "The choice of graph should depend mainly on the:",
+            options: ["Type of variable", "Name of the researcher", "Computer brand", "Sample ID"],
+            answer: 0,
+            explanation: "Different variable types require appropriate graphical displays."
+        },
+        {
+            question: "A graph showing proportions as slices is a:",
+            options: ["Pie chart", "Histogram", "Scatter plot", "Box plot"],
+            answer: 0,
+            explanation: "Pie charts show relative proportions as slices."
+        },
+        {
+            question: "The vertical bars of a histogram represent frequencies within:",
+            options: ["Bins", "Patient names", "Regression models", "Confidence limits"],
+            answer: 0,
+            explanation: "Histogram bars correspond to defined intervals of numerical values."
+        },
+        {
+            question: "Effective data visualization helps communicate:",
+            options: ["Patterns and distributions in the data", "Passwords", "Patient identities", "Database permissions"],
+            answer: 0,
+            explanation: "Appropriate graphs make distributions and patterns easier to interpret."
+        },
+    ],
+    3: [
+        {
+            question: "Which measure of central tendency is calculated by summing values and dividing by their number?",
+            options: ["Mean", "Median", "Mode", "Range"],
+            answer: 0,
+            explanation: "The mean is the arithmetic average."
+        },
+        {
+            question: "Which measure is the middle value after ordering observations?",
+            options: ["Median", "Mean", "Variance", "Range"],
+            answer: 0,
+            explanation: "The median is the central ordered observation or midpoint."
+        },
+        {
+            question: "Which measure identifies the most frequently occurring value?",
+            options: ["Mode", "Mean", "Median", "Standard deviation"],
+            answer: 0,
+            explanation: "The mode is the most frequent value."
+        },
+        {
+            question: "Which is a measure of dispersion?",
+            options: ["Standard deviation", "Mean", "Median", "Mode"],
+            answer: 0,
+            explanation: "Standard deviation measures variability."
+        },
+        {
+            question: "The range is calculated as:",
+            options: ["Maximum minus minimum", "Mean divided by median", "Sum divided by sample size", "Variance divided by mean"],
+            answer: 0,
+            explanation: "Range is the difference between the maximum and minimum."
+        },
+        {
+            question: "Variance measures:",
+            options: ["Variability around the mean", "The most frequent category", "The middle observation", "The number of variables"],
+            answer: 0,
+            explanation: "Variance quantifies dispersion around the mean."
+        },
+        {
+            question: "Standard deviation is used to describe:",
+            options: ["Spread of numerical observations", "Only nominal categories", "The sample frame", "The study population name"],
+            answer: 0,
+            explanation: "Standard deviation summarizes numerical variability."
+        },
+        {
+            question: "Which measure is generally less affected by extreme values?",
+            options: ["Median", "Mean", "Variance", "Range"],
+            answer: 0,
+            explanation: "The median is resistant to extreme observations."
+        },
+        {
+            question: "Central tendency provides a value representing the:",
+            options: ["Center or typical value of a dataset", "Sampling frame", "Study design", "Diagnostic threshold"],
+            answer: 0,
+            explanation: "Central tendency summarizes the center of the data."
+        },
+        {
+            question: "Measures of dispersion describe:",
+            options: ["Variability in the data", "Only the category labels", "Only the sample size", "The research question"],
+            answer: 0,
+            explanation: "Dispersion describes how spread out observations are."
+        },
+    ],
+    4: [
+        {
+            question: "An experiment is an activity whose outcome is:",
+            options: ["Uncertain", "Always fixed", "Already known", "Impossible"],
+            answer: 0,
+            explanation: "An experiment produces an uncertain outcome."
+        },
+        {
+            question: "The set of all possible outcomes is the:",
+            options: ["Sample space", "Parameter", "Sample mean", "Confidence interval"],
+            answer: 0,
+            explanation: "The sample space contains all possible outcomes."
+        },
+        {
+            question: "An event consists of:",
+            options: ["One or more possible outcomes", "Only one numerical measurement", "A sampling error", "A population parameter"],
+            answer: 0,
+            explanation: "An event is a collection of one or more outcomes."
+        },
+        {
+            question: "Probability measures the:",
+            options: ["Chance of an outcome", "Size of a population", "Spread of a dataset", "Difference between means"],
+            answer: 0,
+            explanation: "Probability quantifies the chance of an outcome."
+        },
+        {
+            question: "For a fair die, the probability of rolling a 1 is:",
+            options: ["1/6", "1/2", "1/3", "1"],
+            answer: 0,
+            explanation: "There is one favorable outcome among six equally likely outcomes."
+        },
+        {
+            question: "If two events are mutually exclusive, they:",
+            options: ["Cannot occur together", "Must always occur together", "Have identical outcomes", "Are necessarily independent"],
+            answer: 0,
+            explanation: "Mutually exclusive events cannot occur at the same time."
+        },
+        {
+            question: "For mutually exclusive events A and B, P(A or B) equals:",
+            options: ["P(A) + P(B)", "P(A) \u00d7 P(B)", "P(A) \u2212 P(B)", "P(A) / P(B)"],
+            answer: 0,
+            explanation: "The addition rule applies to mutually exclusive events."
+        },
+        {
+            question: "Independent events are events where occurrence of one:",
+            options: ["Does not change the probability of the other", "Makes the other impossible", "Always causes the other", "Makes both probabilities zero"],
+            answer: 0,
+            explanation: "Independence means one event does not alter the probability of the other."
+        },
+        {
+            question: "The multiplication rule is associated with calculating probability of:",
+            options: ["Joint occurrence", "Only a single outcome", "The sample mean", "A confidence interval"],
+            answer: 0,
+            explanation: "Multiplication is used for joint probabilities under appropriate conditions."
+        },
+        {
+            question: "For a single fair coin toss, the probability of heads is:",
+            options: ["1/2", "1/4", "1", "0"],
+            answer: 0,
+            explanation: "There are two equally likely outcomes, one of which is heads."
+        },
+    ],
+    5: [
+        {
+            question: "A population is:",
+            options: ["The entire group of interest", "Only the selected participants", "A sampling error", "A statistical test"],
+            answer: 0,
+            explanation: "A population is the complete group about which inference is desired."
+        },
+        {
+            question: "A sample is:",
+            options: ["A subset of the population", "The entire target group", "A sampling frame", "A parameter"],
+            answer: 0,
+            explanation: "A sample is selected from the population."
+        },
+        {
+            question: "A patient registry used to select participants is a:",
+            options: ["Sampling frame", "Sampling error", "Population parameter", "Confidence interval"],
+            answer: 0,
+            explanation: "A sampling frame lists or describes elements from which the sample is selected."
+        },
+        {
+            question: "A single patient who can be selected is a:",
+            options: ["Sampling unit", "Sampling frame", "Population", "Sampling distribution"],
+            answer: 0,
+            explanation: "A sampling unit is an individual selectable element."
+        },
+        {
+            question: "Simple random sampling gives eligible units:",
+            options: ["A known random chance of selection", "No chance of selection", "Selection based only on convenience", "Selection based only on age"],
+            answer: 0,
+            explanation: "Random sampling uses a chance mechanism for selection."
+        },
+        {
+            question: "Stratified sampling involves dividing the population into:",
+            options: ["Strata or subgroups", "Regression coefficients", "Confidence intervals", "p-values"],
+            answer: 0,
+            explanation: "Stratification divides a population into defined subgroups."
+        },
+        {
+            question: "Cluster sampling selects:",
+            options: ["Groups or clusters", "Only the largest individuals", "Only the first patient", "Only volunteers"],
+            answer: 0,
+            explanation: "Cluster sampling selects naturally occurring groups."
+        },
+        {
+            question: "Sampling distributions describe the distribution of a:",
+            options: ["Statistic across repeated samples", "Patient diagnosis only", "Single observation", "Researcher's opinion"],
+            answer: 0,
+            explanation: "A sampling distribution describes a statistic over repeated samples."
+        },
+        {
+            question: "Sampling is used because studying an entire population may be:",
+            options: ["Impractical or costly", "Always impossible", "Statistically unnecessary", "Unrelated to research"],
+            answer: 0,
+            explanation: "Samples make many population studies more feasible."
+        },
+        {
+            question: "A representative sample should:",
+            options: ["Reflect important characteristics of the target population", "Contain only extreme observations", "Exclude eligible participants systematically", "Use only one category"],
+            answer: 0,
+            explanation: "Representativeness supports valid inference to the population."
+        },
+    ],
+    6: [
+        {
+            question: "Standard error measures the:",
+            options: ["Precision or sampling variability of an estimator", "Number of categories", "Most frequent value", "Population size"],
+            answer: 0,
+            explanation: "Standard error describes uncertainty or variability of an estimator."
+        },
+        {
+            question: "For a sample mean, standard error is:",
+            options: ["SD divided by \u221an", "SD multiplied by n", "Mean divided by SD", "n divided by SD"],
+            answer: 0,
+            explanation: "The stated formula is SE = SD/\u221an."
+        },
+        {
+            question: "As sample size increases, standard error of the mean generally:",
+            options: ["Decreases", "Increases", "Becomes equal to the mean", "Always becomes zero"],
+            answer: 0,
+            explanation: "Increasing n reduces SD/\u221an."
+        },
+        {
+            question: "A smaller standard error indicates:",
+            options: ["Greater precision", "Less precision", "A larger sampling frame", "A categorical variable"],
+            answer: 0,
+            explanation: "Smaller standard error means less sampling variability."
+        },
+        {
+            question: "A confidence interval provides a range of values used to:",
+            options: ["Express uncertainty around an estimate", "Replace the sample", "Identify every individual", "Eliminate sampling"],
+            answer: 0,
+            explanation: "Confidence intervals communicate uncertainty around estimates."
+        },
+        {
+            question: "A point estimate is:",
+            options: ["A single value used to estimate a population parameter", "A sampling frame", "A graph type", "A hypothesis test"],
+            answer: 0,
+            explanation: "A point estimate is one numerical estimate of a parameter."
+        },
+        {
+            question: "The sample mean can be used as a point estimate of the:",
+            options: ["Population mean", "Population name", "Sampling frame", "p-value"],
+            answer: 0,
+            explanation: "The sample mean estimates the population mean."
+        },
+        {
+            question: "Standard error is described as the standard deviation of a:",
+            options: ["Statistic", "Patient", "Population label", "Graph"],
+            answer: 0,
+            explanation: "The source defines SE as the standard deviation of a statistic."
+        },
+        {
+            question: "Larger standard error implies:",
+            options: ["Greater uncertainty in the estimator", "Greater precision", "No sampling variation", "A true zero"],
+            answer: 0,
+            explanation: "Larger SE indicates greater variability and uncertainty."
+        },
+        {
+            question: "Confidence intervals and hypothesis tests use standard error to account for:",
+            options: ["Sampling variability", "Patient identity", "Campus location", "File format"],
+            answer: 0,
+            explanation: "SE helps quantify sampling uncertainty in inference."
+        },
+    ],
+    7: [
+        {
+            question: "Hypothesis testing is used to draw conclusions about a population from:",
+            options: ["Sample data", "A file name", "A graph title", "A password"],
+            answer: 0,
+            explanation: "Hypothesis testing uses sample evidence to make population inferences."
+        },
+        {
+            question: "The null hypothesis is commonly denoted:",
+            options: ["H0", "H1 only", "SE", "CI"],
+            answer: 0,
+            explanation: "H0 denotes the null hypothesis."
+        },
+        {
+            question: "The alternative hypothesis is commonly denoted:",
+            options: ["H1 or HA", "H0 only", "SD", "n"],
+            answer: 0,
+            explanation: "H1 or HA denotes the alternative hypothesis."
+        },
+        {
+            question: "The null hypothesis usually represents:",
+            options: ["The default or no-effect assumption", "The researcher's preferred result", "A sampling frame", "A graph"],
+            answer: 0,
+            explanation: "H0 is the default or status-quo assumption."
+        },
+        {
+            question: "The alternative hypothesis represents:",
+            options: ["A statement contradicting the null hypothesis", "The sample size", "The sampling frame", "A descriptive table"],
+            answer: 0,
+            explanation: "HA/H1 expresses the competing research claim."
+        },
+        {
+            question: "A p-value is used to assess evidence against the:",
+            options: ["Null hypothesis", "Sampling frame", "Population label", "Data entry form"],
+            answer: 0,
+            explanation: "The p-value helps assess evidence against H0."
+        },
+        {
+            question: "Type I error involves:",
+            options: ["Rejecting a true null hypothesis", "Accepting every null hypothesis", "Measuring standard deviation", "Selecting a sample"],
+            answer: 0,
+            explanation: "Type I error is a false positive rejection of H0."
+        },
+        {
+            question: "Type II error involves:",
+            options: ["Failing to reject a false null hypothesis", "Rejecting a true null hypothesis", "Increasing sample size automatically", "Calculating the median"],
+            answer: 0,
+            explanation: "Type II error is failure to detect a false H0."
+        },
+        {
+            question: "Statistical significance is interpreted in relation to a chosen:",
+            options: ["Significance level", "Patient name", "Campus", "File extension"],
+            answer: 0,
+            explanation: "The decision rule depends on a specified significance level."
+        },
+        {
+            question: "Hypothesis testing should begin with:",
+            options: ["Formulating competing hypotheses", "Drawing a pie chart", "Changing the sample frame", "Deleting observations"],
+            answer: 0,
+            explanation: "The process involves formulating H0 and H1/HA."
+        },
+    ],
+    8: [
+        {
+            question: "A one-sample t-test can assess whether a sample mean differs from a specified:",
+            options: ["Population or test value", "Pie-chart percentage", "Sampling frame", "Regression slope only"],
+            answer: 0,
+            explanation: "The exercise compares the sample mean with a specified population value."
+        },
+        {
+            question: "The Module 8 birth-weight exercise uses a test value of:",
+            options: ["2500 g", "2000 g", "3000 g", "5000 g"],
+            answer: 0,
+            explanation: "The supplied exercise specifies 2500 g as the population test value."
+        },
+        {
+            question: "Before a one-sample t-test, the exercise asks the researcher to check whether birth weights are:",
+            options: ["Normally distributed", "Nominally coded", "All identical", "Categorical only"],
+            answer: 0,
+            explanation: "The exercise includes checking normality with a histogram."
+        },
+        {
+            question: "An independent-samples t-test compares means between:",
+            options: ["Two independent groups", "One value and itself", "Two categories only", "Two sampling frames"],
+            answer: 0,
+            explanation: "The independent-samples t-test compares means from independent groups."
+        },
+        {
+            question: "The Module 8 cholesterol exercise compares males and females on:",
+            options: ["Total cholesterol", "Blood group", "Campus", "Age category only"],
+            answer: 0,
+            explanation: "The exercise asks whether mean total cholesterol differs between males and females."
+        },
+        {
+            question: "A research question for a one-sample t-test should specify the:",
+            options: ["Population comparison value", "File password", "Graph color", "Campus address"],
+            answer: 0,
+            explanation: "The test requires a specified comparison value."
+        },
+        {
+            question: "A 95% confidence interval for a mean difference provides information about:",
+            options: ["Plausible values for the mean difference", "Only the sample size", "Only the variable name", "The sampling frame"],
+            answer: 0,
+            explanation: "The interval quantifies uncertainty around the mean difference."
+        },
+        {
+            question: "The one-sample t-test exercise uses SPSS through:",
+            options: ["Analyze/One-Sample T-Test", "Graphs/Pie Chart only", "File/Save only", "Data/Sort only"],
+            answer: 0,
+            explanation: "The supplied instructions specify Analyze/One-Sample T-Test."
+        },
+        {
+            question: "A key part of interpreting a t-test result is considering the:",
+            options: ["p-value and size and direction of the difference", "File name only", "Campus only", "Number of charts"],
+            answer: 0,
+            explanation: "The exercise asks for p-value and interpretation including size and direction."
+        },
+        {
+            question: "Non-parametric tests are useful when:",
+            options: ["Parametric assumptions are not appropriate", "Every variable is nominal", "There is no research question", "All observations are identical"],
+            answer: 0,
+            explanation: "Non-parametric methods provide alternatives when assumptions for parametric tests are unsuitable."
+        },
+    ],
+    9: [
+        {
+            question: "Which test is explicitly included in the course outline for categorical data?",
+            options: ["Chi-square test", "One-sample z test only", "Paired t-test only", "Linear interpolation"],
+            answer: 0,
+            explanation: "The course outline explicitly includes chi-square methods."
+        },
+        {
+            question: "Categorical data are data organized into:",
+            options: ["Categories", "Continuous measurements only", "Regression coefficients", "Confidence limits"],
+            answer: 0,
+            explanation: "Categorical variables consist of categories."
+        },
+        {
+            question: "The course outline includes testing differences between two sample:",
+            options: ["Proportions", "Only medians", "Only variances", "Only ranges"],
+            answer: 0,
+            explanation: "The outline specifically includes differences between two sample proportions."
+        },
+        {
+            question: "Which topic is included in the course outline?",
+            options: ["Confidence intervals", "Image processing", "Computer networking", "Web design"],
+            answer: 0,
+            explanation: "Confidence intervals are explicitly listed in the course content."
+        },
+        {
+            question: "The course outline includes Type I and Type II:",
+            options: ["Errors", "Graphs", "Samples", "Variables"],
+            answer: 0,
+            explanation: "Both error types are explicitly included."
+        },
+        {
+            question: "Statistical power is included as:",
+            options: ["Power of the test", "Power of a graph", "Power of a computer", "Power of a database"],
+            answer: 0,
+            explanation: "The outline lists power of the test."
+        },
+        {
+            question: "Which theoretical distributions are named in the course outline?",
+            options: ["Normal, Binomial and Poisson", "Uniform, Gamma and Weibull only", "Chi-square only", "Logistic only"],
+            answer: 0,
+            explanation: "The outline names Normal, Binomial and Poisson distributions."
+        },
+        {
+            question: "Which study design is named in the course outline?",
+            options: ["Case-control", "Case series only", "Ecological only", "Laboratory calibration only"],
+            answer: 0,
+            explanation: "Case-control studies are explicitly listed."
+        },
+        {
+            question: "Which sampling topic is explicitly included?",
+            options: ["Determination of sample size", "Image resolution", "HTML validation", "Network routing"],
+            answer: 0,
+            explanation: "Sample size determination is listed under sampling techniques."
+        },
+        {
+            question: "The course outline includes correlation and:",
+            options: ["Regression analysis", "Encryption", "Database administration", "Graphic design"],
+            answer: 0,
+            explanation: "Correlation and regression analysis are explicitly included."
+        },
+    ],
+    10: [
+        {
+            question: "Correlation is included in the course as a method for studying:",
+            options: ["Relationships between variables", "Only sampling frames", "Only categorical labels", "Only confidence levels"],
+            answer: 0,
+            explanation: "The course outline includes correlation analysis."
+        },
+        {
+            question: "Regression analysis is included alongside:",
+            options: ["Correlation", "Only sampling", "Only pie charts", "Only data entry"],
+            answer: 0,
+            explanation: "The course outline explicitly pairs correlation and regression analysis."
+        },
+        {
+            question: "The course outline describes regression as part of:",
+            options: ["Biostatistical analysis", "Patient registration", "Campus administration", "File management"],
+            answer: 0,
+            explanation: "Regression analysis is listed in the biostatistics course description."
+        },
+        {
+            question: "Which topic is explicitly included with correlation and regression?",
+            options: ["Probability and inference", "Web development", "Accounting", "Anatomy"],
+            answer: 0,
+            explanation: "Probability and inference are part of the course description."
+        },
+        {
+            question: "Which distribution is named in the course content?",
+            options: ["Normal distribution", "Only uniform distribution", "Only logistic distribution", "Only geometric distribution"],
+            answer: 0,
+            explanation: "The course outline names the Normal distribution."
+        },
+        {
+            question: "Which study design is listed in the course outline?",
+            options: ["Clinical trials", "Only case reports", "Only laboratory experiments", "Only surveys"],
+            answer: 0,
+            explanation: "Clinical trials are explicitly included among study types."
+        },
+        {
+            question: "The course outline includes hypothesis testing using:",
+            options: ["Null and alternative hypotheses", "Only graphs", "Only frequencies", "Only patient identifiers"],
+            answer: 0,
+            explanation: "Null and alternative hypotheses are explicitly listed."
+        },
+        {
+            question: "Which measure is named under basic statistical measurements?",
+            options: ["Median", "Only odds ratio", "Only sensitivity", "Only regression coefficient"],
+            answer: 0,
+            explanation: "Median is explicitly listed among basic statistical measurements."
+        },
+        {
+            question: "Confidence intervals are included under:",
+            options: ["Statistical inference", "Data entry", "Web publishing", "Clinical coding"],
+            answer: 0,
+            explanation: "Confidence intervals are part of inference content."
+        },
+        {
+            question: "Correlation and regression help address questions about:",
+            options: ["Associations or relationships between variables", "Only category names", "Only sample registration", "Only graph formatting"],
+            answer: 0,
+            explanation: "These methods are used to quantify or describe relationships."
+        },
+    ],
+    11: [
+        {
+            question: "If blood group O has probability 0.42, what is P(O)?",
+            options: ["0.42", "0.04", "0.58", "1.42"],
+            answer: 0,
+            explanation: "The supplied example gives blood group O as 42%, which is 0.42."
+        },
+        {
+            question: "If blood group O is 42% and A is 41%, P(O or A) is:",
+            options: ["0.83", "0.09", "0.42", "0.41"],
+            answer: 0,
+            explanation: "The example adds 0.42 and 0.41 for mutually exclusive outcomes."
+        },
+        {
+            question: "Blood groups O and A in the supplied example are treated as:",
+            options: ["Mutually exclusive", "Identical", "Dependent by definition", "The same category"],
+            answer: 0,
+            explanation: "A person cannot simultaneously belong to two blood groups."
+        },
+        {
+            question: "The addition rule applies directly to the example because the blood-group outcomes are:",
+            options: ["Mutually exclusive", "Continuous", "Paired", "Normally distributed"],
+            answer: 0,
+            explanation: "Mutually exclusive outcomes can be added."
+        },
+        {
+            question: "The multiplication rule is used for probabilities involving:",
+            options: ["Joint occurrence", "Only subtraction", "Only averages", "Only medians"],
+            answer: 0,
+            explanation: "Multiplication is associated with joint occurrence."
+        },
+        {
+            question: "In the example, successive blood-type tests are described as independent because the result of one:",
+            options: ["Does not change the probability of the next", "Determines the next result", "Makes the next result impossible", "Always changes the next probability"],
+            answer: 0,
+            explanation: "The example states that independent successive tests retain the same probability."
+        },
+        {
+            question: "If an outcome has probability 20%, its probability as a decimal is:",
+            options: ["0.20", "2.0", "0.02", "20.0"],
+            answer: 0,
+            explanation: "Twenty percent equals 0.20."
+        },
+        {
+            question: "An event is:",
+            options: ["One or more possible outcomes", "The entire population", "A sample mean", "A standard error"],
+            answer: 0,
+            explanation: "An event consists of one or more outcomes."
+        },
+        {
+            question: "A probability must lie between:",
+            options: ["0 and 1 inclusive", "1 and 10 only", "\u221210 and 0 only", "0 and 1000 only"],
+            answer: 0,
+            explanation: "Probabilities are expressed from 0 to 1 inclusive."
+        },
+        {
+            question: "The sample space contains:",
+            options: ["All possible outcomes of an experiment", "Only the desired outcome", "Only failed outcomes", "Only numerical variables"],
+            answer: 0,
+            explanation: "The sample space is the set of all possible outcomes."
+        },
+    ],
+    12: [
+        {
+            question: "Which topic is included in the course description?",
+            options: ["Statistical analysis and interpretation", "Web programming", "Database engineering", "Graphic design"],
+            answer: 0,
+            explanation: "The course description includes statistical analysis and interpretation."
+        },
+        {
+            question: "The final course content includes:",
+            options: ["Probability and inference", "Only descriptive writing", "Only data entry", "Only anatomy"],
+            answer: 0,
+            explanation: "Probability and inference are explicitly included."
+        },
+        {
+            question: "Which distributions are named in the course outline?",
+            options: ["Normal, Binomial and Poisson", "Only Normal", "Only Poisson", "Only Binomial"],
+            answer: 0,
+            explanation: "All three are explicitly named."
+        },
+        {
+            question: "The course includes sample-size estimation for:",
+            options: ["Various types of studies", "Only laboratory studies", "Only case reports", "Only classroom surveys"],
+            answer: 0,
+            explanation: "The outline says sample size estimation is included for various study types."
+        },
+        {
+            question: "Which study type is explicitly named?",
+            options: ["Prospective studies", "Only cross-sectional studies", "Only ecological studies", "Only case reports"],
+            answer: 0,
+            explanation: "Prospective studies are listed."
+        },
+        {
+            question: "The course includes testing differences between two sample:",
+            options: ["Means and proportions", "Only medians", "Only modes", "Only ranges"],
+            answer: 0,
+            explanation: "The outline includes differences between two sample means and proportions."
+        },
+        {
+            question: "Power of the test is included under:",
+            options: ["Hypothesis testing", "Graphical display", "Data entry", "Sampling frame"],
+            answer: 0,
+            explanation: "Power is explicitly listed under hypothesis testing."
+        },
+        {
+            question: "Chi-square is included in the course content as a method for:",
+            options: ["Categorical data analysis", "Measuring height", "Calculating the mean only", "Drawing histograms"],
+            answer: 0,
+            explanation: "Chi-square methods are included with categorical data."
+        },
+        {
+            question: "Correlation and regression analysis are included in the course to study:",
+            options: ["Relationships between variables", "Only population size", "Only nominal labels", "Only sampling units"],
+            answer: 0,
+            explanation: "The course description includes correlation and regression analysis."
+        },
+        {
+            question: "The final module is intended to integrate:",
+            options: ["Statistical analysis and interpretation in clinical research", "Only probability notation", "Only graph drawing", "Only data entry"],
+            answer: 0,
+            explanation: "The module title and course outline emphasize clinical research, statistical analysis and interpretation."
+        },
+    ],
+};
+
+function startModuleQuiz() {
+
+    if (currentLearningModuleIndex === null) {
+        return;
+    }
+
+    const moduleNumber = modules[currentLearningModuleIndex]
+        ? modules[currentLearningModuleIndex].number
+        : null;
+
+    if (!moduleNumber || !moduleQuizBank[moduleNumber]) {
+        alert("A quiz for this module is not available yet.");
+        return;
+    }
+
+    let attempts = {};
+
+    try {
+        attempts = JSON.parse(
+            localStorage.getItem("moduleQuizAttempts") || "{}"
+        );
+
+        if (!attempts || typeof attempts !== "object" || Array.isArray(attempts)) {
+            attempts = {};
+        }
+    } catch (error) {
+        attempts = {};
+    }
+
+    const attemptKey = String(moduleNumber);
     const moduleAttempts = Number(attempts[attemptKey]) || 0;
 
     if (moduleAttempts >= 2) {
@@ -2730,227 +3594,63 @@ function startModuleQuiz() {
         return;
     }
 
-    const questions = [
+    const existingQuiz =
+        document.querySelector(".quiz-introduction .quiz-container");
 
-        {
-            question: "Which of the following is an example of nominal data?",
-            options: [
-                "Blood group",
-                "Disease severity",
-                "Body temperature in Celsius",
-                "Weight"
-            ],
-            answer: 0,
-            explanation:
-                "Blood group is nominal because its categories have no natural order."
-        },
-
-        {
-            question: "Which type of data has categories with a meaningful order?",
-            options: [
-                "Nominal",
-                "Ordinal",
-                "Interval",
-                "Ratio"
-            ],
-            answer: 1,
-            explanation:
-                "Ordinal data have categories that can be ranked or ordered."
-        },
-
-        {
-            question: "Which of the following is an example of interval data?",
-            options: [
-                "Weight",
-                "Height",
-                "Temperature in Celsius",
-                "Blood group"
-            ],
-            answer: 2,
-            explanation:
-                "Celsius temperature is interval data because the intervals are meaningful but zero is not a true absence of temperature."
-        },
-
-        {
-            question: "Which measurement scale has a true zero?",
-            options: [
-                "Nominal",
-                "Ordinal",
-                "Interval",
-                "Ratio"
-            ],
-            answer: 3,
-            explanation:
-                "Ratio data have a meaningful true zero."
-        },
-
-        {
-            question: "Which of the following is an example of ratio data?",
-            options: [
-                "Blood group",
-                "Disease stage",
-                "Weight",
-                "Temperature in Celsius"
-            ],
-            answer: 2,
-            explanation:
-                "Weight is ratio data because it has a meaningful zero and ratios can be interpreted."
-        },
-
-        {
-            question: "What is a population in clinical research?",
-            options: [
-                "Only the patients who completed the study",
-                "The entire group of interest",
-                "The researchers conducting the study",
-                "The data analysis software"
-            ],
-            answer: 1,
-            explanation:
-                "The population is the entire group about which the researcher wants to draw conclusions."
-        },
-
-        {
-            question: "What is a sample?",
-            options: [
-                "The entire population",
-                "A subset of the population",
-                "A sampling error",
-                "A statistical test"
-            ],
-            answer: 1,
-            explanation:
-                "A sample is a subset of the population selected for study."
-        },
-
-        {
-            question: "A clinic register containing all eligible patients is an example of a:",
-            options: [
-                "Sampling error",
-                "Sampling unit",
-                "Sampling frame",
-                "Population parameter"
-            ],
-            answer: 2,
-            explanation:
-                "A sampling frame is a list or description of the population elements from which a sample can be selected."
-        },
-
-        {
-            question: "In a study where individual patients are selected, each patient is a:",
-            options: [
-                "Sampling unit",
-                "Sampling frame",
-                "Population",
-                "Sampling error"
-            ],
-            answer: 0,
-            explanation:
-                "A sampling unit is the individual element or entity that can be selected during sampling."
-        },
-
-        {
-            question: "Sampling error is best described as:",
-            options: [
-                "An error caused by using a computer",
-                "The difference between a sample characteristic and the corresponding population characteristic",
-                "A mistake in entering a patient's name",
-                "The difference between two statistical tests"
-            ],
-            answer: 1,
-            explanation:
-                "Sampling error is the discrepancy between a characteristic observed in a sample and the corresponding characteristic in the population."
-        }
-
-    ];
-
-
-    /* Keep only one quiz on the page. If it is already open,
-       do not create another copy; simply bring it into view. */
-    const existingQuiz = document.querySelector(".quiz-introduction .quiz-container");
     if (existingQuiz) {
         existingQuiz.scrollIntoView({ behavior: "smooth", block: "start" });
         return;
     }
 
+    const questions = moduleQuizBank[moduleNumber];
+
     let quizHTML = `
         <div class="quiz-container">
-
-            <h2>📝 Module 1 Quiz</h2>
-
+            <h2>📝 Module ${moduleNumber} End-of-Module Quiz</h2>
             <p>
-                Answer all 10 questions. Each question carries
-                <strong>1 mark</strong>.
+                Answer all ${questions.length} questions.
+                Each question carries <strong>1 mark</strong>.
+                You have a maximum of <strong>2 attempts</strong>.
             </p>
-
             <form id="moduleQuizForm">
     `;
 
-
-    questions.forEach((q, index) => {
-
+    questions.forEach(function(q, index) {
         quizHTML += `
-
             <div class="quiz-question">
-
-                <h3>
-                    ${index + 1}. ${q.question}
-                </h3>
-
+                <h3>${index + 1}. ${q.question}</h3>
         `;
 
-        q.options.forEach((option, optionIndex) => {
-
+        q.options.forEach(function(option, optionIndex) {
             quizHTML += `
-
                 <label class="quiz-option">
-
                     <input
                         type="radio"
                         name="question${index}"
                         value="${optionIndex}"
                         required
                     >
-
                     ${option}
-
                 </label>
-
             `;
-
         });
 
-        quizHTML += `
-
-            </div>
-
-        `;
-
+        quizHTML += `</div>`;
     });
 
-
     quizHTML += `
-
-                <button
-                    type="submit"
-                    class="quiz-button">
+                <button type="submit" class="quiz-button">
                     Submit Quiz
                 </button>
-
             </form>
-
             <div id="quizResult"></div>
-
         </div>
     `;
 
-
-    /* Place the quiz immediately below the Module Quiz button. */
     document.getElementById("learningQuizButton").insertAdjacentHTML(
         "afterend",
         quizHTML
     );
-
 
     document.getElementById("moduleQuizForm").addEventListener(
         "submit",
@@ -2958,72 +3658,46 @@ function startModuleQuiz() {
 
             event.preventDefault();
 
-            const formData =
-                new FormData(event.target);
-
+            const formData = new FormData(event.target);
             let score = 0;
 
-            questions.forEach((q, index) => {
-
+            questions.forEach(function(q, index) {
                 const selected =
                     Number(formData.get("question" + index));
 
                 if (selected === q.answer) {
                     score++;
                 }
-
             });
 
-
-            /* Save attempt */
-
-            attempts[attemptKey] = moduleAttempts + 1;
+            const newAttempt = moduleAttempts + 1;
+            attempts[attemptKey] = newAttempt;
 
             localStorage.setItem(
                 "moduleQuizAttempts",
                 JSON.stringify(attempts)
             );
 
-
-            const result =
-                document.getElementById("quizResult");
-
+            const result = document.getElementById("quizResult");
 
             result.innerHTML = `
-
                 <div class="quiz-result">
-
-                    <h2>
-                        Your Score: ${score}/10
-                    </h2>
-
+                    <h2>Your Score: ${score}/${questions.length}</h2>
+                    <p>Attempt ${newAttempt} of 2</p>
                     <p>
-                        Attempt ${moduleAttempts + 1} of 2
-                    </p>
-
-                    <p>
-                        ${score >= 5
+                        ${score >= Math.ceil(questions.length * 0.5)
                             ? "Good work! Keep reviewing the material."
-                            : "Review the learning notes and try to strengthen your understanding."
+                            : "Review the module material and strengthen your understanding before your next attempt."
                         }
                     </p>
-
                 </div>
-
             `;
 
-
-            /* Disable the submitted quiz */
-
-            const inputs =
-                document.querySelectorAll(
-                    "#moduleQuizForm input"
-                );
-
-            inputs.forEach(input => {
+            document.querySelectorAll(
+                "#moduleQuizForm input"
+            ).forEach(function(input) {
                 input.disabled = true;
             });
-
 
             event.target.querySelector(
                 "button[type='submit']"
@@ -3031,54 +3705,32 @@ function startModuleQuiz() {
 
             updateLearningQuizStatus(currentLearningModuleIndex);
 
-
-            /* Attempt 2 shows explanations */
-
-            if (moduleAttempts + 1 === 2) {
-
+            if (newAttempt === 2) {
                 let reviewHTML = `
                     <div class="quiz-review">
-
-                        <h3>📖 Correct Answers & Explanations</h3>
+                        <h3>Quiz Review</h3>
                 `;
 
-                questions.forEach((q, index) => {
-
+                questions.forEach(function(q, index) {
                     reviewHTML += `
-
-                        <div class="quiz-review-item">
-
-                            <strong>
-                                ${index + 1}. ${q.options[q.answer]}
-                            </strong>
-
-                            <p>
-                                ${q.explanation}
-                            </p>
-
+                        <div class="review-question">
+                            <p><strong>${index + 1}. ${q.question}</strong></p>
+                            <p><strong>Correct answer:</strong> ${q.options[q.answer]}</p>
+                            <p>${q.explanation}</p>
                         </div>
-
                     `;
-
                 });
 
                 reviewHTML += `</div>`;
 
                 result.insertAdjacentHTML(
-                    "beforeend",
+                    "afterend",
                     reviewHTML
                 );
-
             }
-
         }
     );
-
 }
-/* ============================================================
-   MARK MODULE COMPLETE
-   ============================================================ */
-
 function toggleComplete(index) {
 
     const module = modules[index];

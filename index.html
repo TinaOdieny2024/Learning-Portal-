@@ -2541,11 +2541,12 @@ function startModuleQuiz() {
     ];
 
 
-    /* Remove an old quiz before creating a new one.
-       This prevents duplicate quizzes when a module is opened more than once. */
-    const oldQuiz = document.querySelector("#learningNotes + .quiz-container");
-    if (oldQuiz) {
-        oldQuiz.remove();
+    /* Keep only one quiz on the page. If it is already open,
+       do not create another copy; simply bring it into view. */
+    const existingQuiz = document.querySelector(".quiz-introduction .quiz-container");
+    if (existingQuiz) {
+        existingQuiz.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
     }
 
     let quizHTML = `
@@ -2620,12 +2621,8 @@ function startModuleQuiz() {
     `;
 
 
-    const existingQuizzes = document.querySelectorAll(".quiz-container");
-    existingQuizzes.forEach(function(quiz) {
-        quiz.remove();
-    });
-
-    document.getElementById("learningNotes").insertAdjacentHTML(
+    /* Place the quiz immediately below the Module Quiz button. */
+    document.getElementById("learningQuizButton").insertAdjacentHTML(
         "afterend",
         quizHTML
     );

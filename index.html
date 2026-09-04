@@ -3457,9 +3457,17 @@ function continueLearning() {
         return;
     }
 
-    openLearningModule(next.index);
-}
+    const index = next.index !== undefined
+        ? next.index
+        : modules.indexOf(next);
 
+    if (index === -1) {
+        alert("Unable to identify the next module.");
+        return;
+    }
+
+    openLearningModule(index);
+}
     const index =
         modules.indexOf(next);
 

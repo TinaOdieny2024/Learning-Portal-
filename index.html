@@ -1,4 +1,4 @@
-<!DOCTYPE html>  
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -655,6 +655,47 @@ body {
 }
 
 
+
+/* ================= QUIZ LAYOUT ================= */
+.quiz-container {
+    margin-top: 20px;
+}
+
+.quiz-question {
+    margin: 0 0 24px;
+    padding: 18px;
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+}
+
+.quiz-question h3 {
+    color: #17365d;
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 14px;
+}
+
+.quiz-option {
+    display: block;
+    width: 100%;
+    margin: 9px 0;
+    padding: 11px 13px;
+    background: white;
+    border: 1px solid #d9dee7;
+    border-radius: 7px;
+    cursor: pointer;
+    line-height: 1.5;
+}
+
+.quiz-option:hover {
+    background: #f4f7fb;
+}
+
+.quiz-option input {
+    margin-right: 9px;
+}
+
 @media (max-width: 700px) {
 
     .module-learning-hero {
@@ -669,427 +710,6 @@ body {
         padding: 20px;
     }
 
-}
-    function startModuleQuiz() {
-
-    if (currentLearningModuleIndex === null) {
-        return;
-    }
-
-    if (currentLearningModuleIndex !== 0) {
-        alert("The quiz for this module will be available soon.");
-        return;
-    }
-
-    const attempts =
-        JSON.parse(localStorage.getItem("moduleQuizAttempts") || "{}");
-
-    const moduleAttempts = attempts[0] || 0;
-
-    if (moduleAttempts >= 2) {
-        alert("You have already used the maximum 2 attempts for this module.");
-        return;
-    }
-
-    const questions = [
-
-        {
-            question: "Which of the following is an example of nominal data?",
-            options: [
-                "Blood group",
-                "Disease severity",
-                "Body temperature in Celsius",
-                "Weight"
-            ],
-            answer: 0,
-            explanation:
-                "Blood group is nominal because its categories have no natural order."
-        },
-
-        {
-            question: "Which type of data has categories with a meaningful order?",
-            options: [
-                "Nominal",
-                "Ordinal",
-                "Interval",
-                "Ratio"
-            ],
-            answer: 1,
-            explanation:
-                "Ordinal data have categories that can be ranked or ordered."
-        },
-
-        {
-            question: "Which of the following is an example of interval data?",
-            options: [
-                "Weight",
-                "Height",
-                "Temperature in Celsius",
-                "Blood group"
-            ],
-            answer: 2,
-            explanation:
-                "Celsius temperature is interval data because the intervals are meaningful but zero is not a true absence of temperature."
-        },
-
-        {
-            question: "Which measurement scale has a true zero?",
-            options: [
-                "Nominal",
-                "Ordinal",
-                "Interval",
-                "Ratio"
-            ],
-            answer: 3,
-            explanation:
-                "Ratio data have a meaningful true zero."
-        },
-
-        {
-            question: "Which of the following is an example of ratio data?",
-            options: [
-                "Blood group",
-                "Disease stage",
-                "Weight",
-                "Temperature in Celsius"
-            ],
-            answer: 2,
-            explanation:
-                "Weight is ratio data because it has a meaningful zero and ratios can be interpreted."
-        },
-
-        {
-            question: "What is a population in clinical research?",
-            options: [
-                "Only the patients who completed the study",
-                "The entire group of interest",
-                "The researchers conducting the study",
-                "The data analysis software"
-            ],
-            answer: 1,
-            explanation:
-                "The population is the entire group about which the researcher wants to draw conclusions."
-        },
-
-        {
-            question: "What is a sample?",
-            options: [
-                "The entire population",
-                "A subset of the population",
-                "A sampling error",
-                "A statistical test"
-            ],
-            answer: 1,
-            explanation:
-                "A sample is a subset of the population selected for study."
-        },
-
-        {
-            question: "A clinic register containing all eligible patients is an example of a:",
-            options: [
-                "Sampling error",
-                "Sampling unit",
-                "Sampling frame",
-                "Population parameter"
-            ],
-            answer: 2,
-            explanation:
-                "A sampling frame is a list or description of the population elements from which a sample can be selected."
-        },
-
-        {
-            question: "In a study where individual patients are selected, each patient is a:",
-            options: [
-                "Sampling unit",
-                "Sampling frame",
-                "Population",
-                "Sampling error"
-            ],
-            answer: 0,
-            explanation:
-                "A sampling unit is the individual element or entity that can be selected during sampling."
-        },
-
-        {
-            question: "Sampling error is best described as:",
-            options: [
-                "An error caused by using a computer",
-                "The difference between a sample characteristic and the corresponding population characteristic",
-                "A mistake in entering a patient's name",
-                "The difference between two statistical tests"
-            ],
-            answer: 1,
-            explanation:
-                "Sampling error is the discrepancy between a characteristic observed in a sample and the corresponding characteristic in the population."
-        }
-
-    ];
-
-
-    let quizHTML = `
-        <div class="quiz-container">
-
-            <h2>📝 Module 1 Quiz</h2>
-
-            <p>
-                Answer all 10 questions. Each question carries
-                <strong>1 mark</strong>.
-            </p>
-
-            <form id="moduleQuizForm">
-    `;
-
-
-    questions.forEach((q, index) => {
-
-        quizHTML += `
-
-            <div class="quiz-question">
-
-                <h3>
-                    ${index + 1}. ${q.question}
-                </h3>
-
-        `;
-
-        q.options.forEach((option, optionIndex) => {
-
-            quizHTML += `
-
-                <label class="quiz-option">
-
-                    <input
-                        type="radio"
-                        name="question${index}"
-                        value="${optionIndex}"
-                        required
-                    >
-
-                    ${option}
-
-                </label>
-
-            `;
-
-        });
-
-        quizHTML += `
-
-            </div>
-
-        `;
-
-    });
-
-
-    quizHTML += `
-
-                <button
-                    type="submit"
-                    class="quiz-button">
-                    Submit Quiz
-                </button>
-
-            </form>
-
-            <div id="quizResult"></div>
-
-        </div>
-    `;
-
-
-    document.getElementById("learningNotes").insertAdjacentHTML(
-        "afterend",
-        quizHTML
-    );
-
-
-    document.getElementById("moduleQuizForm").addEventListener(
-        "submit",
-        function(event) {
-
-            event.preventDefault();
-
-            const formData =
-                new FormData(event.target);
-
-            let score = 0;
-
-            questions.forEach((q, index) => {
-
-                const selected =
-                    Number(formData.get("question" + index));
-
-                if (selected === q.answer) {
-                    score++;
-                }
-
-            });
-
-
-            /* Save attempt */
-
-            attempts[0] = moduleAttempts + 1;
-
-            localStorage.setItem(
-                "moduleQuizAttempts",
-                JSON.stringify(attempts)
-            );
-
-
-            const result =
-                document.getElementById("quizResult");
-
-
-            result.innerHTML = `
-
-                <div class="quiz-result">
-
-                    <h2>
-                        Your Score: ${score}/10
-                    </h2>
-
-                    <p>
-                        Attempt ${moduleAttempts + 1} of 2
-                    </p>
-
-                    <p>
-                        ${score >= 5
-                            ? "Good work! Keep reviewing the material."
-                            : "Review the learning notes and try to strengthen your understanding."
-                        }
-                    </p>
-
-                </div>
-
-            `;
-
-
-            /* Disable the submitted quiz */
-
-            const inputs =
-                document.querySelectorAll(
-                    "#moduleQuizForm input"
-                );
-
-            inputs.forEach(input => {
-                input.disabled = true;
-            });
-
-
-            event.target.querySelector(
-                "button[type='submit']"
-            ).disabled = true;
-
-
-            /* Attempt 2 shows explanations */
-
-            if (moduleAttempts + 1 === 2) {
-
-                let reviewHTML = `
-                    <div class="quiz-review">
-
-                        <h3>📖 Correct Answers & Explanations</h3>
-                `;
-
-                questions.forEach((q, index) => {
-
-                    reviewHTML += `
-
-                        <div class="quiz-review-item">
-
-                            <strong>
-                                ${index + 1}. ${q.options[q.answer]}
-                            </strong>
-
-                            <p>
-                                ${q.explanation}
-                            </p>
-
-                        </div>
-
-                    `;
-
-                });
-
-                reviewHTML += </div>;
-
-                result.insertAdjacentHTML(
-                    "beforeend",
-                    reviewHTML
-                );
-
-            }
-
-        }
-    );
-
-}
-/* ================= FOOTER ================= */
-
-.footer {
-    text-align: center;
-    padding: 30px;
-    color: #8a94a6;
-    font-size: 12px;
-}
-
-/* ================= MOBILE ================= */
-
-@media (max-width: 1100px) {
-
-    .modules {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 900px) {
-
-    .sidebar {
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-    }
-
-    .sidebar.open {
-        transform: translateX(0);
-    }
-
-    .mobile-menu {
-        display: block;
-    }
-
-    .main {
-        margin-left: 0;
-    }
-
-    .topbar {
-        padding-left: 65px;
-    }
-
-    .stats {
-        grid-template-columns: 1fr;
-    }
-
-    .modules {
-        grid-template-columns: 1fr;
-    }
-
-    .content {
-        padding: 20px;
-    }
-
-    .hero {
-        padding: 28px;
-    }
-
-    .hero h1 {
-        font-size: 25px;
-    }
-
-    .schedule-table {
-        display: block;
-        overflow-x: auto;
-    }
 }
 </style>
 </head>
@@ -2921,6 +2541,13 @@ function startModuleQuiz() {
     ];
 
 
+    /* Remove an old quiz before creating a new one.
+       This prevents duplicate quizzes when a module is opened more than once. */
+    const oldQuiz = document.querySelector("#learningNotes + .quiz-container");
+    if (oldQuiz) {
+        oldQuiz.remove();
+    }
+
     let quizHTML = `
         <div class="quiz-container">
 
@@ -2992,6 +2619,11 @@ function startModuleQuiz() {
         </div>
     `;
 
+
+    const existingQuizzes = document.querySelectorAll(".quiz-container");
+    existingQuizzes.forEach(function(quiz) {
+        quiz.remove();
+    });
 
     document.getElementById("learningNotes").insertAdjacentHTML(
         "afterend",

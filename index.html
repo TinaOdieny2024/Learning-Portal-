@@ -4,108 +4,153 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Biostatistics | Clinical Medicine</title>
+<title>Great Lakes University of Kisumu | Biostatistics</title>
 
 <style>
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background: #f4f6f8;
-    color: #222;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f7fb;
+    color: #1f2937;
 }
 
-/* SIDEBAR */
+/* ================= SIDEBAR ================= */
+
 .sidebar {
     position: fixed;
     left: 0;
     top: 0;
-    width: 250px;
+    width: 260px;
     height: 100vh;
-    background: #003b5c;
+    background: #17365d;
     color: white;
-    padding: 25px 15px;
+    padding: 25px 18px;
+    overflow-y: auto;
     z-index: 1000;
 }
 
-.sidebar .logo {
+.university {
     text-align: center;
     padding-bottom: 25px;
     border-bottom: 1px solid rgba(255,255,255,0.2);
 }
 
-.sidebar .logo h2 {
-    font-size: 20px;
-    margin-bottom: 6px;
+.university h2 {
+    font-size: 17px;
+    line-height: 1.4;
+    letter-spacing: 0.5px;
 }
 
-.sidebar .logo p {
+.university p {
     font-size: 12px;
+    margin-top: 7px;
     opacity: 0.8;
 }
 
-.nav {
-    margin-top: 25px;
+.portal-title {
+    text-align: center;
+    margin: 22px 0;
 }
 
-.nav button {
-    width: 100%;
-    border: none;
-    background: transparent;
-    color: white;
-    padding: 14px 15px;
-    margin-bottom: 6px;
-    text-align: left;
-    border-radius: 7px;
-    cursor: pointer;
+.portal-title h3 {
     font-size: 15px;
 }
 
-.nav button:hover,
-.nav button.active {
-    background: #00577f;
+.portal-title p {
+    font-size: 11px;
+    opacity: 0.7;
+    margin-top: 5px;
 }
 
-/* MAIN */
-.main {
-    margin-left: 250px;
-    min-height: 100vh;
+.nav-section {
+    margin-top: 25px;
 }
 
-.topbar {
-    background: white;
-    padding: 18px 30px;
-    border-bottom: 1px solid #ddd;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.nav-section-title {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.55;
+    margin: 0 10px 10px;
 }
 
-.topbar h1 {
-    color: #003b5c;
-    font-size: 22px;
-}
-
-.menu-btn {
-    display: none;
-    background: #003b5c;
+.nav a {
+    display: block;
+    text-decoration: none;
     color: white;
-    border: none;
-    padding: 10px 14px;
-    border-radius: 6px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    font-size: 14px;
     cursor: pointer;
 }
 
-.content {
-    padding: 30px;
-    max-width: 1250px;
+.nav a:hover,
+.nav a.active {
+    background: rgba(255,255,255,0.12);
 }
 
-/* PAGES */
+/* ================= MOBILE MENU ================= */
+
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1200;
+    background: #17365d;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    padding: 10px 13px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* ================= MAIN ================= */
+
+.main {
+    margin-left: 260px;
+    min-height: 100vh;
+}
+
+/* ================= TOP BAR ================= */
+
+.topbar {
+    height: 70px;
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 35px;
+}
+
+.topbar h3 {
+    font-size: 18px;
+    color: #17365d;
+}
+
+.student {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+/* ================= CONTENT ================= */
+
+.content {
+    padding: 35px;
+}
+
 .page {
     display: none;
 }
@@ -114,110 +159,166 @@ body {
     display: block;
 }
 
-/* DASHBOARD */
+/* ================= HERO ================= */
+
 .hero {
-    background: linear-gradient(135deg, #003b5c, #00577f);
+    background: linear-gradient(135deg, #17365d, #24578d);
     color: white;
-    padding: 35px;
-    border-radius: 14px;
-    margin-bottom: 25px;
+    border-radius: 16px;
+    padding: 40px;
+    margin-bottom: 30px;
 }
 
-.hero h2 {
-    font-size: 28px;
+.hero .small {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    opacity: 0.8;
     margin-bottom: 10px;
 }
 
+.hero h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.hero h2 {
+    font-size: 18px;
+    font-weight: normal;
+    opacity: 0.9;
+    margin-bottom: 15px;
+}
+
 .hero p {
-    line-height: 1.6;
+    max-width: 760px;
+    line-height: 1.7;
     opacity: 0.95;
 }
 
+.hero-note {
+    margin-top: 15px;
+    max-width: 760px;
+    line-height: 1.7;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.continue-btn {
+    display: inline-block;
+    margin-top: 22px;
+    padding: 12px 20px;
+    background: white;
+    color: #17365d;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+}
+
+.continue-btn:hover {
+    opacity: 0.9;
+}
+
+/* ================= SECTION ================= */
+
+.section-title {
+    font-size: 20px;
+    color: #17365d;
+    margin: 30px 0 18px;
+}
+
+/* ================= STATS ================= */
+
 .stats {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
-    margin-bottom: 25px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
 }
 
 .stat-card {
     background: white;
-    padding: 22px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-
-.stat-card h3 {
-    color: #003b5c;
-    font-size: 28px;
-    margin-bottom: 6px;
-}
-
-.stat-card p {
-    color: #666;
-    font-size: 14px;
-}
-
-.section-card {
-    background: white;
     padding: 25px;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    margin-bottom: 25px;
+    border: 1px solid #e5e7eb;
 }
 
-.section-card h2 {
-    color: #003b5c;
-    margin-bottom: 12px;
+.stat-card h4 {
+    color: #6b7280;
+    font-size: 13px;
+    font-weight: normal;
 }
 
-.section-card p {
-    line-height: 1.6;
-    color: #555;
+.stat-card .number {
+    font-size: 28px;
+    color: #17365d;
+    font-weight: bold;
+    margin-top: 8px;
 }
 
-/* PROGRESS */
-.progress-container {
-    margin-top: 18px;
+/* ================= PROGRESS BAR ================= */
+
+.progress-area {
+    margin-top: 12px;
 }
 
 .progress-bar {
     width: 100%;
-    height: 14px;
+    height: 12px;
     background: #e5e7eb;
-    border-radius: 10px;
+    border-radius: 20px;
     overflow: hidden;
 }
 
 .progress-fill {
-    width: 0%;
     height: 100%;
-    background: #003b5c;
-    transition: width 0.3s;
+    width: 0%;
+    background: #17365d;
+    border-radius: 20px;
+    transition: width 0.4s ease;
 }
 
-.progress-text {
+.progress-label {
     margin-top: 8px;
-    font-size: 14px;
-    color: #666;
+    color: #6b7280;
+    font-size: 12px;
 }
 
-/* MODULES */
-.page-title {
-    margin-bottom: 10px;
-    color: #003b5c;
-    font-size: 28px;
+/* ================= ANNOUNCEMENT ================= */
+
+.announcement {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 30px;
 }
 
-.page-description {
-    color: #666;
-    margin-bottom: 25px;
-    line-height: 1.6;
+.announcement h3 {
+    color: #17365d;
+    margin-bottom: 8px;
 }
+
+.announcement p {
+    color: #6b7280;
+    line-height: 1.7;
+}
+
+.module-link {
+    display: inline-block;
+    margin-top: 15px;
+    color: #17365d;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+/* ================= MODULES ================= */
 
 .modules {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
 }
 
@@ -225,80 +326,138 @@ body {
     background: white;
     border-radius: 12px;
     padding: 22px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    transition: 0.2s;
+    border: 1px solid #e5e7eb;
+    transition: transform 0.2s, box-shadow 0.2s;
     position: relative;
 }
 
 .module:hover {
     transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
-.module-number {
-    color: #00577f;
-    font-weight: bold;
-    font-size: 13px;
-    margin-bottom: 10px;
+.module.available {
+    border-top: 4px solid #17365d;
 }
 
-.module h3 {
-    color: #222;
-    font-size: 18px;
-    line-height: 1.4;
-    margin-bottom: 10px;
+.module.completed {
+    border-top: 4px solid #1f7a4d;
 }
 
-.module p {
-    color: #666;
-    font-size: 14px;
-    line-height: 1.5;
-    margin-bottom: 18px;
-}
-
-.open-btn {
-    display: inline-block;
-    background: #003b5c;
-    color: white;
-    text-decoration: none;
-    padding: 10px 16px;
-    border-radius: 6px;
-    font-size: 14px;
-    cursor: pointer;
-    border: none;
-}
-
-.open-btn:hover {
-    background: #00577f;
-}
-
-/* LOCKED MODULE */
-.locked {
+.module.locked {
     opacity: 0.65;
 }
 
-.locked .open-btn {
-    background: #888;
+.module-number {
+    font-size: 12px;
+    color: #6b7280;
+    margin-bottom: 8px;
+}
+
+.module h3 {
+    font-size: 17px;
+    color: #17365d;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.module p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #6b7280;
+}
+
+.module-note {
+    margin-top: 10px;
+    padding: 10px;
+    background: #f4f7fb;
+    border-radius: 7px;
+    color: #5d6775;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.status {
+    display: inline-block;
+    margin-top: 15px;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.available .status {
+    color: #1f7a4d;
+}
+
+.completed .status {
+    color: #1f7a4d;
+}
+
+.locked .status {
+    color: #777;
+}
+
+.module-button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 9px 13px;
+    border-radius: 6px;
+    border: none;
+    background: #17365d;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.module-button:hover {
+    background: #24578d;
+}
+
+.module-button.disabled {
+    background: #999;
     cursor: not-allowed;
 }
 
-/* SCHEDULE */
+.complete-button {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #17365d;
+    background: white;
+    color: #17365d;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.complete-button:hover {
+    background: #f4f7fb;
+}
+
+/* ================= TABLE ================= */
+
 .schedule-table {
     width: 100%;
     border-collapse: collapse;
     background: white;
-    border-radius: 10px;
+    border-radius: 12px;
     overflow: hidden;
+    border: 1px solid #e5e7eb;
 }
 
 .schedule-table th,
 .schedule-table td {
     padding: 14px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #e5e7eb;
     text-align: left;
+    font-size: 13px;
 }
 
 .schedule-table th {
-    background: #003b5c;
+    background: #17365d;
     color: white;
 }
 
@@ -306,59 +465,75 @@ body {
     border-bottom: none;
 }
 
-/* ABOUT */
-.about-list {
-    margin-top: 15px;
-    padding-left: 20px;
+/* ================= CARDS ================= */
+
+.info-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 20px;
 }
 
-.about-list li {
+.info-card h3 {
+    color: #17365d;
     margin-bottom: 10px;
-    color: #555;
 }
 
-/* MOBILE */
-@media (max-width: 800px) {
+.info-card p {
+    color: #6b7280;
+    line-height: 1.7;
+}
+
+.info-card ul {
+    margin: 15px 0 0 20px;
+    color: #6b7280;
+}
+
+.info-card li {
+    margin-bottom: 9px;
+}
+
+/* ================= FOOTER ================= */
+
+.footer {
+    text-align: center;
+    padding: 30px;
+    color: #8a94a6;
+    font-size: 12px;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 1100px) {
+
+    .modules {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
 
     .sidebar {
         transform: translateX(-100%);
-        transition: 0.3s;
+        transition: transform 0.3s ease;
     }
 
     .sidebar.open {
         transform: translateX(0);
     }
 
+    .mobile-menu {
+        display: block;
+    }
+
     .main {
         margin-left: 0;
     }
 
-    .menu-btn {
-        display: block;
-    }
-
     .topbar {
-        padding: 15px 20px;
+        padding-left: 65px;
     }
-
-    .topbar h1 {
-        font-size: 18px;
-    }
-
-    .content {
-        padding: 20px;
-    }
-
-    .stats {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .hero h2 {
-        font-size: 23px;
-    }
-}
-
-@media (max-width: 500px) {
 
     .stats {
         grid-template-columns: 1fr;
@@ -367,59 +542,1566 @@ body {
     .modules {
         grid-template-columns: 1fr;
     }
+
+    .content {
+        padding: 20px;
+    }
+
+    .hero {
+        padding: 28px;
+    }
+
+    .hero h1 {
+        font-size: 25px;
+    }
+
+    .schedule-table {
+        display: block;
+        overflow-x: auto;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- SIDEBAR -->
-<aside class="sidebar" id="sidebar">
+<!-- MOBILE MENU -->
+<button class="mobile-menu" onclick="toggleSidebar()">☰</button>
 
-    <div class="logo">
-        <h2>Biostatistics</h2>
-        <p>Clinical Medicine</p>
+
+<!-- ================= SIDEBAR ================= -->
+
+<div class="sidebar" id="sidebar">
+
+    <div class="university">
+        <h2>GREAT LAKES UNIVERSITY OF KISUMU</h2>
+        <p>School of Health Sciences</p>
     </div>
 
-    <nav class="nav">
-
-        <button class="active" onclick="showPage('dashboard', this)">
-            🏠 Dashboard
-        </button>
-
-        <button onclick="showPage('course', this)">
-            📚 Course Content
-        </button>
-
-        <button onclick="showPage('schedule', this)">
-            📅 Course Schedule
-        </button>
-
-        <button onclick="showPage('progress', this)">
-            📊 My Progress
-        </button>
-
-        <button onclick="showPage('about', this)">
-            ℹ️ About Course
-        </button>
-
-    </nav>
-
-</aside>
+    <div class="portal-title">
+        <h3>Biostatistics</h3>
+        <p>Clinical Medicine Learning Portal</p>
+    </div>
 
 
-<!-- MAIN -->
-<main class="main">
+    <div class="nav-section">
 
-    <!-- TOP BAR -->
-    <header class="topbar">
+        <div class="nav-section-title">Learning</div>
 
-        <button class="menu-btn" onclick="toggleSidebar()">
-            ☰
-        </button>
+        <div class="nav">
 
-        <h1>Biostatistics for Clinical Medicine</h1>
+            <a class="active"
+               onclick="showPage('dashboard', this)">
+                Dashboard
+            </a>
 
-        <span>12-Week Course</span>
+            <a onclick="showPage('modulesPage', this)">
+                Course Modules
+            </a>
 
-    </header>
+            <a onclick="showPage('announcementsPage', this)">
+                Announcements
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="nav-section">
+
+        <div class="nav-section-title">Course Tools</div>
+
+        <div class="nav">
+
+            <a onclick="showPage('assignmentsPage', this)">
+                Assignments
+            </a>
+
+            <a onclick="showPage('progressPage', this)">
+                My Progress
+            </a>
+
+            <a onclick="showPage('resourcesPage', this)">
+                Resources
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="nav-section">
+
+        <div class="nav-section-title">Support</div>
+
+        <div class="nav">
+
+            <a onclick="showPage('helpPage', this)">
+                Help
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="main">
+
+    <div class="topbar">
+
+        <h3>Biostatistics Learning Portal</h3>
+
+        <div class="student">
+            Clinical Medicine
+        </div>
+
+    </div>
+
+
+    <div class="content">
+
+
+        <!-- ================================================= -->
+        <!-- DASHBOARD -->
+        <!-- ================================================= -->
+
+        <section id="dashboard" class="page active">
+
+
+            <!-- HERO -->
+
+            <div class="hero">
+
+                <div class="small">
+                    GREAT LAKES UNIVERSITY OF KISUMU
+                </div>
+
+                <h1>Welcome to Biostatistics</h1>
+
+                <h2>Biostatistics for Clinical Medicine</h2>
+
+                <p>
+                    Welcome to your online learning portal. Explore course
+                    modules, learning resources, assignments and assessments
+                    as you progress through the 12-week Biostatistics course.
+                </p>
+
+                <div class="hero-note">
+
+                    This course is designed to help you move beyond simply
+                    calculating statistics. You will learn how to understand
+                    clinical data, select appropriate statistical methods,
+                    interpret results and use statistical evidence to support
+                    sound clinical and research decisions.
+
+                </div>
+
+                <button class="continue-btn"
+                        onclick="continueLearning()">
+
+                    Continue Learning →
+
+                </button>
+
+            </div>
+
+
+            <!-- COURSE OVERVIEW -->
+
+            <h2 class="section-title">
+                Course Overview
+            </h2>
+
+
+            <div class="stats">
+
+                <div class="stat-card">
+
+                    <h4>Course Progress</h4>
+
+                    <div class="number"
+                         id="dashboardProgressNumber">
+                        0%
+                    </div>
+
+                    <div class="progress-area">
+
+                        <div class="progress-bar">
+
+                            <div class="progress-fill"
+                                 id="dashboardProgressBar">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <h4>Current Module</h4>
+
+                    <div class="number"
+                         id="currentModuleNumber">
+                        Module 01
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <h4>Modules Completed</h4>
+
+                    <div class="number"
+                         id="completedNumber">
+                        0 / 12
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONTINUE LEARNING -->
+
+            <h2 class="section-title">
+                Continue Learning
+            </h2>
+
+
+            <div class="announcement">
+
+                <h3 id="continueTitle">
+                    Module 01: Introduction to Biostatistics & Clinical Data
+                </h3>
+
+                <p id="continueDescription">
+
+                    Begin your Biostatistics journey by developing a clear
+                    understanding of biostatistics and the types of clinical
+                    data encountered in medicine and health research.
+
+                </p>
+
+                <button class="module-link"
+                        onclick="continueLearning()">
+
+                    Continue Module →
+
+                </button>
+
+            </div>
+
+
+            <!-- ADDITIONAL COURSE NOTE -->
+
+            <div class="announcement">
+
+                <h3>How to Use This Portal</h3>
+
+                <p>
+
+                    Work through the modules in sequence. Read the learning
+                    material carefully, complete the activities and
+                    assessments provided by your lecturer, and mark each
+                    module as completed when you have finished studying it.
+
+                    Upcoming modules will remain visible on your dashboard
+                    but will be locked until their scheduled release.
+
+                </p>
+
+            </div>
+
+
+            <!-- MODULE PREVIEW -->
+
+            <h2 class="section-title">
+                Course Modules
+            </h2>
+
+            <div class="modules" id="dashboardModules">
+            </div>
+
+
+            <!-- ANNOUNCEMENTS -->
+
+            <h2 class="section-title">
+                Announcements
+            </h2>
+
+            <div class="announcement">
+
+                <h3>Welcome to the Course 🎓</h3>
+
+                <p>
+
+                    Welcome to the Biostatistics for Clinical Medicine
+                    learning portal. Your learning journey will progress
+                    through 12 carefully structured modules covering the
+                    foundations and applications of biostatistics in clinical
+                    medicine and clinical research.
+
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ================================================= -->
+        <!-- COURSE MODULES PAGE -->
+        <!-- ================================================= -->
+
+        <section id="modulesPage" class="page">
+
+            <h2 class="section-title">
+                Course Modules
+            </h2>
+
+            <p style="color:#6b7280; line-height:1.7; margin-bottom:25px;">
+
+                The 12 modules take you from the foundations of clinical
+                data through statistical analysis, clinical epidemiology
+                and interpretation of research findings.
+
+            </p>
+
+            <div class="modules" id="allModules">
+            </div>
+
+        </section>
+
+
+        <!-- ================================================= -->
+        <!-- ANNOUNCEMENTS PAGE -->
+        <!-- ================================================= -->
+
+        <section id="announcementsPage" class="page">
+
+            <h2 class="section-title">
+                Announcements
+            </h2>
+
+            <div class="announcement">
+
+                <h3>Welcome to Biostatistics for Clinical Medicine 🎓</h3>
+
+                <p>
+
+                    Welcome to your online learning portal. This course is
+                    structured to develop practical statistical thinking
+                    for clinical medicine and health research.
+
+                </p>
+
+            </div>
+
+
+            <div class="announcement">
+
+                <h3>Learning Sequence</h3>
+
+                <p>
+
+                    Modules are designed to build upon one another. Students
+                    are encouraged to follow the modules sequentially and
+                    revisit previous topics whenever necessary.
+
+                </p>
+
+            </div>
+
+
+            <div class="announcement">
+
+                <h3>Module Release</h3>
+
+                <p>
+
+                    Course modules may be released according to the
+                    instructional schedule. Upcoming modules remain visible
+                    so that students can see the complete learning journey,
+                    but locked modules cannot be opened before their release.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================================= -->
+        <!-- ASSIGNMENTS -->
+        <!-- ================================================= -->
+
+        <section id="assignmentsPage" class="page">
+
+            <h2 class="section-title">
+                Assignments
+            </h2>
+
+            <div class="info-card">
+
+                <h3>Course Assignments</h3>
+
+                <p>
+
+                    Assignments and assessments will be provided as part
+                    of the course learning activities. Check this section
+                    regularly for new tasks and submission instructions.
+
+                </p>
+
+                <ul>
+
+                    <li>Module-based exercises</li>
+                    <li>Clinical statistics problems</li>
+                    <li>Data interpretation activities</li>
+                    <li>Research-based statistical exercises</li>
+
+                </ul>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================================= -->
+        <!-- PROGRESS -->
+        <!-- ================================================= -->
+
+        <section id="progressPage" class="page">
+
+            <h2 class="section-title">
+                My Progress
+            </h2>
+
+
+            <div class="info-card">
+
+                <h3>Overall Course Progress</h3>
+
+                <div class="progress-area">
+
+                    <div class="progress-bar">
+
+                        <div class="progress-fill"
+                             id="progressPageBar">
+                        </div>
+
+                    </div>
+
+                    <div class="progress-label"
+                         id="progressPageLabel">
+
+                        0 of 12 modules completed
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <h3>Completed Modules</h3>
+
+                <div id="completedList">
+
+                    No modules completed yet.
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================================= -->
+        <!-- RESOURCES -->
+        <!-- ================================================= -->
+
+        <section id="resourcesPage" class="page">
+
+            <h2 class="section-title">
+                Learning Resources
+            </h2>
+
+
+            <div class="info-card">
+
+                <h3>Course Materials</h3>
+
+                <p>
+
+                    The Course Modules section contains the official
+                    Biostatistics learning materials provided for this
+                    course.
+
+                </p>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <h3>Recommended Learning Approach</h3>
+
+                <ul>
+
+                    <li>Read each module before attempting exercises.</li>
+
+                    <li>
+                        Relate statistical concepts to clinical examples.
+                    </li>
+
+                    <li>
+                        Practice interpretation, not just calculation.
+                    </li>
+
+                    <li>
+                        Review previous modules when learning new concepts.
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================================= -->
+        <!-- HELP -->
+        <!-- ================================================= -->
+
+        <section id="helpPage" class="page">
+
+            <h2 class="section-title">
+                Help & Support
+            </h2>
+
+
+            <div class="info-card">
+
+                <h3>How do I open a module?</h3>
+
+                <p>
+
+                    Go to Course Modules and select Open Module on any
+                    module that has been released.
+
+                </p>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <h3>Why is a module locked?</h3>
+
+                <p>
+
+                    A locked module has not yet reached its scheduled
+                    release date and time. It will become available
+                    automatically when the release time is reached.
+
+                </p>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <h3>How is my progress recorded?</h3>
+
+                <p>
+
+                    When you mark a module as completed, the portal records
+                    your progress in your browser on your current device.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <div class="footer">
+
+            <p>
+                Great Lakes University of Kisumu
+            </p>
+
+            <p>
+                Biostatistics for Clinical Medicine • Learning Portal
+            </p>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* ============================================================
+   COURSE CONFIGURATION
+   ============================================================ */
+
+/*
+   IMPORTANT:
+   The titles below are the official module-guide titles.
+
+   The "file" field is the actual PDF filename in GitHub.
+
+   We have confirmed the filenames for Modules 01, 03, 04, 10
+   and 12.
+
+   Replace the remaining PLACEHOLDER values with the exact
+   filenames of your uploaded PDFs when we confirm them.
+*/
+
+
+const modules = [
+
+    {
+        number: 1,
+
+        title:
+        "Introduction to Biostatistics & Clinical Data",
+
+        description:
+        "Introduction to biostatistics, clinical data and the role of statistical thinking in clinical medicine and health research.",
+
+        note:
+        "Build the foundation for understanding how clinical data are collected, classified and used to answer medical questions.",
+
+        file:
+        "Module_01_ Types of Data Encountered in Statistical Analysis_-_Clinical_Data.pdf",
+
+        release:
+        "2026-09-04T00:00:00"
+
+    },
+
+
+    {
+        number: 2,
+
+        title:
+        "Data Presentation & Visualization",
+
+        description:
+        "Learn how clinical data are organized, summarized and presented using appropriate tables, charts and graphical displays.",
+
+        note:
+        "Good data presentation helps clinicians identify patterns, trends and important findings quickly.",
+
+        file:
+        "PLACEHOLDER_MODULE_02.pdf",
+
+        release:
+        "2026-09-11T00:00:00"
+
+    },
+
+
+    {
+        number: 3,
+
+        title:
+        "Measures of Central Tendency & Dispersion",
+
+        description:
+        "Explore mean, median, mode, range, variance, standard deviation and other measures used to summarize clinical data.",
+
+        note:
+        "These measures help describe the typical value and variability within a clinical dataset.",
+
+        file:
+        "Module_03_Measures_of_Central_Tendency_-_Dispersion.pdf",
+
+        release:
+        "2026-09-18T00:00:00"
+
+    },
+
+
+    {
+        number: 4,
+
+        title:
+        "Probability Distributions",
+
+        description:
+        "Understand probability concepts and important probability distributions used in clinical and health research.",
+
+        note:
+        "Probability distributions provide the foundation for many statistical methods used later in the course.",
+
+        file:
+        "Module_04_Probability_-_Probability_Distributions.pdf",
+
+        release:
+        "2026-09-25T00:00:00"
+
+    },
+
+
+    {
+        number: 5,
+
+        title:
+        "Sampling & Sampling Distributions",
+
+        description:
+        "Understand sampling methods, sampling distributions and their importance in clinical research.",
+
+        note:
+        "Learn how researchers use samples to make conclusions about larger populations.",
+
+        file:
+        "PLACEHOLDER_MODULE_05.pdf",
+
+        release:
+        "2026-10-02T00:00:00"
+
+    },
+
+
+    {
+        number: 6,
+
+        title:
+        "Estimation & Confidence Intervals",
+
+        description:
+        "Learn point estimation, confidence intervals and the interpretation of estimates in clinical research.",
+
+        note:
+        "Confidence intervals help communicate the uncertainty surrounding estimates from clinical studies.",
+
+        file:
+        "PLACEHOLDER_MODULE_06.pdf",
+
+        release:
+        "2026-10-09T00:00:00"
+
+    },
+
+
+    {
+        number: 7,
+
+        title:
+        "Hypothesis Testing",
+
+        description:
+        "Understand hypothesis testing, p-values, statistical significance and evidence-based statistical decisions.",
+
+        note:
+        "The goal is to understand what statistical evidence means in the context of a clinical question.",
+
+        file:
+        "PLACEHOLDER_MODULE_07.pdf",
+
+        release:
+        "2026-10-16T00:00:00"
+
+    },
+
+
+    {
+        number: 8,
+
+        title:
+        "Comparing Groups — t-tests & Non-parametric Tests",
+
+        description:
+        "Learn how to compare groups using t-tests and appropriate non-parametric statistical methods.",
+
+        note:
+        "Choose statistical tests according to the study design, data characteristics and research question.",
+
+        file:
+        "PLACEHOLDER_MODULE_08.pdf",
+
+        release:
+        "2026-10-23T00:00:00"
+
+    },
+
+
+    {
+        number: 9,
+
+        title:
+        "Categorical Data & Chi-Square Tests",
+
+        description:
+        "Understand categorical data and the use of chi-square methods for analysing relationships between categorical variables.",
+
+        note:
+        "These methods are commonly used to investigate associations between clinical and demographic characteristics.",
+
+        file:
+        "PLACEHOLDER_MODULE_09.pdf",
+
+        release:
+        "2026-10-30T00:00:00"
+
+    },
+
+
+    {
+        number: 10,
+
+        title:
+        "Correlation & Regression",
+
+        description:
+        "Explore relationships between variables using correlation and regression methods.",
+
+        note:
+        "Learn how statistical models can help describe and quantify relationships between clinical variables.",
+
+        file:
+        "Module_10_Correlation_-_Regression.pdf",
+
+        release:
+        "2026-11-06T00:00:00"
+
+    },
+
+
+    {
+        number: 11,
+
+        title:
+        "Clinical Epidemiology & Diagnostic Test Statistics",
+
+        description:
+        "Apply statistical concepts to clinical epidemiology and evaluate the performance of diagnostic tests.",
+
+        note:
+        "Connect statistical concepts with real clinical decisions involving diagnosis and screening.",
+
+        file:
+        "PLACEHOLDER_MODULE_11.pdf",
+
+        release:
+        "2026-11-13T00:00:00"
+
+    },
+
+
+    {
+        number: 12,
+
+        title:
+        "Clinical Research, Statistical Analysis & Interpretation",
+
+        description:
+        "Bring together statistical analysis, interpretation and reporting of findings in clinical research.",
+
+        note:
+        "The final module integrates the statistical concepts learned throughout the course.",
+
+        file:
+        "Module_12_Clinical_Research-Statistical_Analysis-_Interpretation.pdf",
+
+        release:
+        "2026-11-20T00:00:00"
+
+    }
+
+];
+
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+
+function showPage(pageId, clickedLink) {
+
+    const pages = document.querySelectorAll(".page");
+
+    pages.forEach(function(page) {
+
+        page.classList.remove("active");
+
+    });
+
+
+    const selectedPage = document.getElementById(pageId);
+
+    if (selectedPage) {
+
+        selectedPage.classList.add("active");
+
+    }
+
+
+    const links = document.querySelectorAll(".nav a");
+
+    links.forEach(function(link) {
+
+        link.classList.remove("active");
+
+    });
+
+
+    if (clickedLink) {
+
+        clickedLink.classList.add("active");
+
+    }
+
+
+    closeSidebar();
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+/* ============================================================
+   MOBILE SIDEBAR
+   ============================================================ */
+
+function toggleSidebar() {
+
+    document
+        .getElementById("sidebar")
+        .classList.toggle("open");
+
+}
+
+
+function closeSidebar() {
+
+    document
+        .getElementById("sidebar")
+        .classList.remove("open");
+
+}
+
+
+/* ============================================================
+   PROGRESS STORAGE
+   ============================================================ */
+
+function getCompletedModules() {
+
+    try {
+
+        return JSON.parse(
+            localStorage.getItem("biostatisticsCompletedModules")
+        ) || [];
+
+    } catch (error) {
+
+        return [];
+
+    }
+
+}
+
+
+function saveCompletedModules(completed) {
+
+    localStorage.setItem(
+        "biostatisticsCompletedModules",
+        JSON.stringify(completed)
+    );
+
+}
+
+
+/* ============================================================
+   CHECK MODULE AVAILABILITY
+   ============================================================ */
+
+function isModuleAvailable(module) {
+
+    const now = new Date();
+
+    const releaseDate = new Date(module.release);
+
+    return now >= releaseDate;
+
+}
+
+
+/* ============================================================
+   MODULE STATUS
+   ============================================================ */
+
+function getModuleStatus(module) {
+
+    const completed = getCompletedModules();
+
+    if (completed.includes(module.number)) {
+
+        return "completed";
+
+    }
+
+    if (isModuleAvailable(module)) {
+
+        return "available";
+
+    }
+
+    return "locked";
+
+}
+
+
+/* ============================================================
+   OPEN MODULE
+   ============================================================ */
+
+function openModule(index) {
+
+    const module = modules[index];
+
+    if (!isModuleAvailable(module)) {
+
+        const releaseDate =
+            new Date(module.release);
+
+        alert(
+            "This module is not available yet.\n\n" +
+            "It will be released on " +
+            releaseDate.toLocaleString()
+        );
+
+        return;
+
+    }
+
+
+    if (
+        !module.file ||
+        module.file.indexOf("PLACEHOLDER") !== -1
+    ) {
+
+        alert(
+            "This module is ready on the dashboard, but its exact PDF filename still needs to be connected."
+        );
+
+        return;
+
+    }
+
+
+    window.open(
+        module.file,
+        "_blank"
+    );
+
+}
+
+
+/* ============================================================
+   MARK MODULE COMPLETE
+   ============================================================ */
+
+function toggleComplete(index) {
+
+    const module = modules[index];
+
+    if (!isModuleAvailable(module)) {
+
+        alert(
+            "This module is still locked."
+        );
+
+        return;
+
+    }
+
+
+    let completed = getCompletedModules();
+
+
+    if (completed.includes(module.number)) {
+
+        completed =
+            completed.filter(
+                function(number) {
+                    return number !== module.number;
+                }
+            );
+
+    } else {
+
+        completed.push(module.number);
+
+    }
+
+
+    completed.sort(function(a, b) {
+        return a - b;
+    });
+
+
+    saveCompletedModules(completed);
+
+    renderModules();
+
+    updateDashboard();
+
+}
+
+
+/* ============================================================
+   RENDER MODULE CARD
+   ============================================================ */
+
+function createModuleCard(module, index) {
+
+    const status =
+        getModuleStatus(module);
+
+
+    let statusText = "";
+
+    if (status === "completed") {
+
+        statusText = "✓ COMPLETED";
+
+    } else if (status === "available") {
+
+        statusText = "AVAILABLE NOW";
+
+    } else {
+
+        statusText = "🔒 UPCOMING";
+
+    }
+
+
+    let buttonHTML = "";
+
+
+    if (status === "locked") {
+
+        buttonHTML = `
+
+            <button class="module-button disabled"
+                    onclick="openModule(${index})">
+
+                🔒 Locked
+
+            </button>
+
+        `;
+
+    } else {
+
+        buttonHTML = `
+
+            <button class="module-button"
+                    onclick="openModule(${index})">
+
+                Open Module →
+
+            </button>
+
+            <br>
+
+            <button class="complete-button"
+                    onclick="toggleComplete(${index})">
+
+                ${
+                    status === "completed"
+                    ? "↩️ Mark as Incomplete"
+                    : "✓ Mark as Completed"
+                }
+
+            </button>
+
+        `;
+
+    }
+
+
+    return `
+
+        <div class="module ${status}">
+
+            <div class="module-number">
+                MODULE ${String(module.number).padStart(2, "0")}
+            </div>
+
+            <h3>
+                ${module.title}
+            </h3>
+
+            <p>
+                ${module.description}
+            </p>
+
+            <div class="module-note">
+                <strong>Learning focus:</strong><br>
+                ${module.note}
+            </div>
+
+            <div class="status">
+                ${statusText}
+            </div>
+
+            ${buttonHTML}
+
+        </div>
+
+    `;
+
+}
+
+
+/* ============================================================
+   RENDER ALL MODULES
+   ============================================================ */
+
+function renderModules() {
+
+    const dashboardContainer =
+        document.getElementById("dashboardModules");
+
+    const allModulesContainer =
+        document.getElementById("allModules");
+
+
+    let html = "";
+
+
+    modules.forEach(function(module, index) {
+
+        html += createModuleCard(
+            module,
+            index
+        );
+
+    });
+
+
+    dashboardContainer.innerHTML = html;
+
+    allModulesContainer.innerHTML = html;
+
+}
+
+
+/* ============================================================
+   UPDATE DASHBOARD
+   ============================================================ */
+
+function updateDashboard() {
+
+    const completed =
+        getCompletedModules();
+
+
+    const completedCount =
+        completed.length;
+
+
+    const total =
+        modules.length;
+
+
+    const percentage =
+        Math.round(
+            (completedCount / total) * 100
+        );
+
+
+    document
+        .getElementById("dashboardProgressNumber")
+        .textContent =
+        percentage + "%";
+
+
+    document
+        .getElementById("dashboardProgressBar")
+        .style.width =
+        percentage + "%";
+
+
+    document
+        .getElementById("completedNumber")
+        .textContent =
+        completedCount +
+        " / " +
+        total;
+
+
+    document
+        .getElementById("progressPageBar")
+        .style.width =
+        percentage + "%";
+
+
+    document
+        .getElementById("progressPageLabel")
+        .textContent =
+        completedCount +
+        " of " +
+        total +
+        " modules completed";
+
+
+    updateCurrentModule();
+
+    updateCompletedList();
+
+}
+
+
+/* ============================================================
+   CURRENT MODULE
+   ============================================================ */
+
+function getNextModule() {
+
+    const completed =
+        getCompletedModules();
+
+
+    for (
+        let i = 0;
+        i < modules.length;
+        i++
+    ) {
+
+        if (
+            !completed.includes(
+                modules[i].number
+            ) &&
+            isModuleAvailable(
+                modules[i]
+            )
+        ) {
+
+            return modules[i];
+
+        }
+
+    }
+
+
+    return null;
+
+}
+
+
+function updateCurrentModule() {
+
+    const next =
+        getNextModule();
+
+
+    const currentElement =
+        document.getElementById(
+            "currentModuleNumber"
+        );
+
+
+    const continueTitle =
+        document.getElementById(
+            "continueTitle"
+        );
+
+
+    const continueDescription =
+        document.getElementById(
+            "continueDescription"
+        );
+
+
+    if (next) {
+
+        currentElement.textContent =
+            "Module " +
+            String(next.number)
+                .padStart(2, "0");
+
+
+        continueTitle.textContent =
+            "Module " +
+            String(next.number)
+                .padStart(2, "0") +
+            ": " +
+            next.title;
+
+
+        continueDescription.textContent =
+            next.description;
+
+    } else {
+
+        currentElement.textContent =
+            "Completed";
+
+
+        continueTitle.textContent =
+            "🎉 Course Completed";
+
+
+        continueDescription.textContent =
+            "Congratulations! You have completed all currently available modules.";
+
+    }
+
+}
+
+
+/* ============================================================
+   CONTINUE LEARNING
+   ============================================================ */
+
+function continueLearning() {
+
+    const next =
+        getNextModule();
+
+
+    if (!next) {
+
+        showPage("progressPage");
+
+        return;
+
+    }
+
+
+    const index =
+        modules.indexOf(next);
+
+
+    openModule(index);
+
+}
+
+
+/* ============================================================
+   COMPLETED LIST
+   ============================================================ */
+
+function updateCompletedList() {
+
+    const container =
+        document.getElementById(
+            "completedList"
+        );
+
+
+    const completed =
+        getCompletedModules();
+
+
+    if (completed.length === 0) {
+
+        container.innerHTML =
+            "No modules completed yet.";
+
+        return;
+
+    }
+
+
+    let html = "<ul>";
+
+
+    completed.forEach(function(number) {
+
+        const module =
+            modules.find(
+                function(item) {
+                    return item.number === number;
+                }
+            );
+
+
+        if (module) {
+
+            html +=
+                "<li>" +
+                "Module " +
+                String(number).padStart(2, "0") +
+                " — " +
+                module.title +
+                "</li>";
+
+        }
+
+    });
+
+
+    html += "</ul>";
+
+
+    container.innerHTML = html;
+
+}
+
+
+/* ============================================================
+   INITIALIZE
+   ============================================================ */
+
+function initializePortal() {
+
+    renderModules();
+
+    updateDashboard();
+
+}
+
+
+/* ============================================================
+   AUTOMATIC REFRESH
+   ============================================================ */
+
+/*
+   Checks every minute whether a scheduled module has become
+   available. This means students do not have to refresh the
+   page manually once the release time arrives.
+*/
+
+setInterval(function() {
+
+    renderModules();
+
+    updateDashboard();
+
+}, 60000);
+
+
+/* START */
+
+initializePortal();
+
+</script>
+
+</body>
+</html>

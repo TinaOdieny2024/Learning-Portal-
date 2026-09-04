@@ -2184,12 +2184,28 @@ function getCompletedModules() {
 
     try {
 
-        return JSON.parse(
-            localStorage.getItem("biostatisticsCompletedModules")
-        ) || [];
+        const stored = JSON.parse(
+            localStorage.getItem("biostatisticsCompletedModules") || "[]"
+        );
+
+        if (!Array.isArray(stored)) {
+            return [];
+        }
+
+        return stored
+            .map(Number)
+            .filter(function(number) {
+                return modules.some(function(module) {
+                    return module.number === number;
+                });
+            })
+            .filter(function(number, position, array) {
+                return array.indexOf(number) === position;
+            });
 
     } catch (error) {
 
+        console.warn("Unable to read saved module progress.", error);
         return [];
 
     }
@@ -2199,10 +2215,18 @@ function getCompletedModules() {
 
 function saveCompletedModules(completed) {
 
-    localStorage.setItem(
-        "biostatisticsCompletedModules",
-        JSON.stringify(completed)
-    );
+    try {
+
+        localStorage.setItem(
+            "biostatisticsCompletedModules",
+            JSON.stringify(completed)
+        );
+
+    } catch (error) {
+
+        console.warn("Unable to save module progress.", error);
+
+    }
 
 }
 
@@ -2257,68 +2281,10 @@ function openLearningModule(index) {
 
     const module = modules[index];
 
-    if (!isModuleAvailable(module)) {
-        alert("This module is not yet available.");
+    if (!module) {
+        alert("Unable to identify this module.");
         return;
     }
-
-    currentLearningModuleIndex = index;
-
-    document.getElementById("learningModuleNumber").textContent =
-        "MODULE " + String(index + 1).padStart(2, "0");
-
-    document.getElementById("learningModuleTitle").textContent =
-        module.title;
-
-    document.getElementById("learningModuleDescription").textContent =
-        module.description;
-
-    document.getElementById("learningObjectives").innerHTML = `
-        <li>Understand the key concepts covered in this module.</li>
-        <li>Apply the concepts to clinical and health-related examples.</li>
-        <li>Interpret statistical information relevant to clinical practice.</li>
-    `;
-
-    document.getElementById("learningNotes").innerHTML = `
-        <h3>Introduction</h3>
-        <p>${module.description}</p>
-
-        <h3>Key Learning Points</h3>
-        <p>${module.note}</p>
-
-        <p>
-            Read through the learning notes carefully and relate the
-            statistical concepts to clinical practice.
-        </p>
-    `;
-
-    document.getElementById("learningAdditionalNotes").innerHTML = `
-        <p>
-            <strong>Clinical connection:</strong>
-            Think about how the concepts in this module could be used
-            when collecting, analysing or interpreting clinical data.
-        </p>
-    `;
-
-    document.getElementById("learningPdfButton").onclick = function() {
-        openModulePDF(index);
-    };
-
-    updateLearningCompletionStatus(index);
-    updateLearningQuizStatus(index);
-
-    showPage("moduleLearningPage");
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-}
-
-
-function openLearningModule(index) {
-
-    const module = modules[index];
 
     if (!isModuleAvailable(module)) {
         alert("This module is not yet available.");
@@ -2328,7 +2294,7 @@ function openLearningModule(index) {
     currentLearningModuleIndex = index;
 
     document.getElementById("learningModuleNumber").textContent =
-        "MODULE " + String(index + 1).padStart(2, "0");
+        "MODULE " + String(module.number).padStart(2, "0");
 
     document.getElementById("learningModuleTitle").textContent =
         module.title;
@@ -2690,13 +2656,37 @@ function openLearningModule(index) {
 
 }
 
+function openModulePDF(index) {
+
+    const module = modules[index];
+
+    if (!module) {
+        alert("Unable to identify this module.");
+        return;
+    }
+
+    if (!module.file || module.file.indexOf("PLACEHOLDER_") === 0) {
+        alert(
+            "The official PDF for Module " +
+            String(module.number).padStart(2, "0") +
+            " has not yet been linked. Please add the exact PDF filename in the module configuration."
+        );
+        return;
+    }
+
+    const pdfUrl = new URL(module.file, window.location.href).href;
+    window.open(pdfUrl, "_blank", "noopener,noreferrer");
+
+}
+
+
 function updateLearningCompletionStatus(index) {
 
     const button = document.getElementById("learningCompleteButton");
 
     const completed = getCompletedModules();
 
-    if (completed.includes(index)) {
+    if (completed.includes(modules[index].number)) {
 
         button.textContent = "✓ Module Completed";
         button.disabled = true;
@@ -2727,9 +2717,39 @@ function completeCurrentLearningModule() {
 function updateLearningQuizStatus(index) {
 
     const status = document.getElementById("learningQuizStatus");
+    const button = document.getElementById("learningQuizButton");
+
+    let attempts = {};
+
+    try {
+        attempts = JSON.parse(
+            localStorage.getItem("moduleQuizAttempts") || "{}"
+        );
+    } catch (error) {
+        attempts = {};
+    }
+
+    const used = Number(attempts[String(index)]) || 0;
+
+    if (index !== 0) {
+        status.textContent =
+            "The quiz for this module will be added with the module learning material.";
+        button.disabled = true;
+        return;
+    }
+
+    if (used >= 2) {
+        status.textContent = "Quiz attempts used: 2 of 2.";
+        button.disabled = true;
+        return;
+    }
 
     status.textContent =
-        "Quiz not attempted yet. The 10-question quiz will be available here.";
+        used === 0
+            ? "Quiz not attempted yet. You have 2 attempts available."
+            : "Quiz attempts used: " + used + " of 2.";
+
+    button.disabled = false;
 }
 
 
@@ -2744,10 +2764,22 @@ function startModuleQuiz() {
         return;
     }
 
-    const attempts =
-        JSON.parse(localStorage.getItem("moduleQuizAttempts") || "{}");
+    let attempts = {};
 
-    const moduleAttempts = attempts[0] || 0;
+    try {
+        attempts = JSON.parse(
+            localStorage.getItem("moduleQuizAttempts") || "{}"
+        );
+
+        if (!attempts || typeof attempts !== "object" || Array.isArray(attempts)) {
+            attempts = {};
+        }
+    } catch (error) {
+        attempts = {};
+    }
+
+    const attemptKey = String(currentLearningModuleIndex);
+    const moduleAttempts = Number(attempts[attemptKey]) || 0;
 
     if (moduleAttempts >= 2) {
         alert("You have already used the maximum 2 attempts for this module.");
@@ -2992,7 +3024,7 @@ function startModuleQuiz() {
 
             /* Save attempt */
 
-            attempts[0] = moduleAttempts + 1;
+            attempts[attemptKey] = moduleAttempts + 1;
 
             localStorage.setItem(
                 "moduleQuizAttempts",
@@ -3044,6 +3076,8 @@ function startModuleQuiz() {
                 "button[type='submit']"
             ).disabled = true;
 
+            updateLearningQuizStatus(currentLearningModuleIndex);
+
 
             /* Attempt 2 shows explanations */
 
@@ -3075,7 +3109,7 @@ function startModuleQuiz() {
 
                 });
 
-                reviewHTML += </div>;
+                reviewHTML += `</div>`;
 
                 result.insertAdjacentHTML(
                     "beforeend",
@@ -3087,7 +3121,6 @@ function startModuleQuiz() {
         }
     );
 
-}
 }
 /* ============================================================
    MARK MODULE COMPLETE
@@ -3138,6 +3171,10 @@ function toggleComplete(index) {
 
     updateDashboard();
 
+    if (currentLearningModuleIndex !== null) {
+        updateLearningCompletionStatus(currentLearningModuleIndex);
+    }
+
 }
 
 
@@ -3176,8 +3213,8 @@ function createModuleCard(module, index) {
         buttonHTML = `
 
             <button class="module-button disabled"
-                    onclick="openLearningModule(${index})"
-
+                    type="button"
+                    disabled>
                 🔒 Locked
 
             </button>
@@ -3189,7 +3226,7 @@ function createModuleCard(module, index) {
         buttonHTML = `
 
             <button class="module-button"
-                    onclick="openModule(${index})">
+                    onclick="openLearningModule(${index})">
 
                 Open Module →
 
@@ -3286,63 +3323,42 @@ function renderModules() {
 
 function updateDashboard() {
 
-    const completed =
-        getCompletedModules();
+    const completed = getCompletedModules();
+    const completedCount = completed.length;
+    const total = modules.length;
+    const percentage = total === 0
+        ? 0
+        : Math.round((completedCount / total) * 100);
 
+    const dashboardProgressNumber = document.getElementById("dashboardProgressNumber");
+    const dashboardProgressBar = document.getElementById("dashboardProgressBar");
+    const completedNumber = document.getElementById("completedNumber");
+    const progressPageBar = document.getElementById("progressPageBar");
+    const progressPageLabel = document.getElementById("progressPageLabel");
 
-    const completedCount =
-        completed.length;
+    if (dashboardProgressNumber) {
+        dashboardProgressNumber.textContent = percentage + "%";
+    }
 
+    if (dashboardProgressBar) {
+        dashboardProgressBar.style.width = percentage + "%";
+    }
 
-    const total =
-        modules.length;
+    if (completedNumber) {
+        completedNumber.textContent = completedCount + " / " + total;
+    }
 
+    if (progressPageBar) {
+        progressPageBar.style.width = percentage + "%";
+    }
 
-    const percentage =
-        Math.round(
-            (completedCount / total) * 100
-        );
-
-
-    document
-        .getElementById("dashboardProgressNumber")
-        .textContent =
-        percentage + "%";
-
-
-    document
-        .getElementById("dashboardProgressBar")
-        .style.width =
-        percentage + "%";
-
-
-    document
-        .getElementById("completedNumber")
-        .textContent =
-        completedCount +
-        " / " +
-        total;
-
-
-    document
-        .getElementById("progressPageBar")
-        .style.width =
-        percentage + "%";
-
-
-    document
-        .getElementById("progressPageLabel")
-        .textContent =
-        completedCount +
-        " of " +
-        total +
-        " modules completed";
-
+    if (progressPageLabel) {
+        progressPageLabel.textContent =
+            completedCount + " of " + total + " modules completed";
+    }
 
     updateCurrentModule();
-
     updateCompletedList();
-
 }
 
 
@@ -3448,7 +3464,15 @@ function continueLearning() {
     const next = getNextModule();
 
     if (!next) {
-        showPage("progressPage");
+        const completed = getCompletedModules();
+
+        if (completed.length === modules.length) {
+            showPage("progressPage");
+        } else {
+            alert("You have reached the end of the currently released modules. The next module will open when it is released.");
+            showPage("modulesPage");
+        }
+
         return;
     }
 
@@ -3462,13 +3486,6 @@ function continueLearning() {
     }
 
     openLearningModule(index);
-}
-    const index =
-        modules.indexOf(next);
-
-
-    openModule(index);
-
 }
 
 

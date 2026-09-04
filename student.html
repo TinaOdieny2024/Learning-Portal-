@@ -3579,9 +3579,14 @@ function startModuleQuiz() {
             localStorage.getItem("moduleQuizAttempts") || "{}"
         );
 
-        if (!attempts || typeof attempts !== "object" || Array.isArray(attempts)) {
+        if (
+            !attempts ||
+            typeof attempts !== "object" ||
+            Array.isArray(attempts)
+        ) {
             attempts = {};
         }
+
     } catch (error) {
         attempts = {};
     }
@@ -3589,16 +3594,25 @@ function startModuleQuiz() {
     const attemptKey = String(moduleNumber);
     const moduleAttempts = Number(attempts[attemptKey]) || 0;
 
+    /* Maximum 2 attempts */
     if (moduleAttempts >= 2) {
-        alert("You have already used the maximum 2 attempts for this module.");
+        alert(
+            "You have already used the maximum 2 attempts for this module."
+        );
         return;
     }
 
+    /* Prevent opening another copy of the same quiz */
     const existingQuiz =
-        document.querySelector(".quiz-introduction .quiz-container");
+        document.querySelector(
+            ".quiz-introduction .quiz-container"
+        );
 
     if (existingQuiz) {
-        existingQuiz.scrollIntoView({ behavior: "smooth", block: "start" });
+        existingQuiz.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
         return;
     }
 
@@ -3606,130 +3620,259 @@ function startModuleQuiz() {
 
     let quizHTML = `
         <div class="quiz-container">
-            <h2>📝 Module ${moduleNumber} End-of-Module Quiz</h2>
+
+            <h2>
+                📝 Module ${moduleNumber} End-of-Module Quiz
+            </h2>
+
             <p>
                 Answer all ${questions.length} questions.
                 Each question carries <strong>1 mark</strong>.
                 You have a maximum of <strong>2 attempts</strong>.
             </p>
+
             <form id="moduleQuizForm">
     `;
 
     questions.forEach(function(q, index) {
+
         quizHTML += `
             <div class="quiz-question">
-                <h3>${index + 1}. ${q.question}</h3>
+
+                <h3>
+                    ${index + 1}. ${q.question}
+                </h3>
         `;
 
         q.options.forEach(function(option, optionIndex) {
+
             quizHTML += `
                 <label class="quiz-option">
+
                     <input
                         type="radio"
                         name="question${index}"
                         value="${optionIndex}"
                         required
                     >
+
                     ${option}
+
                 </label>
             `;
+
         });
 
-        quizHTML += `</div>`;
+        quizHTML += `
+            </div>
+        `;
     });
 
     quizHTML += `
-                <button type="submit" class="quiz-button">
+                <button
+                    type="submit"
+                    class="quiz-button">
                     Submit Quiz
                 </button>
+
             </form>
+
             <div id="quizResult"></div>
+
         </div>
     `;
 
-    document.getElementById("learningQuizButton").insertAdjacentHTML(
-        "afterend",
-        quizHTML
-    );
+    document
+        .getElementById("learningQuizButton")
+        .insertAdjacentHTML("afterend", quizHTML);
 
-    document.getElementById("moduleQuizForm").addEventListener(
-        "submit",
-        function(event) {
+    document
+        .getElementById("moduleQuizForm")
+        .addEventListener(
+            "submit",
+            function(event) {
 
-            event.preventDefault();
+                event.preventDefault();
 
-            const formData = new FormData(event.target);
-            let score = 0;
+                const formData =
+                    new FormData(event.target);
 
-            questions.forEach(function(q, index) {
-                const selected =
-                    Number(formData.get("question" + index));
+                let score = 0;
 
-                if (selected === q.answer) {
-                    score++;
-                }
-            });
-
-            const newAttempt = moduleAttempts + 1;
-            attempts[attemptKey] = newAttempt;
-
-            localStorage.setItem(
-                "moduleQuizAttempts",
-                JSON.stringify(attempts)
-            );
-
-            const result = document.getElementById("quizResult");
-
-            result.innerHTML = `
-                <div class="quiz-result">
-                    <h2>Your Score: ${score}/${questions.length}</h2>
-                    <p>Attempt ${newAttempt} of 2</p>
-                    <p>
-                        ${score >= Math.ceil(questions.length * 0.5)
-                            ? "Good work! Keep reviewing the material."
-                            : "Review the module material and strengthen your understanding before your next attempt."
-                        }
-                    </p>
-                </div>
-            `;
-
-            document.querySelectorAll(
-                "#moduleQuizForm input"
-            ).forEach(function(input) {
-                input.disabled = true;
-            });
-
-            event.target.querySelector(
-                "button[type='submit']"
-            ).disabled = true;
-
-            updateLearningQuizStatus(currentLearningModuleIndex);
-
-            if (newAttempt === 2) {
-                let reviewHTML = `
-                    <div class="quiz-review">
-                        <h3>Quiz Review</h3>
-                `;
+                /* AUTO-MARK */
 
                 questions.forEach(function(q, index) {
-                    reviewHTML += `
-                        <div class="review-question">
-                            <p><strong>${index + 1}. ${q.question}</strong></p>
-                            <p><strong>Correct answer:</strong> ${q.options[q.answer]}</p>
-                            <p>${q.explanation}</p>
-                        </div>
-                    `;
+
+                    const selected =
+                        Number(
+                            formData.get(
+                                "question" + index
+                            )
+                        );
+
+                    if (selected === q.answer) {
+                        score++;
+                    }
+
                 });
 
-                reviewHTML += `</div>`;
+                const newAttempt =
+                    moduleAttempts + 1;
 
-                result.insertAdjacentHTML(
-                    "afterend",
-                    reviewHTML
+                attempts[attemptKey] =
+                    newAttempt;
+
+                localStorage.setItem(
+                    "moduleQuizAttempts",
+                    JSON.stringify(attempts)
                 );
+
+                const result =
+                    document.getElementById(
+                        "quizResult"
+                    );
+
+                /*
+                 * RELEASE SCORE IMMEDIATELY
+                 */
+
+                result.innerHTML = `
+                    <div class="quiz-result">
+
+                        <h2>
+                            Your Score:
+                            ${score}/${questions.length}
+                        </h2>
+
+                        <p>
+                            Attempt ${newAttempt} of 2
+                        </p>
+
+                        <p>
+                            ${
+                                score === questions.length
+                                ? "Excellent! You achieved 100%."
+                                : "Your score has been recorded. Review the module material before your next attempt."
+                            }
+                        </p>
+
+                    </div>
+                `;
+
+                /*
+                 * LOCK THE QUIZ AFTER SUBMISSION
+                 */
+
+                document
+                    .querySelectorAll(
+                        "#moduleQuizForm input"
+                    )
+                    .forEach(function(input) {
+
+                        input.disabled = true;
+
+                    });
+
+                const submitButton =
+                    event.target.querySelector(
+                        "button[type='submit']"
+                    );
+
+                if (submitButton) {
+                    submitButton.disabled = true;
+                }
+
+                /*
+                 * UPDATE QUIZ STATUS
+                 */
+
+                updateLearningQuizStatus(
+                    currentLearningModuleIndex
+                );
+
+                /*
+                 * RELEASE ANSWERS + EXPLANATIONS
+                 *
+                 * ATTEMPT 1:
+                 * Only if 100%.
+                 *
+                 * ATTEMPT 2:
+                 * Always.
+                 */
+
+                const perfectFirstAttempt =
+                    newAttempt === 1 &&
+                    score === questions.length;
+
+                const secondAttempt =
+                    newAttempt === 2;
+
+                if (
+                    perfectFirstAttempt ||
+                    secondAttempt
+                ) {
+
+                    let reviewHTML = `
+                        <div class="quiz-review">
+
+                            <h3>
+                                📖 Quiz Review
+                            </h3>
+
+                            <p>
+                                <strong>
+                                    Correct answers and explanations
+                                </strong>
+                            </p>
+                    `;
+
+                    questions.forEach(
+                        function(q, index) {
+
+                            reviewHTML += `
+                                <div class="review-question">
+
+                                    <p>
+                                        <strong>
+                                            ${index + 1}.
+                                            ${q.question}
+                                        </strong>
+                                    </p>
+
+                                    <p>
+                                        <strong>
+                                            Correct answer:
+                                        </strong>
+
+                                        ${q.options[q.answer]}
+                                    </p>
+
+                                    <p>
+                                        <strong>
+                                            Explanation:
+                                        </strong>
+
+                                        ${q.explanation}
+                                    </p>
+
+                                </div>
+                            `;
+
+                        }
+                    );
+
+                    reviewHTML += `
+                        </div>
+                    `;
+
+                    result.insertAdjacentHTML(
+                        "afterend",
+                        reviewHTML
+                    );
+                }
+
             }
-        }
-    );
+        );
 }
 function toggleComplete(index) {
 

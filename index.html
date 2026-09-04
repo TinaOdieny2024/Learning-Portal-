@@ -493,7 +493,538 @@ body {
 .info-card li {
     margin-bottom: 9px;
 }
+/* ============================================================
+   MODULE LEARNING PAGE
+   ============================================================ */
 
+.back-button {
+    background: white;
+    border: 1px solid #d9dee7;
+    color: #17365d;
+    padding: 10px 15px;
+    border-radius: 7px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.back-button:hover {
+    background: #f4f7fb;
+}
+
+
+.module-learning-hero {
+    background: linear-gradient(135deg, #17365d, #24578d);
+    color: white;
+    border-radius: 16px;
+    padding: 35px;
+    margin-bottom: 25px;
+}
+
+.module-learning-hero .module-number {
+    color: rgba(255,255,255,0.75);
+}
+
+.module-learning-hero h1 {
+    font-size: 30px;
+    margin: 8px 0 12px;
+    line-height: 1.3;
+}
+
+.module-learning-hero p {
+    max-width: 800px;
+    line-height: 1.7;
+    opacity: 0.92;
+}
+
+
+.learning-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 22px;
+}
+
+.learning-card h2 {
+    color: #17365d;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.learning-card p {
+    color: #5f6b7a;
+    line-height: 1.8;
+}
+
+.learning-card ul {
+    margin-left: 22px;
+    color: #5f6b7a;
+}
+
+.learning-card li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+
+#learningNotes h3 {
+    color: #17365d;
+    margin: 20px 0 8px;
+}
+
+#learningNotes p {
+    margin-bottom: 15px;
+}
+
+#learningNotes ul {
+    margin-bottom: 15px;
+}
+
+
+.additional-notes {
+    border-left: 5px solid #d6a84f;
+    background: #fffdf7;
+}
+
+
+.additional-notes h2 {
+    color: #765b18;
+}
+
+
+.pdf-card {
+    background: #f8fafc;
+}
+
+
+.completion-card {
+    background: #f8fbf9;
+}
+
+
+.quiz-introduction {
+    border-top: 4px solid #17365d;
+}
+
+
+.quiz-information {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 18px 0;
+}
+
+.quiz-information span {
+    background: #f0f4f9;
+    color: #17365d;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+
+#learningQuizStatus {
+    margin: 15px 0;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+
+.quiz-button {
+    display: inline-block;
+    margin-top: 5px;
+    padding: 11px 17px;
+    border: none;
+    border-radius: 7px;
+    background: #17365d;
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.quiz-button:hover {
+    background: #24578d;
+}
+
+.quiz-button:disabled {
+    background: #999;
+    cursor: not-allowed;
+}
+
+
+@media (max-width: 700px) {
+
+    .module-learning-hero {
+        padding: 25px;
+    }
+
+    .module-learning-hero h1 {
+        font-size: 24px;
+    }
+
+    .learning-card {
+        padding: 20px;
+    }
+
+}
+    function startModuleQuiz() {
+
+    if (currentLearningModuleIndex === null) {
+        return;
+    }
+
+    if (currentLearningModuleIndex !== 0) {
+        alert("The quiz for this module will be available soon.");
+        return;
+    }
+
+    const attempts =
+        JSON.parse(localStorage.getItem("moduleQuizAttempts") || "{}");
+
+    const moduleAttempts = attempts[0] || 0;
+
+    if (moduleAttempts >= 2) {
+        alert("You have already used the maximum 2 attempts for this module.");
+        return;
+    }
+
+    const questions = [
+
+        {
+            question: "Which of the following is an example of nominal data?",
+            options: [
+                "Blood group",
+                "Disease severity",
+                "Body temperature in Celsius",
+                "Weight"
+            ],
+            answer: 0,
+            explanation:
+                "Blood group is nominal because its categories have no natural order."
+        },
+
+        {
+            question: "Which type of data has categories with a meaningful order?",
+            options: [
+                "Nominal",
+                "Ordinal",
+                "Interval",
+                "Ratio"
+            ],
+            answer: 1,
+            explanation:
+                "Ordinal data have categories that can be ranked or ordered."
+        },
+
+        {
+            question: "Which of the following is an example of interval data?",
+            options: [
+                "Weight",
+                "Height",
+                "Temperature in Celsius",
+                "Blood group"
+            ],
+            answer: 2,
+            explanation:
+                "Celsius temperature is interval data because the intervals are meaningful but zero is not a true absence of temperature."
+        },
+
+        {
+            question: "Which measurement scale has a true zero?",
+            options: [
+                "Nominal",
+                "Ordinal",
+                "Interval",
+                "Ratio"
+            ],
+            answer: 3,
+            explanation:
+                "Ratio data have a meaningful true zero."
+        },
+
+        {
+            question: "Which of the following is an example of ratio data?",
+            options: [
+                "Blood group",
+                "Disease stage",
+                "Weight",
+                "Temperature in Celsius"
+            ],
+            answer: 2,
+            explanation:
+                "Weight is ratio data because it has a meaningful zero and ratios can be interpreted."
+        },
+
+        {
+            question: "What is a population in clinical research?",
+            options: [
+                "Only the patients who completed the study",
+                "The entire group of interest",
+                "The researchers conducting the study",
+                "The data analysis software"
+            ],
+            answer: 1,
+            explanation:
+                "The population is the entire group about which the researcher wants to draw conclusions."
+        },
+
+        {
+            question: "What is a sample?",
+            options: [
+                "The entire population",
+                "A subset of the population",
+                "A sampling error",
+                "A statistical test"
+            ],
+            answer: 1,
+            explanation:
+                "A sample is a subset of the population selected for study."
+        },
+
+        {
+            question: "A clinic register containing all eligible patients is an example of a:",
+            options: [
+                "Sampling error",
+                "Sampling unit",
+                "Sampling frame",
+                "Population parameter"
+            ],
+            answer: 2,
+            explanation:
+                "A sampling frame is a list or description of the population elements from which a sample can be selected."
+        },
+
+        {
+            question: "In a study where individual patients are selected, each patient is a:",
+            options: [
+                "Sampling unit",
+                "Sampling frame",
+                "Population",
+                "Sampling error"
+            ],
+            answer: 0,
+            explanation:
+                "A sampling unit is the individual element or entity that can be selected during sampling."
+        },
+
+        {
+            question: "Sampling error is best described as:",
+            options: [
+                "An error caused by using a computer",
+                "The difference between a sample characteristic and the corresponding population characteristic",
+                "A mistake in entering a patient's name",
+                "The difference between two statistical tests"
+            ],
+            answer: 1,
+            explanation:
+                "Sampling error is the discrepancy between a characteristic observed in a sample and the corresponding characteristic in the population."
+        }
+
+    ];
+
+
+    let quizHTML = `
+        <div class="quiz-container">
+
+            <h2>📝 Module 1 Quiz</h2>
+
+            <p>
+                Answer all 10 questions. Each question carries
+                <strong>1 mark</strong>.
+            </p>
+
+            <form id="moduleQuizForm">
+    `;
+
+
+    questions.forEach((q, index) => {
+
+        quizHTML += `
+
+            <div class="quiz-question">
+
+                <h3>
+                    ${index + 1}. ${q.question}
+                </h3>
+
+        `;
+
+        q.options.forEach((option, optionIndex) => {
+
+            quizHTML += `
+
+                <label class="quiz-option">
+
+                    <input
+                        type="radio"
+                        name="question${index}"
+                        value="${optionIndex}"
+                        required
+                    >
+
+                    ${option}
+
+                </label>
+
+            `;
+
+        });
+
+        quizHTML += `
+
+            </div>
+
+        `;
+
+    });
+
+
+    quizHTML += `
+
+                <button
+                    type="submit"
+                    class="quiz-button">
+                    Submit Quiz
+                </button>
+
+            </form>
+
+            <div id="quizResult"></div>
+
+        </div>
+    `;
+
+
+    document.getElementById("learningNotes").insertAdjacentHTML(
+        "afterend",
+        quizHTML
+    );
+
+
+    document.getElementById("moduleQuizForm").addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+            const formData =
+                new FormData(event.target);
+
+            let score = 0;
+
+            questions.forEach((q, index) => {
+
+                const selected =
+                    Number(formData.get("question" + index));
+
+                if (selected === q.answer) {
+                    score++;
+                }
+
+            });
+
+
+            /* Save attempt */
+
+            attempts[0] = moduleAttempts + 1;
+
+            localStorage.setItem(
+                "moduleQuizAttempts",
+                JSON.stringify(attempts)
+            );
+
+
+            const result =
+                document.getElementById("quizResult");
+
+
+            result.innerHTML = `
+
+                <div class="quiz-result">
+
+                    <h2>
+                        Your Score: ${score}/10
+                    </h2>
+
+                    <p>
+                        Attempt ${moduleAttempts + 1} of 2
+                    </p>
+
+                    <p>
+                        ${score >= 5
+                            ? "Good work! Keep reviewing the material."
+                            : "Review the learning notes and try to strengthen your understanding."
+                        }
+                    </p>
+
+                </div>
+
+            `;
+
+
+            /* Disable the submitted quiz */
+
+            const inputs =
+                document.querySelectorAll(
+                    "#moduleQuizForm input"
+                );
+
+            inputs.forEach(input => {
+                input.disabled = true;
+            });
+
+
+            event.target.querySelector(
+                "button[type='submit']"
+            ).disabled = true;
+
+
+            /* Attempt 2 shows explanations */
+
+            if (moduleAttempts + 1 === 2) {
+
+                let reviewHTML = `
+                    <div class="quiz-review">
+
+                        <h3>📖 Correct Answers & Explanations</h3>
+                `;
+
+                questions.forEach((q, index) => {
+
+                    reviewHTML += `
+
+                        <div class="quiz-review-item">
+
+                            <strong>
+                                ${index + 1}. ${q.options[q.answer]}
+                            </strong>
+
+                            <p>
+                                ${q.explanation}
+                            </p>
+
+                        </div>
+
+                    `;
+
+                });
+
+                reviewHTML += </div>;
+
+                result.insertAdjacentHTML(
+                    "beforeend",
+                    reviewHTML
+                );
+
+            }
+
+        }
+    );
+
+}
 /* ================= FOOTER ================= */
 
 .footer {
@@ -880,7 +1411,149 @@ body {
             </div>
 
         </section>
+<!-- ================================================= -->
+<!-- MODULE LEARNING PAGE -->
+<!-- ================================================= -->
 
+<section id="moduleLearningPage" class="page">
+
+    <button class="back-button"
+            onclick="showPage('modulesPage')">
+        ← Back to Course Modules
+    </button>
+
+    <div class="module-learning-hero">
+
+        <div class="module-number" id="learningModuleNumber">
+            MODULE 01
+        </div>
+
+        <h1 id="learningModuleTitle">
+            Module Title
+        </h1>
+
+        <p id="learningModuleDescription">
+            Module description
+        </p>
+
+    </div>
+
+
+    <!-- LEARNING OBJECTIVES -->
+
+    <div class="learning-card">
+
+        <h2>🎯 Learning Objectives</h2>
+
+        <ul id="learningObjectives">
+        </ul>
+
+    </div>
+
+
+    <!-- LEARNING NOTES -->
+
+    <div class="learning-card">
+
+        <h2>📚 Learning Notes</h2>
+
+        <div id="learningNotes">
+
+            <p>
+                Learning notes for this module will appear here.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ADDITIONAL NOTES -->
+
+    <div class="learning-card additional-notes">
+
+        <h2>💡 Additional Clinical Notes</h2>
+
+        <div id="learningAdditionalNotes">
+
+        </div>
+
+    </div>
+
+
+    <!-- OFFICIAL PDF -->
+
+    <div class="learning-card pdf-card">
+
+        <h2>📄 Official Module Material</h2>
+
+        <p>
+            The complete official module material is available
+            in PDF format below. You may open it for further
+            reading and reference.
+        </p>
+
+        <button class="module-button"
+                id="learningPdfButton">
+            Open Official PDF →
+        </button>
+
+    </div>
+
+
+    <!-- MODULE COMPLETION -->
+
+    <div class="learning-card completion-card">
+
+        <h2>✓ Module Completion</h2>
+
+        <p>
+            After studying the learning notes and reviewing the
+            official module material, you may mark this module
+            as completed.
+        </p>
+
+        <button class="complete-button"
+                id="learningCompleteButton"
+                onclick="completeCurrentLearningModule()">
+            ✓ Mark Module as Completed
+        </button>
+
+    </div>
+
+
+    <!-- QUIZ -->
+
+    <div class="learning-card quiz-introduction">
+
+        <h2>📝 Module Quiz</h2>
+
+        <p>
+            Test your understanding of this module with
+            10 multiple-choice questions.
+        </p>
+
+        <div class="quiz-information">
+
+            <span>10 Questions</span>
+            <span>10 Marks</span>
+            <span>Maximum 2 Attempts</span>
+
+        </div>
+
+        <div id="learningQuizStatus">
+            Quiz not attempted yet.
+        </div>
+
+        <button class="quiz-button"
+                id="learningQuizButton"
+                onclick="startModuleQuiz()">
+            Take Module Quiz →
+        </button>
+
+    </div>
+
+</section>
 
         <!-- ================================================= -->
         <!-- ANNOUNCEMENTS PAGE -->
@@ -1578,48 +2251,844 @@ function getModuleStatus(module) {
    OPEN MODULE
    ============================================================ */
 
-function openModule(index) {
+let currentLearningModuleIndex = null;
+
+function openLearningModule(index) {
 
     const module = modules[index];
 
     if (!isModuleAvailable(module)) {
-
-        const releaseDate =
-            new Date(module.release);
-
-        alert(
-            "This module is not available yet.\n\n" +
-            "It will be released on " +
-            releaseDate.toLocaleString()
-        );
-
+        alert("This module is not yet available.");
         return;
-
     }
 
+    currentLearningModuleIndex = index;
 
-    if (
-        !module.file ||
-        module.file.indexOf("PLACEHOLDER") !== -1
-    ) {
+    document.getElementById("learningModuleNumber").textContent =
+        "MODULE " + String(index + 1).padStart(2, "0");
 
-        alert(
-            "This module is ready on the dashboard, but its exact PDF filename still needs to be connected."
-        );
+    document.getElementById("learningModuleTitle").textContent =
+        module.title;
 
-        return;
+    document.getElementById("learningModuleDescription").textContent =
+        module.description;
 
-    }
+    document.getElementById("learningObjectives").innerHTML = `
+        <li>Understand the key concepts covered in this module.</li>
+        <li>Apply the concepts to clinical and health-related examples.</li>
+        <li>Interpret statistical information relevant to clinical practice.</li>
+    `;
 
+    document.getElementById("learningNotes").innerHTML = `
+        <h3>Introduction</h3>
+        <p>${module.description}</p>
 
-    window.open(
-        module.file,
-        "_blank"
-    );
+        <h3>Key Learning Points</h3>
+        <p>${module.note}</p>
 
+        <p>
+            Read through the learning notes carefully and relate the
+            statistical concepts to clinical practice.
+        </p>
+    `;
+
+    document.getElementById("learningAdditionalNotes").innerHTML = `
+        <p>
+            <strong>Clinical connection:</strong>
+            Think about how the concepts in this module could be used
+            when collecting, analysing or interpreting clinical data.
+        </p>
+    `;
+
+    document.getElementById("learningPdfButton").onclick = function() {
+        openModulePDF(index);
+    };
+
+    updateLearningCompletionStatus(index);
+    updateLearningQuizStatus(index);
+
+    showPage("moduleLearningPage");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
 
 
+function openLearningModule(index) {
+
+    const module = modules[index];
+
+    if (!isModuleAvailable(module)) {
+        alert("This module is not yet available.");
+        return;
+    }
+
+    currentLearningModuleIndex = index;
+
+    document.getElementById("learningModuleNumber").textContent =
+        "MODULE " + String(index + 1).padStart(2, "0");
+
+    document.getElementById("learningModuleTitle").textContent =
+        module.title;
+
+    document.getElementById("learningModuleDescription").textContent =
+        module.description;
+
+
+    /* =========================================================
+       MODULE 1 — TYPES OF DATA ENCOUNTERED IN STATISTICAL
+       ANALYSIS / CLINICAL DATA
+       ========================================================= */
+
+    if (index === 0) {
+
+        document.getElementById("learningObjectives").innerHTML = `
+
+            <li>Explain the different types of data encountered in
+            clinical and health research.</li>
+
+            <li>Distinguish between qualitative and quantitative data.</li>
+
+            <li>Differentiate nominal, ordinal, interval and ratio
+            measurement scales.</li>
+
+            <li>Identify appropriate examples of each type of data
+            in clinical practice.</li>
+
+            <li>Explain the difference between a population and a sample.</li>
+
+            <li>Describe the meaning of sampling frame, sampling unit
+            and sampling error.</li>
+
+        `;
+
+
+        document.getElementById("learningNotes").innerHTML = `
+
+            <h3>1. Introduction to Clinical Data</h3>
+
+            <p>
+                Clinical research involves collecting information about
+                patients, diseases, treatments, laboratory measurements
+                and health outcomes. This information is referred to as
+                <strong>clinical data</strong>.
+            </p>
+
+            <p>
+                Understanding the type of data collected is important
+                because the type of data determines how the information
+                should be summarized, displayed and statistically analysed.
+            </p>
+
+
+            <h3>2. Qualitative and Quantitative Data</h3>
+
+            <p>
+                Data can broadly be classified into
+                <strong>qualitative</strong> and
+                <strong>quantitative</strong> data.
+            </p>
+
+            <p>
+                <strong>Qualitative data</strong> describe characteristics
+                or categories rather than numerical measurements.
+                Examples include sex, blood group, disease status and
+                treatment category.
+            </p>
+
+            <p>
+                <strong>Quantitative data</strong> are numerical and
+                represent quantities that can be measured or counted.
+                Examples include age, weight, height, blood pressure and
+                laboratory measurements.
+            </p>
+
+
+            <h3>3. Nominal Data</h3>
+
+            <p>
+                <strong>Nominal data</strong> consist of categories that
+                have no natural order or ranking.
+            </p>
+
+            <p>
+                Examples in clinical practice include:
+            </p>
+
+            <ul>
+                <li>Blood group: A, B, AB or O</li>
+                <li>Sex categories</li>
+                <li>HIV status: positive or negative</li>
+                <li>Type of treatment received</li>
+                <li>Marital status</li>
+            </ul>
+
+            <p>
+                Although numbers may sometimes be assigned to nominal
+                categories, the numbers are simply labels and do not
+                represent numerical quantities.
+            </p>
+
+
+            <h3>4. Ordinal Data</h3>
+
+            <p>
+                <strong>Ordinal data</strong> consist of categories that
+                have a meaningful order or ranking, but the distance
+                between categories is not necessarily equal.
+            </p>
+
+            <p>
+                Examples include:
+            </p>
+
+            <ul>
+                <li>Mild, moderate and severe disease</li>
+                <li>Low, medium and high risk</li>
+                <li>Stages of cancer</li>
+                <li>Patient satisfaction categories</li>
+            </ul>
+
+
+            <h3>5. Interval Data</h3>
+
+            <p>
+                <strong>Interval data</strong> are numerical data in which
+                the differences between values are meaningful and equally
+                spaced, but there is no true zero point.
+            </p>
+
+            <p>
+                Examples include temperature measured in
+                <strong>Celsius or Fahrenheit</strong>.
+            </p>
+
+            <p>
+                Calendar dates are another example of interval-type
+                measurements because the difference between dates is
+                meaningful, but zero does not represent the complete
+                absence of time.
+            </p>
+
+            <p>
+                Because there is no true zero, statements involving
+                meaningful ratios are not appropriate for interval data.
+            </p>
+
+
+            <h3>6. Ratio Data</h3>
+
+            <p>
+                <strong>Ratio data</strong> have all the properties of
+                interval data, but they also have a meaningful
+                <strong>true zero</strong>.
+            </p>
+
+            <p>
+                Examples in clinical research include:
+            </p>
+
+            <ul>
+                <li>Height</li>
+                <li>Weight</li>
+                <li>Blood pressure</li>
+                <li>Age</li>
+                <li>Laboratory enzyme activity</li>
+                <li>Duration of hospital stay</li>
+            </ul>
+
+            <p>
+                The presence of a true zero allows meaningful statements
+                about ratios. For example, a patient weighing 80 kg has
+                twice the mass of a patient weighing 40 kg.
+            </p>
+
+
+            <h3>7. Population and Sample</h3>
+
+            <p>
+                A <strong>population</strong> is the entire group of
+                individuals or observations that a researcher is
+                interested in studying.
+            </p>
+
+            <p>
+                A <strong>sample</strong> is a subset of the population
+                selected for the actual study.
+            </p>
+
+            <p>
+                For example, if a researcher wants to study all patients
+                receiving HIV care in a county, all eligible patients form
+                the population, while the patients selected for the study
+                form the sample.
+            </p>
+
+
+            <h3>8. Sampling Frame</h3>
+
+            <p>
+                A <strong>sampling frame</strong> is the list or description
+                of the population elements from which a sample can be
+                selected.
+            </p>
+
+            <p>
+                For example, a clinic register containing all eligible
+                patients may serve as a sampling frame for a clinical study.
+            </p>
+
+
+            <h3>9. Sampling Unit</h3>
+
+            <p>
+                A <strong>sampling unit</strong> is the individual element
+                or entity that can be selected during sampling.
+            </p>
+
+            <p>
+                Depending on the study, the sampling unit may be an
+                individual patient, household, clinic, community or other
+                defined entity.
+            </p>
+
+
+            <h3>10. Sampling Error</h3>
+
+            <p>
+                <strong>Sampling error</strong> is the difference between
+                a characteristic measured in a sample and the corresponding
+                characteristic in the population from which the sample was
+                selected.
+            </p>
+
+            <p>
+                Sampling error occurs because a sample does not necessarily
+                contain exactly the same characteristics as the entire
+                population.
+            </p>
+
+        `;
+
+
+        document.getElementById("learningAdditionalNotes").innerHTML = `
+
+            <p>
+                <strong>Clinical practice connection:</strong>
+                Before choosing a statistical test, first identify the
+                type of variable you are analysing. For example, blood
+                group is nominal, disease severity may be ordinal, while
+                weight and blood pressure are quantitative measurements.
+            </p>
+
+            <p>
+                <strong>Remember:</strong>
+                The measurement scale affects the statistical methods that
+                can appropriately be used to summarize and analyse clinical
+                data.
+            </p>
+
+            <p>
+                <strong>Exam tip:</strong>
+                When you see a clinical variable in an examination question,
+                ask yourself: Is it a category? Does it have an order?
+                Is the distance between values meaningful? Is there a true
+                zero?
+            </p>
+
+        `;
+
+    } else {
+
+        /* Temporary content for Modules 2–12 */
+
+        document.getElementById("learningObjectives").innerHTML = `
+
+            <li>Understand the key concepts covered in this module.</li>
+
+            <li>Apply the statistical concepts to clinical and
+            health-related examples.</li>
+
+            <li>Interpret statistical information relevant to
+            clinical practice.</li>
+
+        `;
+
+
+        document.getElementById("learningNotes").innerHTML = `
+
+            <h3>Introduction</h3>
+
+            <p>
+                ${module.description}
+            </p>
+
+            <h3>Key Learning Point</h3>
+
+            <p>
+                ${module.note}
+            </p>
+
+            <p>
+                The detailed learning notes for this module will be
+                added from the official course material.
+            </p>
+
+        `;
+
+
+        document.getElementById("learningAdditionalNotes").innerHTML = `
+
+            <p>
+                <strong>Clinical connection:</strong>
+                Consider how the concepts in this module can be applied
+                when collecting, analysing and interpreting clinical data.
+            </p>
+
+        `;
+
+    }
+
+
+    /* =========================================================
+       OFFICIAL PDF
+       ========================================================= */
+
+    document.getElementById("learningPdfButton").onclick = function() {
+
+        openModulePDF(index);
+
+    };
+
+
+    /* =========================================================
+       COMPLETION STATUS
+       ========================================================= */
+
+    updateLearningCompletionStatus(index);
+
+
+    /* =========================================================
+       QUIZ STATUS
+       ========================================================= */
+
+    updateLearningQuizStatus(index);
+
+
+    /* =========================================================
+       SHOW LEARNING PAGE
+       ========================================================= */
+
+    showPage("moduleLearningPage");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+function updateLearningCompletionStatus(index) {
+
+    const button = document.getElementById("learningCompleteButton");
+
+    const completed = getCompletedModules();
+
+    if (completed.includes(index)) {
+
+        button.textContent = "✓ Module Completed";
+        button.disabled = true;
+
+    } else {
+
+        button.textContent = "✓ Mark Module as Completed";
+        button.disabled = false;
+
+    }
+}
+
+
+function completeCurrentLearningModule() {
+
+    if (currentLearningModuleIndex === null) {
+        return;
+    }
+
+    toggleComplete(currentLearningModuleIndex);
+
+    updateLearningCompletionStatus(currentLearningModuleIndex);
+    updateCompletedList();
+    updateDashboard();
+}
+
+
+function updateLearningQuizStatus(index) {
+
+    const status = document.getElementById("learningQuizStatus");
+
+    status.textContent =
+        "Quiz not attempted yet. The 10-question quiz will be available here.";
+}
+
+
+function startModuleQuiz() {
+
+    if (currentLearningModuleIndex === null) {
+        return;
+    }
+
+    if (currentLearningModuleIndex !== 0) {
+        alert("The quiz for this module will be available soon.");
+        return;
+    }
+
+    const attempts =
+        JSON.parse(localStorage.getItem("moduleQuizAttempts") || "{}");
+
+    const moduleAttempts = attempts[0] || 0;
+
+    if (moduleAttempts >= 2) {
+        alert("You have already used the maximum 2 attempts for this module.");
+        return;
+    }
+
+    const questions = [
+
+        {
+            question: "Which of the following is an example of nominal data?",
+            options: [
+                "Blood group",
+                "Disease severity",
+                "Body temperature in Celsius",
+                "Weight"
+            ],
+            answer: 0,
+            explanation:
+                "Blood group is nominal because its categories have no natural order."
+        },
+
+        {
+            question: "Which type of data has categories with a meaningful order?",
+            options: [
+                "Nominal",
+                "Ordinal",
+                "Interval",
+                "Ratio"
+            ],
+            answer: 1,
+            explanation:
+                "Ordinal data have categories that can be ranked or ordered."
+        },
+
+        {
+            question: "Which of the following is an example of interval data?",
+            options: [
+                "Weight",
+                "Height",
+                "Temperature in Celsius",
+                "Blood group"
+            ],
+            answer: 2,
+            explanation:
+                "Celsius temperature is interval data because the intervals are meaningful but zero is not a true absence of temperature."
+        },
+
+        {
+            question: "Which measurement scale has a true zero?",
+            options: [
+                "Nominal",
+                "Ordinal",
+                "Interval",
+                "Ratio"
+            ],
+            answer: 3,
+            explanation:
+                "Ratio data have a meaningful true zero."
+        },
+
+        {
+            question: "Which of the following is an example of ratio data?",
+            options: [
+                "Blood group",
+                "Disease stage",
+                "Weight",
+                "Temperature in Celsius"
+            ],
+            answer: 2,
+            explanation:
+                "Weight is ratio data because it has a meaningful zero and ratios can be interpreted."
+        },
+
+        {
+            question: "What is a population in clinical research?",
+            options: [
+                "Only the patients who completed the study",
+                "The entire group of interest",
+                "The researchers conducting the study",
+                "The data analysis software"
+            ],
+            answer: 1,
+            explanation:
+                "The population is the entire group about which the researcher wants to draw conclusions."
+        },
+
+        {
+            question: "What is a sample?",
+            options: [
+                "The entire population",
+                "A subset of the population",
+                "A sampling error",
+                "A statistical test"
+            ],
+            answer: 1,
+            explanation:
+                "A sample is a subset of the population selected for study."
+        },
+
+        {
+            question: "A clinic register containing all eligible patients is an example of a:",
+            options: [
+                "Sampling error",
+                "Sampling unit",
+                "Sampling frame",
+                "Population parameter"
+            ],
+            answer: 2,
+            explanation:
+                "A sampling frame is a list or description of the population elements from which a sample can be selected."
+        },
+
+        {
+            question: "In a study where individual patients are selected, each patient is a:",
+            options: [
+                "Sampling unit",
+                "Sampling frame",
+                "Population",
+                "Sampling error"
+            ],
+            answer: 0,
+            explanation:
+                "A sampling unit is the individual element or entity that can be selected during sampling."
+        },
+
+        {
+            question: "Sampling error is best described as:",
+            options: [
+                "An error caused by using a computer",
+                "The difference between a sample characteristic and the corresponding population characteristic",
+                "A mistake in entering a patient's name",
+                "The difference between two statistical tests"
+            ],
+            answer: 1,
+            explanation:
+                "Sampling error is the discrepancy between a characteristic observed in a sample and the corresponding characteristic in the population."
+        }
+
+    ];
+
+
+    let quizHTML = `
+        <div class="quiz-container">
+
+            <h2>📝 Module 1 Quiz</h2>
+
+            <p>
+                Answer all 10 questions. Each question carries
+                <strong>1 mark</strong>.
+            </p>
+
+            <form id="moduleQuizForm">
+    `;
+
+
+    questions.forEach((q, index) => {
+
+        quizHTML += `
+
+            <div class="quiz-question">
+
+                <h3>
+                    ${index + 1}. ${q.question}
+                </h3>
+
+        `;
+
+        q.options.forEach((option, optionIndex) => {
+
+            quizHTML += `
+
+                <label class="quiz-option">
+
+                    <input
+                        type="radio"
+                        name="question${index}"
+                        value="${optionIndex}"
+                        required
+                    >
+
+                    ${option}
+
+                </label>
+
+            `;
+
+        });
+
+        quizHTML += `
+
+            </div>
+
+        `;
+
+    });
+
+
+    quizHTML += `
+
+                <button
+                    type="submit"
+                    class="quiz-button">
+                    Submit Quiz
+                </button>
+
+            </form>
+
+            <div id="quizResult"></div>
+
+        </div>
+    `;
+
+
+    document.getElementById("learningNotes").insertAdjacentHTML(
+        "afterend",
+        quizHTML
+    );
+
+
+    document.getElementById("moduleQuizForm").addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+            const formData =
+                new FormData(event.target);
+
+            let score = 0;
+
+            questions.forEach((q, index) => {
+
+                const selected =
+                    Number(formData.get("question" + index));
+
+                if (selected === q.answer) {
+                    score++;
+                }
+
+            });
+
+
+            /* Save attempt */
+
+            attempts[0] = moduleAttempts + 1;
+
+            localStorage.setItem(
+                "moduleQuizAttempts",
+                JSON.stringify(attempts)
+            );
+
+
+            const result =
+                document.getElementById("quizResult");
+
+
+            result.innerHTML = `
+
+                <div class="quiz-result">
+
+                    <h2>
+                        Your Score: ${score}/10
+                    </h2>
+
+                    <p>
+                        Attempt ${moduleAttempts + 1} of 2
+                    </p>
+
+                    <p>
+                        ${score >= 5
+                            ? "Good work! Keep reviewing the material."
+                            : "Review the learning notes and try to strengthen your understanding."
+                        }
+                    </p>
+
+                </div>
+
+            `;
+
+
+            /* Disable the submitted quiz */
+
+            const inputs =
+                document.querySelectorAll(
+                    "#moduleQuizForm input"
+                );
+
+            inputs.forEach(input => {
+                input.disabled = true;
+            });
+
+
+            event.target.querySelector(
+                "button[type='submit']"
+            ).disabled = true;
+
+
+            /* Attempt 2 shows explanations */
+
+            if (moduleAttempts + 1 === 2) {
+
+                let reviewHTML = `
+                    <div class="quiz-review">
+
+                        <h3>📖 Correct Answers & Explanations</h3>
+                `;
+
+                questions.forEach((q, index) => {
+
+                    reviewHTML += `
+
+                        <div class="quiz-review-item">
+
+                            <strong>
+                                ${index + 1}. ${q.options[q.answer]}
+                            </strong>
+
+                            <p>
+                                ${q.explanation}
+                            </p>
+
+                        </div>
+
+                    `;
+
+                });
+
+                reviewHTML += </div>;
+
+                result.insertAdjacentHTML(
+                    "beforeend",
+                    reviewHTML
+                );
+
+            }
+
+        }
+    );
+
+}
+}
 /* ============================================================
    MARK MODULE COMPLETE
    ============================================================ */
@@ -1707,7 +3176,7 @@ function createModuleCard(module, index) {
         buttonHTML = `
 
             <button class="module-button disabled"
-                    onclick="openModule(${index})">
+                    onclick="openLearningModule(${index})"
 
                 🔒 Locked
 

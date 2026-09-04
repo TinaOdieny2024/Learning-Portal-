@@ -839,6 +839,12 @@ body {
     }
 
 }
+
+.login-tabs { display:flex; gap:8px; margin:18px 0; }
+.login-tabs .login-role-button { flex:1; }
+.login-form select { width:100%; padding:11px 12px; border:1px solid #d1d5db; border-radius:7px; font-size:14px; background:#fff; margin-bottom:12px; }
+.login-form.hidden { display:none; }
+.login-note { font-size:12px; color:#6b7280; margin-top:12px; line-height:1.5; }
 </style>
 </head>
 
@@ -848,22 +854,42 @@ body {
 <div class="login-screen" id="loginScreen">
     <div class="login-card">
         <h1>Biostatistics Learning Portal</h1>
-        <p>Sign in to continue.</p>
+        <p>Student access</p>
 
-        <div class="login-role-buttons">
-            <button type="button" class="login-role-button active" id="studentRoleButton" onclick="selectLoginRole('student')">Student Login</button>
-            <button type="button" class="login-role-button" id="instructorRoleButton" onclick="selectLoginRole('instructor')">Instructor Login</button>
+        <div class="login-tabs">
+            <button type="button" class="login-role-button active" id="studentLoginTab" onclick="showStudentLogin()">Student Login</button>
+            <button type="button" class="login-role-button" id="studentRegisterTab" onclick="showStudentRegister()">Register for Unit</button>
         </div>
 
-        <form class="login-form" onsubmit="handleLogin(event)">
-            <label id="usernameLabel" for="loginUsername">Student ID / Name</label>
-            <input id="loginUsername" type="text" autocomplete="username" placeholder="Enter your Student ID or name" required>
+        <form class="login-form" id="studentLoginForm" onsubmit="handleStudentLogin(event)">
+            <label for="loginUsername">Registration Number</label>
+            <input id="loginUsername" type="text" autocomplete="username" placeholder="Enter your registration number" required>
 
             <label for="loginPassword">Password</label>
-            <input id="loginPassword" type="password" autocomplete="current-password" placeholder="Enter password" required>
+            <input id="loginPassword" type="password" autocomplete="current-password" placeholder="Enter your password" required>
 
             <button class="login-submit" type="submit">Sign In</button>
             <div class="login-message" id="loginMessage"></div>
+        </form>
+
+        <form class="login-form hidden" id="studentRegisterForm" onsubmit="handleStudentRegistration(event)">
+            <label for="registerName">Official Name</label>
+            <input id="registerName" type="text" autocomplete="name" placeholder="Enter your official name" required>
+
+            <label for="registerNumber">Registration Number</label>
+            <input id="registerNumber" type="text" placeholder="Enter your registration number" required>
+
+            <label for="registerCampus">Campus</label>
+            <input id="registerCampus" type="text" placeholder="Enter your campus" required>
+
+            <label for="registerPassword">Create Password</label>
+            <input id="registerPassword" type="password" autocomplete="new-password" placeholder="Create a password" minlength="6" required>
+
+            <label for="registerConfirmPassword">Confirm Password</label>
+            <input id="registerConfirmPassword" type="password" autocomplete="new-password" placeholder="Confirm your password" minlength="6" required>
+
+            <button class="login-submit" type="submit">Create Student Account</button>
+            <div class="login-message" id="registerMessage"></div>
         </form>
     </div>
 </div>
@@ -1956,70 +1982,97 @@ function closeSidebar() {
 
 const PORTAL_PAGE_ROLE = window.location.pathname.toLowerCase().endsWith("/teacher.html") ? "instructor" : "student";
 
-let selectedLoginRole = "student";
-
-/* Change these two passwords before publishing the portal.
-   This is classroom-level JavaScript access control only; it is
-   not secure authentication for confidential information. */
-const STUDENT_PASSWORD = "student2026";
-const INSTRUCTOR_USERNAME = "instructor";
-const INSTRUCTOR_PASSWORD = "instructor2026";
-
-function isInstructorSession() {
-    return localStorage.getItem("biostatisticsPortalRole") === "instructor";
+/* Student accounts are stored locally on the student's device because
+   this site is hosted on GitHub Pages and has no server/database. */
+function getStudentAccounts() {
+    try {
+        const data = JSON.parse(localStorage.getItem("biostatisticsStudentAccounts") || "{}");
+        return data && typeof data === "object" ? data : {};
+    } catch (error) {
+        return {};
+    }
 }
 
-function selectLoginRole(role) {
-    role = PORTAL_PAGE_ROLE;
-    selectedLoginRole = role;
+function saveStudentAccounts(accounts) {
+    localStorage.setItem("biostatisticsStudentAccounts", JSON.stringify(accounts));
+}
 
-    document.getElementById("studentRoleButton").classList.toggle("active", role === "student");
-    document.getElementById("instructorRoleButton").classList.toggle("active", role === "instructor");
+function normalizeRegistrationNumber(value) {
+    return value.trim().toUpperCase();
+}
 
-    const label = document.getElementById("usernameLabel");
-    const input = document.getElementById("loginUsername");
-
-    if (role === "instructor") {
-        label.textContent = "Instructor Username";
-        input.placeholder = "Enter instructor username";
-    } else {
-        label.textContent = "Student ID / Name";
-        input.placeholder = "Enter your Student ID or name";
-    }
-
+function showStudentLogin() {
+    document.getElementById("studentLoginTab").classList.add("active");
+    document.getElementById("studentRegisterTab").classList.remove("active");
+    document.getElementById("studentLoginForm").classList.remove("hidden");
+    document.getElementById("studentRegisterForm").classList.add("hidden");
     document.getElementById("loginMessage").textContent = "";
 }
 
-function handleLogin(event) {
+function showStudentRegister() {
+    document.getElementById("studentRegisterTab").classList.add("active");
+    document.getElementById("studentLoginTab").classList.remove("active");
+    document.getElementById("studentRegisterForm").classList.remove("hidden");
+    document.getElementById("studentLoginForm").classList.add("hidden");
+    document.getElementById("registerMessage").textContent = "";
+}
+
+function handleStudentRegistration(event) {
     event.preventDefault();
 
-    const username = document.getElementById("loginUsername").value.trim();
+    const name = document.getElementById("registerName").value.trim();
+    const regNo = normalizeRegistrationNumber(document.getElementById("registerNumber").value);
+    const campus = document.getElementById("registerCampus").value;
+    const password = document.getElementById("registerPassword").value;
+    const confirm = document.getElementById("registerConfirmPassword").value;
+    const message = document.getElementById("registerMessage");
+
+    if (name.length < 2) { message.textContent = "Please enter your official name."; return; }
+    if (!regNo) { message.textContent = "Please enter your registration number."; return; }
+    if (!campus) { message.textContent = "Please select your campus."; return; }
+    if (password.length < 6) { message.textContent = "Password must be at least 6 characters."; return; }
+    if (password !== confirm) { message.textContent = "The passwords do not match."; return; }
+
+    const accounts = getStudentAccounts();
+    if (accounts[regNo]) {
+        message.textContent = "This registration number is already registered on this device. Please log in.";
+        return;
+    }
+
+    accounts[regNo] = { name: name, registrationNumber: regNo, campus: campus, password: password, createdAt: new Date().toISOString() };
+    saveStudentAccounts(accounts);
+
+    document.getElementById("loginUsername").value = regNo;
+    document.getElementById("loginPassword").value = password;
+    message.textContent = "Registration successful. You can now log in.";
+    showStudentLogin();
+    document.getElementById("loginMessage").textContent = "Registration successful. Please sign in.";
+}
+
+function handleStudentLogin(event) {
+    event.preventDefault();
+    const regNo = normalizeRegistrationNumber(document.getElementById("loginUsername").value);
     const password = document.getElementById("loginPassword").value;
     const message = document.getElementById("loginMessage");
+    const accounts = getStudentAccounts();
+    const account = accounts[regNo];
 
-    if (selectedLoginRole !== PORTAL_PAGE_ROLE) {
-        selectedLoginRole = PORTAL_PAGE_ROLE;
+    if (!account || account.password !== password) {
+        message.textContent = "Registration number or password is incorrect. If you are new, use Register for Unit.";
+        return;
     }
 
-    if (selectedLoginRole === "instructor") {
-        if (username.toLowerCase() !== INSTRUCTOR_USERNAME || password !== INSTRUCTOR_PASSWORD) {
-            message.textContent = "Incorrect instructor username or password.";
-            return;
-        }
-
-        localStorage.setItem("biostatisticsPortalRole", "instructor");
-        localStorage.setItem("biostatisticsPortalUser", "Instructor");
-    } else {
-        if (!username || password !== STUDENT_PASSWORD) {
-            message.textContent = "Please check your Student ID/name and student password.";
-            return;
-        }
-
-        localStorage.setItem("biostatisticsPortalRole", "student");
-        localStorage.setItem("biostatisticsPortalUser", username);
-    }
-
+    localStorage.setItem("biostatisticsPortalRole", "student");
+    localStorage.setItem("biostatisticsPortalUser", account.name);
+    localStorage.setItem("biostatisticsStudentRegNo", account.registrationNumber);
+    localStorage.setItem("biostatisticsStudentCampus", account.campus);
     applyPortalSession();
+}
+
+function handleLogin(event) {
+    if (PORTAL_PAGE_ROLE === "student") {
+        handleStudentLogin(event);
+    }
 }
 
 function applyPortalSession() {
@@ -2027,14 +2080,12 @@ function applyPortalSession() {
     const user = localStorage.getItem("biostatisticsPortalUser") || "Clinical Medicine";
     const loginScreen = document.getElementById("loginScreen");
 
-    /* Each link has its own role. A student link cannot open instructor mode,
-       and the teacher link always requires the instructor credentials. */
     if (storedRole !== PORTAL_PAGE_ROLE) {
         localStorage.removeItem("biostatisticsPortalRole");
         localStorage.removeItem("biostatisticsPortalUser");
         document.body.classList.remove("instructor-mode");
         loginScreen.classList.remove("hidden");
-        selectLoginRole(PORTAL_PAGE_ROLE);
+        if (PORTAL_PAGE_ROLE === "student") showStudentLogin();
         return;
     }
 
@@ -2043,9 +2094,7 @@ function applyPortalSession() {
 
     const display = document.getElementById("userDisplay");
     if (display) {
-        display.textContent = PORTAL_PAGE_ROLE === "instructor"
-            ? "Instructor: " + user
-            : "Student: " + user;
+        display.textContent = PORTAL_PAGE_ROLE === "instructor" ? "Instructor: " + user : "Student: " + user;
     }
 
     renderModules();
@@ -2055,12 +2104,16 @@ function applyPortalSession() {
 function logoutPortal() {
     localStorage.removeItem("biostatisticsPortalRole");
     localStorage.removeItem("biostatisticsPortalUser");
+    localStorage.removeItem("biostatisticsStudentRegNo");
+    localStorage.removeItem("biostatisticsStudentCampus");
     document.body.classList.remove("instructor-mode");
-    document.getElementById("loginUsername").value = "";
-    document.getElementById("loginPassword").value = "";
+    const loginUsername = document.getElementById("loginUsername");
+    const loginPassword = document.getElementById("loginPassword");
+    if (loginUsername) loginUsername.value = "";
+    if (loginPassword) loginPassword.value = "";
     document.getElementById("loginMessage").textContent = "";
-    selectLoginRole("student");
     document.getElementById("loginScreen").classList.remove("hidden");
+    if (PORTAL_PAGE_ROLE === "student") showStudentLogin();
 }
 
 /* ============================================================
@@ -3461,21 +3514,12 @@ function updateCompletedList() {
 
 function initializePortal() {
 
-    /* Show only the login appropriate to the link being used. */
-    const studentButton = document.getElementById("studentRoleButton");
-    const instructorButton = document.getElementById("instructorRoleButton");
-    if (studentButton) studentButton.style.display = PORTAL_PAGE_ROLE === "student" ? "block" : "none";
-    if (instructorButton) instructorButton.style.display = PORTAL_PAGE_ROLE === "instructor" ? "block" : "none";
-
-    selectLoginRole(PORTAL_PAGE_ROLE);
-
     const loginIntro = document.querySelector("#loginScreen .login-card p");
     if (loginIntro) {
         loginIntro.textContent = PORTAL_PAGE_ROLE === "instructor"
             ? "Instructor access — all 12 modules are unlocked for teaching and review."
-            : "Student access — enter your Student ID/name and student password to continue.";
+            : "Register for the unit once, then use your registration number and password to log in.";
     }
-
     applyPortalSession();
 
 }

@@ -3350,31 +3350,22 @@ function updateDashboard() {
    CURRENT MODULE
    ============================================================ */
 
-function getNextModule() {
+function continueLearning() {
 
-    const completed =
-        getCompletedModules();
+    const next = getNextModule();
 
+    if (!next) {
 
-    for (
-        let i = 0;
-        i < modules.length;
-        i++
-    ) {
+        showPage("progressPage");
 
-        if (
-            !completed.includes(
-                modules[i].number
-            ) &&
-            isModuleAvailable(
-                modules[i]
-            )
-        ) {
+        return;
+    }
 
-            return modules[i];
+    const index = modules.indexOf(next);
 
-        }
+    openLearningModule(index);
 
+}
     }
 
 

@@ -1,421 +1,425 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Biostatistics | Clinical Medicine</title>
+<title>Biostatistics | Clinical Medicine</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f6f8;
-            color: #222;
-        }
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    color: #222;
+}
 
-        header {
-            background: #003b5c;
-            color: white;
-            padding: 25px;
-            text-align: center;
-        }
+/* SIDEBAR */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100vh;
+    background: #003b5c;
+    color: white;
+    padding: 25px 15px;
+    z-index: 1000;
+}
 
-        header h1 {
-            font-size: 28px;
-            margin-bottom: 8px;
-        }
+.sidebar .logo {
+    text-align: center;
+    padding-bottom: 25px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
 
-        header p {
-            font-size: 15px;
-        }
+.sidebar .logo h2 {
+    font-size: 20px;
+    margin-bottom: 6px;
+}
 
-        .container {
-            max-width: 1100px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
+.sidebar .logo p {
+    font-size: 12px;
+    opacity: 0.8;
+}
 
-        .welcome {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
+.nav {
+    margin-top: 25px;
+}
 
-        .welcome h2 {
-            color: #003b5c;
-            margin-bottom: 10px;
-        }
+.nav button {
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: white;
+    padding: 14px 15px;
+    margin-bottom: 6px;
+    text-align: left;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 15px;
+}
 
-        .modules {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
+.nav button:hover,
+.nav button.active {
+    background: #00577f;
+}
 
-        .module {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            transition: 0.2s;
-        }
+/* MAIN */
+.main {
+    margin-left: 250px;
+    min-height: 100vh;
+}
 
-        .module:hover {
-            transform: translateY(-3px);
-        }
+.topbar {
+    background: white;
+    padding: 18px 30px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        .module-number {
-            color: #003b5c;
-            font-weight: bold;
-            font-size: 14px;
-            margin-bottom: 8px;
-        }
+.topbar h1 {
+    color: #003b5c;
+    font-size: 22px;
+}
 
-        .module h3 {
-            margin-bottom: 10px;
-        }
+.menu-btn {
+    display: none;
+    background: #003b5c;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+}
 
-        .module p {
-            color: #666;
-            font-size: 14px;
-            line-height: 1.5;
-            margin-bottom: 15px;
-        }
+.content {
+    padding: 30px;
+    max-width: 1250px;
+}
 
-        .module a {
-            display: inline-block;
-            background: #003b5c;
-            color: white;
-            text-decoration: none;
-            padding: 10px 16px;
-            border-radius: 6px;
-            font-size: 14px;
-        }
+/* PAGES */
+.page {
+    display: none;
+}
 
-        .module a:hover {
-            background: #00577f;
-        }
+.page.active {
+    display: block;
+}
 
-        footer {
-            margin-top: 40px;
-            background: #003b5c;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            font-size: 13px;
-        }
-    </style>
+/* DASHBOARD */
+.hero {
+    background: linear-gradient(135deg, #003b5c, #00577f);
+    color: white;
+    padding: 35px;
+    border-radius: 14px;
+    margin-bottom: 25px;
+}
+
+.hero h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    line-height: 1.6;
+    opacity: 0.95;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    background: white;
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.stat-card h3 {
+    color: #003b5c;
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+
+.stat-card p {
+    color: #666;
+    font-size: 14px;
+}
+
+.section-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+}
+
+.section-card h2 {
+    color: #003b5c;
+    margin-bottom: 12px;
+}
+
+.section-card p {
+    line-height: 1.6;
+    color: #555;
+}
+
+/* PROGRESS */
+.progress-container {
+    margin-top: 18px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 14px;
+    background: #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 0%;
+    height: 100%;
+    background: #003b5c;
+    transition: width 0.3s;
+}
+
+.progress-text {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #666;
+}
+
+/* MODULES */
+.page-title {
+    margin-bottom: 10px;
+    color: #003b5c;
+    font-size: 28px;
+}
+
+.page-description {
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.modules {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.module {
+    background: white;
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: 0.2s;
+    position: relative;
+}
+
+.module:hover {
+    transform: translateY(-3px);
+}
+
+.module-number {
+    color: #00577f;
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.module h3 {
+    color: #222;
+    font-size: 18px;
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
+
+.module p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 18px;
+}
+
+.open-btn {
+    display: inline-block;
+    background: #003b5c;
+    color: white;
+    text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+}
+
+.open-btn:hover {
+    background: #00577f;
+}
+
+/* LOCKED MODULE */
+.locked {
+    opacity: 0.65;
+}
+
+.locked .open-btn {
+    background: #888;
+    cursor: not-allowed;
+}
+
+/* SCHEDULE */
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.schedule-table th,
+.schedule-table td {
+    padding: 14px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+.schedule-table th {
+    background: #003b5c;
+    color: white;
+}
+
+.schedule-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* ABOUT */
+.about-list {
+    margin-top: 15px;
+    padding-left: 20px;
+}
+
+.about-list li {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+/* MOBILE */
+@media (max-width: 800px) {
+
+    .sidebar {
+        transform: translateX(-100%);
+        transition: 0.3s;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .main {
+        margin-left: 0;
+    }
+
+    .menu-btn {
+        display: block;
+    }
+
+    .topbar {
+        padding: 15px 20px;
+    }
+
+    .topbar h1 {
+        font-size: 18px;
+    }
+
+    .content {
+        padding: 20px;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero h2 {
+        font-size: 23px;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .modules {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <!-- HEADER -->
-    <header>
-        <h1>Biostatistics for Clinical Medicine</h1>
-        <p>Online Learning Portal</p>
-    </header>
-
-
-    <!-- MAIN CONTENT -->
-    <div class="container">
-
-        <!-- WELCOME SECTION -->
-        <div class="welcome">
-            <h2>Course Content</h2>
-
-            <p>
-                Welcome to the Biostatistics course for Clinical Medicine.
-                Select a module below to access the learning materials.
-            </p>
-        </div>
-
-
-        <!-- MODULES -->
-        <div class="modules">
-
-
-            <!-- MODULE 01 -->
-            <div class="module">
-
-                <div class="module-number">
-                    MODULE 01
-                </div>
-
-                <h3>Types of Data</h3>
-
-                <p>
-                    Types of data encountered in statistical analysis
-                    and clinical research.
-                </p>
-
-                <a href="Module_01_ Types of Data Encountered in Statistical Analysis_-_Clinical_Data.pdf"
-   target="_blank">
-    Open Module
-</a>
-
-            </div>
-
-
-            <!-- MODULE 02 -->
-            <div class="module">
-
-                <div class="module-number">
-                    MODULE 02
-                </div>
-
-                <h3>Data Presentation</h3>
-
-                <p>
-                    Methods of organizing, presenting and summarizing
-                    clinical data.
-                </p>
-
-                <a href="modules/module-02/Module_02.pdf"
-                   target="_blank">
-                    Open Module
-                </a>
-
-            </div>
-
-
-            <!-- MODULE 03 -->
-            <div class="module">
-
-                <div class="module-number">
-                    MODULE 03
-                </div>
-
-                <h3>Measures of Central Tendency and Dispersion</h3>
-
-                <p>
-                    Mean, median, mode, range, variance, standard deviation
-                    and other measures.
-                </p>
-
-                <a href="modules/module-03/Module_03_Measures_of_Central_Tendency_Dispersion.pdf"
-                   target="_blank">
-                    Open Module
-                </a>
-
-            </div>
-
-
-            <!-- MODULE 04 -->
-            <div class="module">
-
-                <div class="module-number">
-                    MODULE 04
-                </div>
-
-                <h3>Probability and Probability Distributions</h3>
-
-                <p>
-                    Basic probability concepts and important probability
-                    distributions used in clinical research.
-                </p>
-
-                <a href="modules/module-04/Module_04_Probability_Probability_Distributions.pdf"
-                   target="_blank">
-                    Open Module
-                </a>
-
-            </div>
-
-
-            <!-- MODULE 05 -->
-            <div class="module">
-
-                <div class="module-number">
-                    MODULE 05
-                </div>
-
-                <h3>Sampling and Sampling Distributions</h3>
-
-                <p>
-                    Sampling methods, sampling distributions and their
-                    application in clinical studies.
-                </p>
-
-                <a href="modules/module-05/Module_05.pdf"
-                   target="_blank">
-                    Open Module
-                </a>
-
-            </div>
-
-
-            <!-- MODULE 06 -->
-            <div class="module">
-
-                <div class="module-number">
-                    MODULE 06
-                </div>
-
-                <h3>Estimation and Confidence Intervals</h3>
-
-                <p>
-                    Point estimation, confidence intervals and interpretation
-                    of estimates.
-                </p>
-
-                <a href="modules/module-06/Module_06.pdf"
-                   target="_blank">
-                    Open Module
-                </a>
-
-            </div>
-
-
-            <!-- MODULE 07 -->
-            <div class="module">
-
-                <div class="module-number">
-                    MODULE 07
-                </div>
-
-                <h3>Hypothesis Testing</h3>
-
-                <p>
-                    Principles of hypothesis testing, p-values and statistical
-                    decision making.
-                </p>
-
-                <a href="modules/module-07/Module_07.pdf"
-                   target="_blank">
-                    Open Module
-                </a>
-
-            </div>
-
-
-            <!-- MODULE 08 -->
-            <div class="module">
-
-                <div class="module-number">
-                    MODULE 08
-                </div>
-
-                <h3>Common Statistical Tests</h3>
-
-                <p>
-                    Statistical tests commonly used in clinical and health
-                    research.
-                </p>
-
-                <a href="modules/module-08/Module_08.pdf"
-                   target="_blank">
-                    Open Module
-                </a>
-
-            </div>
-
-
-            <!-- MODULE 09 -->
-            <div class="module">
-
-                <div class="module-number">
-                    MODULE 09
-                </div>
-
-                <h3>Analysis of Variance</h3>
-
-                <p>
-                    Analysis of variance and comparison of means across
-                    multiple groups.
-                </p>
-
-                <a href="modules/module-09/Module_09.pdf"
-                   target="_blank">
-                    Open Module
-                </a>
-
-            </div>
-
-
-            <!-- MODULE 10 -->
-            <div class="module">
-
-                <div class="module-number">
-                    MODULE 10
-                </div>
-
-                <h3>Correlation and Regression</h3>
-
-                <p>
-                    Exploring relationships between variables using
-                    correlation and regression methods.
-                </p>
-
-                <a href="modules/module-10/Module_10_Correlation_Regression.pdf"
-                   target="_blank">
-                    Open Module
-                </a>
-
-            </div>
-
-
-            <!-- MODULE 11 -->
-            <div class="module">
-
-                <div class="module-number">
-                    MODULE 11
-                </div>
-
-                <h3>Clinical Research Applications</h3>
-
-                <p>
-                    Application of statistical methods to clinical research
-                    questions and datasets.
-                </p>
-
-                <a href="modules/module-11/Module_11.pdf"
-                   target="_blank">
-                    Open Module
-                </a>
-
-            </div>
-
-
-            <!-- MODULE 12 -->
-            <div class="module">
-
-                <div class="module-number">
-                    MODULE 12
-                </div>
-
-                <h3>Statistical Analysis and Interpretation</h3>
-
-                <p>
-                    Statistical analysis, interpretation of results and
-                    reporting findings in clinical research.
-                </p>
-
-                <a href="modules/module-12/Module_12_Clinical_Research_Statistical_Analysis_Interpretation.pdf"
-                   target="_blank">
-                    Open Module
-                </a>
-
-            </div>
-
-
-        </div>
-
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+
+    <div class="logo">
+        <h2>Biostatistics</h2>
+        <p>Clinical Medicine</p>
     </div>
 
+    <nav class="nav">
 
-    <!-- FOOTER -->
-    <footer>
-        <p>Biostatistics for Clinical Medicine</p>
-        <p>Learning Portal</p>
-    </footer>
+        <button class="active" onclick="showPage('dashboard', this)">
+            🏠 Dashboard
+        </button>
 
-</body>
-</html
+        <button onclick="showPage('course', this)">
+            📚 Course Content
+        </button>
+
+        <button onclick="showPage('schedule', this)">
+            📅 Course Schedule
+        </button>
+
+        <button onclick="showPage('progress', this)">
+            📊 My Progress
+        </button>
+
+        <button onclick="showPage('about', this)">
+            ℹ️ About Course
+        </button>
+
+    </nav>
+
+</aside>
+
+
+<!-- MAIN -->
+<main class="main">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+
+        <button class="menu-btn" onclick="toggleSidebar()">
+            ☰
+        </button>
+
+        <h1>Biostatistics for Clinical Medicine</h1>
+
+        <span>12-Week Course</span>
+
+    </header>

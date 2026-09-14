@@ -1982,6 +1982,33 @@ function closeSidebar() {
 
 const PORTAL_PAGE_ROLE = window.location.pathname.toLowerCase().endsWith("/teacher.html") ? "instructor" : "student";
 
+/* ============================================================
+   SHARED GOOGLE SHEETS BACKEND
+   Replace these two placeholders after deploying Apps Script.
+   Do NOT put student passwords or Google credentials here.
+   ============================================================ */
+const PORTAL_BACKEND_URL = "https://script.google.com/macros/s/AKfycbwwQgS5okyB3HC6LKR7LmsuTpMDdRMFLvPiySazcaMzEmskbnvqzLvgxLEC8u1DnsKZ/exec";
+const PORTAL_API_KEY = "GLUK_CLINICALMEDBIOSTAT_2026_StudentRecords_7K9mQ4xP";
+
+async function syncPortalData(payload) {
+    if (!PORTAL_BACKEND_URL || PORTAL_BACKEND_URL.includes("PASTE_YOUR_")) {
+        return { ok: false, skipped: true };
+    }
+
+    try {
+        const response = await fetch(PORTAL_BACKEND_URL, {
+            method: "POST",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify({ ...payload, apiKey: PORTAL_API_KEY })
+        });
+        return await response.json();
+    } catch (error) {
+        console.warn("Portal sync failed:", error);
+        return { ok: false, error: String(error) };
+    }
+}
+
+
 /* Student accounts are stored locally on the student's device because
    this site is hosted on GitHub Pages and has no server/database. */
 function getStudentAccounts() {
@@ -2041,6 +2068,15 @@ function handleStudentRegistration(event) {
 
     accounts[regNo] = { name: name, registrationNumber: regNo, campus: campus, password: password, createdAt: new Date().toISOString() };
     saveStudentAccounts(accounts);
+
+    // Send registration details to the shared instructor records.
+    // The password is intentionally NOT included.
+    syncPortalData({
+        action: "register",
+        name: name,
+        registrationNumber: regNo,
+        campus: campus
+    });
 
     document.getElementById("loginUsername").value = regNo;
     document.getElementById("loginPassword").value = password;
@@ -3696,6 +3732,46 @@ function startModuleQuiz() {
                 "moduleQuizAttempts",
                 JSON.stringify(attempts)
             );
+
+            // Persist the student's result locally and send the mark to the
+            // shared Student Records backend. Passwords are never sent.
+            const studentRegNo = localStorage.getItem("biostatisticsStudentRegNo") || "";
+            const studentName = localStorage.getItem("biostatisticsPortalUser") || "";
+            const studentCampus = localStorage.getItem("biostatisticsStudentCampus") || "";
+            const percentage = Math.round((score / questions.length) * 100);
+
+            let quizResults = {};
+            try {
+                quizResults = JSON.parse(localStorage.getItem("biostatisticsQuizResults") || "{}");
+                if (!quizResults || typeof quizResults !== "object" || Array.isArray(quizResults)) quizResults = {};
+            } catch (error) {
+                quizResults = {};
+            }
+
+            const resultRegNo = String(studentRegNo).trim().toUpperCase();
+            if (resultRegNo) {
+                if (!quizResults[resultRegNo]) quizResults[resultRegNo] = {};
+                quizResults[resultRegNo]["module" + moduleNumber] = {
+                    score: score,
+                    total: questions.length,
+                    percentage: percentage,
+                    attempt: newAttempt,
+                    submittedAt: new Date().toISOString()
+                };
+                localStorage.setItem("biostatisticsQuizResults", JSON.stringify(quizResults));
+
+                syncPortalData({
+                    action: "quizResult",
+                    name: studentName,
+                    registrationNumber: resultRegNo,
+                    campus: studentCampus,
+                    moduleNumber: moduleNumber,
+                    score: score,
+                    total: questions.length,
+                    percentage: percentage,
+                    attempt: newAttempt
+                });
+            }
 
             const result = document.getElementById("quizResult");
 

@@ -2067,6 +2067,7 @@ function handleStudentLogin(event) {
     localStorage.setItem("biostatisticsStudentRegNo", account.registrationNumber);
     localStorage.setItem("biostatisticsStudentCampus", account.campus);
     applyPortalSession();
+    resetInactivityTimer();
 }
 
 function handleLogin(event) {
@@ -2104,6 +2105,10 @@ function applyPortalSession() {
 
     renderModules();
     updateDashboard();
+
+    if (PORTAL_PAGE_ROLE === "student") {
+        resetInactivityTimer();
+    }
 }
 
 function logoutPortal() {
@@ -4201,6 +4206,83 @@ function initializePortal() {
 
 }
 
+
+
+/* ============================================================
+   30-MINUTE INACTIVITY AUTO-LOGOUT
+   ============================================================ */
+
+const INACTIVITY_LIMIT = 30 * 60 * 1000; // 30 minutes
+let inactivityTimer = null;
+let lastActivityTime = Date.now();
+
+function resetInactivityTimer() {
+    if (localStorage.getItem("biostatisticsPortalRole") !== "student") {
+        return;
+    }
+
+    lastActivityTime = Date.now();
+
+    if (inactivityTimer) {
+        clearTimeout(inactivityTimer);
+    }
+
+    inactivityTimer = setTimeout(function () {
+        checkInactivityLogout();
+    }, INACTIVITY_LIMIT);
+}
+
+function checkInactivityLogout() {
+    if (localStorage.getItem("biostatisticsPortalRole") !== "student") {
+        return;
+    }
+
+    const inactiveFor = Date.now() - lastActivityTime;
+
+    if (inactiveFor >= INACTIVITY_LIMIT) {
+        logoutForInactivity();
+    } else {
+        if (inactivityTimer) {
+            clearTimeout(inactivityTimer);
+        }
+
+        inactivityTimer = setTimeout(
+            checkInactivityLogout,
+            INACTIVITY_LIMIT - inactiveFor
+        );
+    }
+}
+
+function logoutForInactivity() {
+    if (inactivityTimer) {
+        clearTimeout(inactivityTimer);
+        inactivityTimer = null;
+    }
+
+    logoutPortal();
+
+    const loginMessage = document.getElementById("loginMessage");
+
+    if (loginMessage) {
+        loginMessage.textContent =
+            "You have been logged out because there was no activity for 30 minutes. Please sign in again.";
+    }
+}
+
+/*
+   These events count as student activity. They are deliberately
+   limited to normal interaction events so the session remains
+   active while the student is actually using the portal.
+*/
+["click", "keydown", "mousemove", "scroll", "touchstart"].forEach(function (eventName) {
+    document.addEventListener(eventName, resetInactivityTimer, { passive: true });
+});
+
+/*
+   Also check periodically in case the browser delays a timeout
+   while the page is in the background.
+*/
+setInterval(checkInactivityLogout, 60000);
 
 /* ============================================================
    AUTOMATIC REFRESH

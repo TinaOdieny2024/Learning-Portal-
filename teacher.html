@@ -839,6 +839,108 @@ body {
     }
 
 }
+
+/* ================= STUDENT RECORDS ================= */
+.student-records-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+.student-records-toolbar input {
+    flex: 1 1 260px;
+    padding: 11px 13px;
+    border: 1px solid #d9dee7;
+    border-radius: 7px;
+    font-size: 13px;
+}
+.records-button {
+    padding: 10px 14px;
+    border: none;
+    border-radius: 7px;
+    background: #17365d;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 12px;
+}
+.records-button.secondary {
+    background: white;
+    color: #17365d;
+    border: 1px solid #d9dee7;
+}
+.records-button:hover {
+    background: #24578d;
+}
+.records-button.secondary:hover {
+    background: #f4f7fb;
+}
+.records-note {
+    background: #fff8e6;
+    border: 1px solid #ead79a;
+    color: #765b18;
+    border-radius: 9px;
+    padding: 13px 15px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+.records-table-wrap {
+    overflow-x: auto;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+}
+.records-table {
+    width: 100%;
+    min-width: 1050px;
+    border-collapse: collapse;
+}
+.records-table th,
+.records-table td {
+    padding: 11px 10px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+    font-size: 12px;
+    white-space: nowrap;
+}
+.records-table th {
+    background: #17365d;
+    color: white;
+    position: sticky;
+    top: 0;
+}
+.records-table tr:last-child td {
+    border-bottom: none;
+}
+.records-empty {
+    text-align: center;
+    padding: 35px 20px;
+    color: #6b7280;
+}
+.record-score {
+    font-weight: bold;
+    color: #17365d;
+}
+.record-complete {
+    color: #1f7a4d;
+    font-weight: bold;
+}
+.record-pending {
+    color: #777;
+}
+.records-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+@media (max-width: 800px) {
+    .records-summary {
+        grid-template-columns: 1fr;
+    }
+}
+
 </style>
 </head>
 
@@ -904,6 +1006,10 @@ body {
 
             <a onclick="showPage('announcementsPage', this)">
                 Announcements
+            </a>
+
+            <a class="instructor-only-nav" onclick="showPage('studentRecordsPage', this)">
+                Student Records
             </a>
 
         </div>
@@ -1162,6 +1268,91 @@ body {
 
         </section>
 
+
+
+        <!-- ================================================= -->
+        <!-- STUDENT RECORDS PAGE -->
+        <!-- ================================================= -->
+
+        <section id="studentRecordsPage" class="page instructor-only-page">
+
+            <h2 class="section-title">
+                Student Records & Results
+            </h2>
+
+            <div class="records-note">
+                <strong>Instructor record area:</strong>
+                This section displays student registration details and quiz
+                results that are available to this browser. Student passwords
+                are intentionally never displayed.
+                <br><br>
+                <strong>Important:</strong> because this portal is hosted on
+                GitHub Pages, records are currently browser-based. Students
+                using different devices will not automatically send their
+                records to this instructor browser until a shared database is
+                connected.
+            </div>
+
+            <div class="records-summary">
+                <div class="stat-card">
+                    <h4>Registered Students</h4>
+                    <div class="number" id="recordsStudentCount">0</div>
+                </div>
+                <div class="stat-card">
+                    <h4>Quiz Records</h4>
+                    <div class="number" id="recordsQuizCount">0</div>
+                </div>
+                <div class="stat-card">
+                    <h4>Students With Results</h4>
+                    <div class="number" id="recordsStudentsWithResults">0</div>
+                </div>
+            </div>
+
+            <div class="student-records-toolbar">
+                <input
+                    id="studentRecordsSearch"
+                    type="search"
+                    placeholder="Search by name, registration number or campus"
+                    oninput="renderStudentRecords()"
+                >
+                <button type="button" class="records-button"
+                        onclick="refreshStudentRecords()">
+                    Refresh Records
+                </button>
+                <button type="button" class="records-button secondary"
+                        onclick="exportStudentRecordsCSV()">
+                    Export CSV
+                </button>
+            </div>
+
+            <div class="records-table-wrap">
+                <table class="records-table">
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Registration No.</th>
+                            <th>Campus</th>
+                            <th>M1</th>
+                            <th>M2</th>
+                            <th>M3</th>
+                            <th>M4</th>
+                            <th>M5</th>
+                            <th>M6</th>
+                            <th>M7</th>
+                            <th>M8</th>
+                            <th>M9</th>
+                            <th>M10</th>
+                            <th>M11</th>
+                            <th>M12</th>
+                            <th>Overall</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentRecordsBody">
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
 
         <!-- ================================================= -->
         <!-- COURSE MODULES PAGE -->
@@ -1884,6 +2075,14 @@ const modules = [
 
 function showPage(pageId, clickedLink) {
 
+    if (pageId === "studentRecordsPage" && !isInstructorSession()) {
+        return;
+    }
+
+    if (pageId === "studentRecordsPage") {
+        setTimeout(renderStudentRecords, 0);
+    }
+
     const pages = document.querySelectorAll(".page");
 
     pages.forEach(function(page) {
@@ -1955,6 +2154,52 @@ function closeSidebar() {
    ============================================================ */
 
 const PORTAL_PAGE_ROLE = window.location.pathname.toLowerCase().endsWith("/teacher.html") ? "instructor" : "student";
+
+/* ============================================================
+   SHARED GOOGLE SHEETS BACKEND
+   Replace these placeholders after deploying Apps Script.
+   ============================================================ */
+const PORTAL_BACKEND_URL = "https://script.google.com/macros/s/AKfycbwwQgS5okyB3HC6LKR7LmsuTpMDdRMFLvPiySazcaMzEmskbnvqzLvgxLEC8u1DnsKZ/exec";
+const PORTAL_API_KEY = "GLUK_CLINICALMEDBIOSTAT_2026_StudentRecords_7K9mQ4xP";
+
+async function fetchSharedStudentRecords() {
+    if (!PORTAL_BACKEND_URL || PORTAL_BACKEND_URL.includes("PASTE_YOUR_")) {
+        return false;
+    }
+
+    try {
+        const url = PORTAL_BACKEND_URL + "?action=getRecords&apiKey=" + encodeURIComponent(PORTAL_API_KEY);
+        const response = await fetch(url, { method: "GET" });
+        const payload = await response.json();
+
+        if (!payload || !payload.ok || !payload.data) return false;
+
+        const students = payload.data.students || [];
+        const results = payload.data.results || {};
+
+        const accounts = {};
+        students.forEach(function(student) {
+            const reg = String(student.registrationNumber || "").trim().toUpperCase();
+            if (!reg) return;
+            accounts[reg] = {
+                name: student.name || "",
+                registrationNumber: reg,
+                campus: student.campus || "",
+                createdAt: student.createdAt || "",
+                lastSeen: student.lastSeen || ""
+            };
+        });
+
+        localStorage.setItem("biostatisticsStudentAccounts", JSON.stringify(accounts));
+        localStorage.setItem("biostatisticsQuizResults", JSON.stringify(results));
+        renderStudentRecords();
+        return true;
+    } catch (error) {
+        console.warn("Unable to load shared Student Records:", error);
+        return false;
+    }
+}
+
 
 let selectedLoginRole = "student";
 
@@ -4107,6 +4352,343 @@ function updateCompletedList() {
 }
 
 
+
+/* ============================================================
+   STUDENT RECORDS / RESULTS
+   ============================================================ */
+
+function getInstructorStudentAccounts() {
+    try {
+        const data = JSON.parse(
+            localStorage.getItem("biostatisticsStudentAccounts") || "{}"
+        );
+        return data && typeof data === "object" ? data : {};
+    } catch (error) {
+        return {};
+    }
+}
+
+function getInstructorQuizResults() {
+    try {
+        const data = JSON.parse(
+            localStorage.getItem("biostatisticsQuizResults") || "{}"
+        );
+        return data && typeof data === "object" ? data : {};
+    } catch (error) {
+        return {};
+    }
+}
+
+function getRecordForStudent(results, regNo) {
+    if (!results || !regNo) return {};
+    return results[regNo] || results[String(regNo).toUpperCase()] || {};
+}
+
+function getModuleScore(record, moduleNumber) {
+    if (!record || typeof record !== "object") return null;
+
+    const candidates = [
+        record["module" + moduleNumber],
+        record["Module " + moduleNumber],
+        record[moduleNumber],
+        record[String(moduleNumber)]
+    ];
+
+    for (const value of candidates) {
+        if (value !== undefined && value !== null && value !== "") {
+            if (typeof value === "object" && value.score !== undefined) {
+                return value.score;
+            }
+            return value;
+        }
+    }
+
+    if (record.scores && typeof record.scores === "object") {
+        const value =
+            record.scores[moduleNumber] ??
+            record.scores[String(moduleNumber)] ??
+            record.scores["module" + moduleNumber];
+
+        if (value !== undefined && value !== null && value !== "") {
+            if (typeof value === "object" && value.score !== undefined) {
+                return value.score;
+            }
+            return value;
+        }
+    }
+
+    return null;
+}
+
+function formatRecordScore(value) {
+    if (value === null || value === undefined || value === "") {
+        return '<span class="record-pending">—</span>';
+    }
+
+    if (typeof value === "object" && value.score !== undefined) {
+        value = value.score;
+    }
+
+    return '<span class="record-score">' +
+        String(value) +
+        '</span>';
+}
+
+function calculateOverallScore(record) {
+    const scores = [];
+
+    for (let i = 1; i <= 12; i++) {
+        const value = getModuleScore(record, i);
+
+        if (value !== null && value !== undefined && value !== "") {
+            const numeric = Number(value);
+            if (!Number.isNaN(numeric)) {
+                scores.push(numeric);
+            }
+        }
+    }
+
+    if (!scores.length) return null;
+
+    const total = scores.reduce((sum, value) => sum + value, 0);
+    return Math.round((total / scores.length) * 10) / 10;
+}
+
+async function refreshStudentRecords() {
+    const loaded = await fetchSharedStudentRecords();
+    if (!loaded) renderStudentRecords();
+}
+
+function renderStudentRecords() {
+
+    if (!isInstructorSession()) {
+        return;
+    }
+
+    const accounts = getInstructorStudentAccounts();
+    const results = getInstructorQuizResults();
+    const searchInput = document.getElementById("studentRecordsSearch");
+    const search = searchInput
+        ? searchInput.value.trim().toLowerCase()
+        : "";
+
+    const body = document.getElementById("studentRecordsBody");
+
+    if (!body) return;
+
+    const students = Object.keys(accounts)
+        .map(function(regNo) {
+            return accounts[regNo];
+        })
+        .filter(function(account) {
+            return account && typeof account === "object";
+        })
+        .filter(function(account) {
+
+            if (!search) return true;
+
+            return [
+                account.name,
+                account.registrationNumber,
+                account.campus
+            ].join(" ").toLowerCase().includes(search);
+
+        })
+        .sort(function(a, b) {
+            return String(a.name || "").localeCompare(
+                String(b.name || "")
+            );
+        });
+
+    let quizRecordCount = 0;
+    let studentsWithResults = 0;
+
+    Object.keys(results).forEach(function(regNo) {
+        const record = getRecordForStudent(results, regNo);
+
+        for (let i = 1; i <= 12; i++) {
+            if (getModuleScore(record, i) !== null) {
+                quizRecordCount++;
+            }
+        }
+    });
+
+    students.forEach(function(account) {
+        const regNo = String(
+            account.registrationNumber || ""
+        ).toUpperCase();
+
+        const record = getRecordForStudent(results, regNo);
+        let hasResult = false;
+
+        for (let i = 1; i <= 12; i++) {
+            if (getModuleScore(record, i) !== null) {
+                hasResult = true;
+                break;
+            }
+        }
+
+        if (hasResult) studentsWithResults++;
+    });
+
+    const totalRegistered = Object.keys(accounts).length;
+
+    const countElement =
+        document.getElementById("recordsStudentCount");
+
+    const quizCountElement =
+        document.getElementById("recordsQuizCount");
+
+    const resultCountElement =
+        document.getElementById("recordsStudentsWithResults");
+
+    if (countElement) countElement.textContent = totalRegistered;
+    if (quizCountElement) quizCountElement.textContent = quizRecordCount;
+    if (resultCountElement) resultCountElement.textContent = studentsWithResults;
+
+    if (!students.length) {
+        body.innerHTML = `
+            <tr>
+                <td colspan="16" class="records-empty">
+                    No student records are available on this browser.
+                </td>
+            </tr>
+        `;
+        return;
+    }
+
+    body.innerHTML = students.map(function(account) {
+
+        const regNo = String(
+            account.registrationNumber || ""
+        ).toUpperCase();
+
+        const record = getRecordForStudent(results, regNo);
+
+        let cells = `
+            <td>${escapeRecordHTML(account.name || "—")}</td>
+            <td>${escapeRecordHTML(regNo || "—")}</td>
+            <td>${escapeRecordHTML(account.campus || "—")}</td>
+        `;
+
+        for (let i = 1; i <= 12; i++) {
+            cells += `<td>${formatRecordScore(
+                getModuleScore(record, i)
+            )}</td>`;
+        }
+
+        const overall = calculateOverallScore(record);
+
+        cells += `
+            <td>
+                ${
+                    overall === null
+                        ? '<span class="record-pending">—</span>'
+                        : '<span class="record-score">' + overall + '%</span>'
+                }
+            </td>
+        `;
+
+        return `<tr>${cells}</tr>`;
+
+    }).join("");
+}
+
+function escapeRecordHTML(value) {
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+function exportStudentRecordsCSV() {
+
+    if (!isInstructorSession()) {
+        alert("Instructor access is required.");
+        return;
+    }
+
+    const accounts = getInstructorStudentAccounts();
+    const results = getInstructorQuizResults();
+
+    const rows = [];
+
+    rows.push([
+        "Student Name",
+        "Registration No.",
+        "Campus",
+        "Module 1",
+        "Module 2",
+        "Module 3",
+        "Module 4",
+        "Module 5",
+        "Module 6",
+        "Module 7",
+        "Module 8",
+        "Module 9",
+        "Module 10",
+        "Module 11",
+        "Module 12",
+        "Overall"
+    ]);
+
+    Object.keys(accounts).forEach(function(regNo) {
+
+        const account = accounts[regNo] || {};
+        const normalizedRegNo =
+            String(account.registrationNumber || regNo).toUpperCase();
+
+        const record =
+            getRecordForStudent(results, normalizedRegNo);
+
+        const row = [
+            account.name || "",
+            normalizedRegNo,
+            account.campus || ""
+        ];
+
+        for (let i = 1; i <= 12; i++) {
+            let value = getModuleScore(record, i);
+            if (value && typeof value === "object" && value.score !== undefined) {
+                value = value.score;
+            }
+            row.push(
+                value === null || value === undefined ? "" : value
+            );
+        }
+
+        const overall = calculateOverallScore(record);
+        row.push(overall === null ? "" : overall + "%");
+
+        rows.push(row);
+    });
+
+    const csv = rows.map(function(row) {
+        return row.map(function(value) {
+            return '"' + String(value)
+                .replace(/"/g, '""') + '"';
+        }).join(",");
+    }).join("\r\n");
+
+    const blob = new Blob(
+        [csv],
+        { type: "text/csv;charset=utf-8;" }
+    );
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = "biostatistics_student_records.csv";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    URL.revokeObjectURL(url);
+}
+
 /* ============================================================
    INITIALIZE
    ============================================================ */
@@ -4129,6 +4711,10 @@ function initializePortal() {
     }
 
     applyPortalSession();
+
+    if (PORTAL_PAGE_ROLE === "instructor" && isInstructorSession()) {
+        renderStudentRecords();
+    }
 
 }
 

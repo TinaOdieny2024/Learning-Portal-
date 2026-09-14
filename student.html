@@ -4085,19 +4085,41 @@ function updateCurrentModule() {
 function continueLearning() {
 
     /*
-     * Continue Learning should take the student to the
-     * Modules page and show the modules that are currently
-     * released. The existing release dates and locked-module
-     * rules are not changed.
+     * Open the first released module that the student has
+     * not yet completed.
+     *
+     * If all released modules are already completed, open
+     * the latest released module for review.
      */
-    showPage("modulesPage");
+    const completed = getCompletedModules();
 
-    /*
-     * Refresh the module cards so the current release status
-     * is displayed correctly.
-     */
-    renderModules();
+    let nextAvailableIndex = -1;
 
+    for (let i = 0; i < modules.length; i++) {
+        if (
+            isModuleAvailable(modules[i]) &&
+            !completed.includes(modules[i].number)
+        ) {
+            nextAvailableIndex = i;
+            break;
+        }
+    }
+
+    if (nextAvailableIndex === -1) {
+        for (let i = modules.length - 1; i >= 0; i--) {
+            if (isModuleAvailable(modules[i])) {
+                nextAvailableIndex = i;
+                break;
+            }
+        }
+    }
+
+    if (nextAvailableIndex === -1) {
+        alert("No module has been released yet.");
+        return;
+    }
+
+    openLearningModule(nextAvailableIndex);
 }
 
 

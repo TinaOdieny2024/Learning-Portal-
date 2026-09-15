@@ -1282,15 +1282,15 @@ body {
 
             <div class="records-note">
                 <strong>Instructor record area:</strong>
-                This section displays student registration details and quiz
-                results that are available to this browser. Student passwords
-                are intentionally never displayed.
+                This section displays student registration details, module
+                completion and quiz results received through the shared
+                Google Sheets backend. Student passwords are intentionally
+                never displayed.
                 <br><br>
-                <strong>Important:</strong> because this portal is hosted on
-                GitHub Pages, records are currently browser-based. Students
-                using different devices will not automatically send their
-                records to this instructor browser until a shared database is
-                connected.
+                <strong>Module display:</strong> ✓ means the student marked
+                the module as completed. A percentage shows the quiz result.
+                When both are available, the cell shows both (for example,
+                ✓ 80%).
             </div>
 
             <div class="records-summary">
@@ -2176,6 +2176,7 @@ async function fetchSharedStudentRecords() {
 
         const students = payload.data.students || [];
         const results = payload.data.results || {};
+        const progress = payload.data.progress || [];
 
         const accounts = {};
         students.forEach(function(student) {
@@ -2192,6 +2193,7 @@ async function fetchSharedStudentRecords() {
 
         localStorage.setItem("biostatisticsStudentAccounts", JSON.stringify(accounts));
         localStorage.setItem("biostatisticsQuizResults", JSON.stringify(results));
+        localStorage.setItem("biostatisticsStudentProgress", JSON.stringify(progress));
         renderStudentRecords();
         return true;
     } catch (error) {
@@ -4379,6 +4381,89 @@ function getInstructorQuizResults() {
     }
 }
 
+function getInstructorProgress() {
+    try {
+        const data = JSON.parse(
+            localStorage.getItem("biostatisticsStudentProgress") || "[]"
+        );
+        return data && typeof data === "object" ? data : [];
+    } catch (error) {
+        return [];
+    }
+}
+
+function getProgressForStudent(progress, regNo) {
+    const normalized = String(regNo || "").trim().toUpperCase();
+    if (!progress || !normalized) return [];
+
+    /* New shared Progress sheet format: an array of rows. */
+    if (Array.isArray(progress)) {
+        return progress.filter(function(item) {
+            if (!item || typeof item !== "object") return false;
+            const itemReg = String(
+                item.registrationNumber ||
+                item["Registration No."] ||
+                item.registrationNo ||
+                ""
+            ).trim().toUpperCase();
+            return itemReg === normalized;
+        });
+    }
+
+    /* Also support an object keyed by registration number. */
+    const value =
+        progress[normalized] ||
+        progress[String(regNo || "")] ||
+        progress[String(regNo || "").toUpperCase()];
+
+    if (Array.isArray(value)) return value;
+    if (value && typeof value === "object") return [value];
+
+    return [];
+}
+
+function isModuleCompleted(progressRows, moduleNumber) {
+    if (!Array.isArray(progressRows)) return false;
+
+    return progressRows.some(function(item) {
+        if (!item || typeof item !== "object") return false;
+
+        const itemModule = Number(
+            item.moduleNumber ||
+            item.Module ||
+            item["Module"] ||
+            item.module ||
+            item["Module Number"]
+        );
+
+        if (itemModule !== Number(moduleNumber)) return false;
+
+        const completed = item.completed ?? item.Completed;
+
+        return completed === true ||
+               String(completed).trim().toLowerCase() === "true" ||
+               String(completed).trim().toLowerCase() === "yes" ||
+               String(completed).trim() === "1";
+    });
+}
+
+function formatModuleRecord(score, completed) {
+    if (completed && score !== null && score !== undefined && score !== "") {
+        return '<span class="record-complete">✓</span> ' +
+               '<span class="record-score">' + String(score) + '%</span>';
+    }
+
+    if (completed) {
+        return '<span class="record-complete">✓</span>';
+    }
+
+    if (score !== null && score !== undefined && score !== "") {
+        return '<span class="record-score">' + String(score) + '%</span>';
+    }
+
+    return '<span class="record-pending">—</span>';
+}
+
 function getRecordForStudent(results, regNo) {
     if (!results || !regNo) return {};
     return results[regNo] || results[String(regNo).toUpperCase()] || {};
@@ -4467,6 +4552,7 @@ function renderStudentRecords() {
 
     const accounts = getInstructorStudentAccounts();
     const results = getInstructorQuizResults();
+    const progress = getInstructorProgress();
     const searchInput = document.getElementById("studentRecordsSearch");
     const search = searchInput
         ? searchInput.value.trim().toLowerCase()
@@ -4550,7 +4636,7 @@ function renderStudentRecords() {
         body.innerHTML = `
             <tr>
                 <td colspan="16" class="records-empty">
-                    No student records are available on this browser.
+                    No student records are currently available from the shared records source.
                 </td>
             </tr>
         `;
@@ -4564,6 +4650,7 @@ function renderStudentRecords() {
         ).toUpperCase();
 
         const record = getRecordForStudent(results, regNo);
+        const progressRows = getProgressForStudent(progress, regNo);
 
         let cells = `
             <td>${escapeRecordHTML(account.name || "—")}</td>
@@ -4572,9 +4659,10 @@ function renderStudentRecords() {
         `;
 
         for (let i = 1; i <= 12; i++) {
-            cells += `<td>${formatRecordScore(
-                getModuleScore(record, i)
-            )}</td>`;
+            const score = getModuleScore(record, i);
+            const completed = isModuleCompleted(progressRows, i);
+
+            cells += `<td>${formatModuleRecord(score, completed)}</td>`;
         }
 
         const overall = calculateOverallScore(record);
@@ -4612,6 +4700,7 @@ function exportStudentRecordsCSV() {
 
     const accounts = getInstructorStudentAccounts();
     const results = getInstructorQuizResults();
+    const progress = getInstructorProgress();
 
     const rows = [];
 
@@ -4642,6 +4731,8 @@ function exportStudentRecordsCSV() {
 
         const record =
             getRecordForStudent(results, normalizedRegNo);
+        const progressRows =
+            getProgressForStudent(progress, normalizedRegNo);
 
         const row = [
             account.name || "",
@@ -4654,9 +4745,18 @@ function exportStudentRecordsCSV() {
             if (value && typeof value === "object" && value.score !== undefined) {
                 value = value.score;
             }
-            row.push(
-                value === null || value === undefined ? "" : value
-            );
+
+            const completed = isModuleCompleted(progressRows, i);
+
+            if (completed && value !== null && value !== undefined && value !== "") {
+                row.push("✓ " + value + "%");
+            } else if (completed) {
+                row.push("✓");
+            } else if (value !== null && value !== undefined && value !== "") {
+                row.push(value + "%");
+            } else {
+                row.push("");
+            }
         }
 
         const overall = calculateOverallScore(record);
@@ -4714,6 +4814,7 @@ function initializePortal() {
 
     if (PORTAL_PAGE_ROLE === "instructor" && isInstructorSession()) {
         renderStudentRecords();
+        fetchSharedStudentRecords();
     }
 
 }

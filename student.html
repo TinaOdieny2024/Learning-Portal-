@@ -3831,50 +3831,55 @@ function toggleComplete(index) {
     const module = modules[index];
 
     if (!isModuleAvailable(module)) {
-
-        alert(
-            "This module is still locked."
-        );
-
+        alert("This module is still locked.");
         return;
-
     }
-
 
     let completed = getCompletedModules();
 
-
     if (completed.includes(module.number)) {
-
-        completed =
-            completed.filter(
-                function(number) {
-                    return number !== module.number;
-                }
-            );
-
+        completed = completed.filter(function(number) {
+            return number !== module.number;
+        });
     } else {
-
         completed.push(module.number);
-
     }
-
 
     completed.sort(function(a, b) {
         return a - b;
     });
 
-
+    // Save locally
     saveCompletedModules(completed);
 
-    renderModules();
+    // Send completion status to Google Sheets
+    const studentRegNo =
+        localStorage.getItem("biostatisticsStudentRegNo") || "";
 
+    const studentName =
+        localStorage.getItem("biostatisticsPortalUser") || "";
+
+    const studentCampus =
+        localStorage.getItem("biostatisticsStudentCampus") || "";
+
+    if (studentRegNo) {
+        syncPortalData({
+            action: "progress",
+            name: studentName,
+            registrationNumber: studentRegNo,
+            campus: studentCampus,
+            moduleNumber: module.number,
+            completed: completed.includes(module.number)
+        });
+    }
+
+    // Refresh the student interface
+    renderModules();
     updateDashboard();
 
     if (currentLearningModuleIndex !== null) {
         updateLearningCompletionStatus(currentLearningModuleIndex);
     }
-
 }
 
 

@@ -3921,9 +3921,10 @@ function startModuleQuiz() {
 
     document.getElementById("moduleQuizForm").addEventListener(
         "submit",
-        function(event) {
+        async function(event) {
 
             event.preventDefault();
+            window.__lastQuizSyncResponse = null;
 
             const formData = new FormData(event.target);
             let score = 0;
@@ -3972,7 +3973,7 @@ function startModuleQuiz() {
                 };
                 localStorage.setItem("biostatisticsQuizResults", JSON.stringify(quizResults));
 
-                syncPortalData({
+                const syncResponse = await syncPortalData({
                     action: "quizResult",
                     name: studentName,
                     registrationNumber: resultRegNo,
@@ -3983,14 +3984,31 @@ function startModuleQuiz() {
                     percentage: percentage,
                     attempt: newAttempt
                 });
+
+                quizResults[resultRegNo]["module" + moduleNumber].synced =
+                    !!(syncResponse && syncResponse.ok === true);
+                quizResults[resultRegNo]["module" + moduleNumber].syncError =
+                    syncResponse && syncResponse.ok !== true
+                        ? (syncResponse.error || "Score could not be saved to the class record.")
+                        : "";
+                localStorage.setItem("biostatisticsQuizResults", JSON.stringify(quizResults));
+
+                window.__lastQuizSyncResponse = syncResponse;
             }
 
             const result = document.getElementById("quizResult");
+            const syncResponse = window.__lastQuizSyncResponse || null;
+            const syncMessage = syncResponse && syncResponse.ok === true
+                ? '<p style="margin-top:10px;color:#1f7a4d;font-weight:bold;">✓ Score saved to the class record.</p>'
+                : '<p style="margin-top:10px;color:#b42318;font-weight:bold;">⚠ Your score is saved on this device, but it was not saved to the class record. ' +
+                  ((syncResponse && syncResponse.error) ? syncResponse.error : 'Please sign in again or contact the instructor.') +
+                  '</p>';
 
             result.innerHTML = `
                 <div class="quiz-result">
                     <h2>Your Score: ${score}/${questions.length}</h2>
                     <p>Attempt ${newAttempt} of 2</p>
+                    ${syncMessage}
                     <p>
                         ${score >= Math.ceil(questions.length * 0.5)
                             ? "Good work! Keep reviewing the material."

@@ -2009,6 +2009,86 @@ async function syncPortalData(payload) {
 }
 
 
+/* Re-sync quiz results already saved on this student's device.
+   This repairs results that were completed before the shared backend sync
+   was working, without forcing the student to retake the quiz. */
+async function syncSavedQuizResults() {
+    try {
+        const regNo = String(
+            localStorage.getItem("biostatisticsStudentRegNo") || ""
+        ).trim().toUpperCase();
+
+        const name = localStorage.getItem("biostatisticsPortalUser") || "";
+        const campus = localStorage.getItem("biostatisticsStudentCampus") || "";
+
+        if (!regNo || !name || !campus) return;
+
+        let allResults = {};
+        try {
+            allResults = JSON.parse(
+                localStorage.getItem("biostatisticsQuizResults") || "{}"
+            );
+        } catch (error) {
+            allResults = {};
+        }
+
+        const studentResults = allResults[regNo] || {};
+        const moduleKeys = Object.keys(studentResults);
+
+        for (const key of moduleKeys) {
+            const match = String(key).match(/^module(\d+)$/i);
+            if (!match) continue;
+
+            const moduleNumber = Number(match[1]);
+            const result = studentResults[key];
+
+            if (!result || typeof result !== "object") continue;
+
+            const score = Number(result.score);
+            const total = Number(result.total);
+            const percentage = Number(result.percentage);
+            const attempt = Number(result.attempt);
+
+            if (
+                !Number.isInteger(moduleNumber) ||
+                moduleNumber < 1 ||
+                moduleNumber > 12 ||
+                !Number.isFinite(score) ||
+                !Number.isFinite(total) ||
+                total <= 0 ||
+                !Number.isFinite(percentage) ||
+                !Number.isInteger(attempt) ||
+                attempt < 1 ||
+                attempt > 2
+            ) {
+                continue;
+            }
+
+            const response = await syncPortalData({
+                action: "quizResult",
+                name: name,
+                registrationNumber: regNo,
+                campus: campus,
+                moduleNumber: moduleNumber,
+                score: score,
+                total: total,
+                percentage: percentage,
+                attempt: attempt
+            });
+
+            if (!response || response.ok !== true) {
+                console.warn(
+                    "Quiz result was not accepted by the shared backend:",
+                    response
+                );
+            }
+        }
+    } catch (error) {
+        console.warn("Saved quiz result re-sync failed:", error);
+    }
+}
+
+
 /* Student accounts are stored locally on the student's device because
    this site is hosted on GitHub Pages and has no server/database. */
 function getStudentAccounts() {
@@ -2104,6 +2184,7 @@ function handleStudentLogin(event) {
     localStorage.setItem("biostatisticsStudentCampus", account.campus);
     applyPortalSession();
     resetInactivityTimer();
+    syncSavedQuizResults();
 }
 
 function handleLogin(event) {
@@ -3831,55 +3912,50 @@ function toggleComplete(index) {
     const module = modules[index];
 
     if (!isModuleAvailable(module)) {
-        alert("This module is still locked.");
+
+        alert(
+            "This module is still locked."
+        );
+
         return;
+
     }
+
 
     let completed = getCompletedModules();
 
+
     if (completed.includes(module.number)) {
-        completed = completed.filter(function(number) {
-            return number !== module.number;
-        });
+
+        completed =
+            completed.filter(
+                function(number) {
+                    return number !== module.number;
+                }
+            );
+
     } else {
+
         completed.push(module.number);
+
     }
+
 
     completed.sort(function(a, b) {
         return a - b;
     });
 
-    // Save locally
+
     saveCompletedModules(completed);
 
-    // Send completion status to Google Sheets
-    const studentRegNo =
-        localStorage.getItem("biostatisticsStudentRegNo") || "";
-
-    const studentName =
-        localStorage.getItem("biostatisticsPortalUser") || "";
-
-    const studentCampus =
-        localStorage.getItem("biostatisticsStudentCampus") || "";
-
-    if (studentRegNo) {
-        syncPortalData({
-            action: "progress",
-            name: studentName,
-            registrationNumber: studentRegNo,
-            campus: studentCampus,
-            moduleNumber: module.number,
-            completed: completed.includes(module.number)
-        });
-    }
-
-    // Refresh the student interface
     renderModules();
+
     updateDashboard();
 
     if (currentLearningModuleIndex !== null) {
         updateLearningCompletionStatus(currentLearningModuleIndex);
     }
+
 }
 
 
